@@ -1,0 +1,141 @@
+.my-settings {
+
+  .icon-privacy-tab {
+    background-image: url('/images/icons/icon-privacy.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    padding-left: 38px !important;
+  }
+
+  .icon-notifications-tab {
+    background-image: url('/images/icons/icon-notifications.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    padding-left: 55px !important;
+  }
+
+  .icon-password-tab {
+    background-image: url('/images/icons/icon-password.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    padding-left: 40px !important;
+  }
+
+  .settings-tabs {
+    background: $brand-gray-light;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      font-family: "bree_serifregular", Georgia, "Times New Roman", Times, serif;
+      float: left;
+      width: 25%;
+    }
+
+    @media (min-width: $screen-sm-min) {
+
+      li {
+        border-left: 2px solid #fff;
+
+        &.active {
+          background: $brand-gray;
+          margin-top: -3px;
+
+          &.privacy a {
+            border-top: 3px solid $secondary-green;
+          }
+
+          &.notifications a {
+            border-top: 3px solid $secondary-red;
+          }
+
+          &.password a {
+            border-top: 3px solid $secondary-purple;
+          }
+        }
+
+        &:first-child {
+          border-left: none;
+        }
+
+        a {
+          display: block;
+          padding: 10px;
+          color: $brand-black;
+
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: $screen-xs-max) {
+
+    .settings-tabs {
+      margin: 0 -20px;
+
+      li {
+
+        &.privacy a {
+          background-color: $secondary-green;
+        }
+
+        &.notifications a {
+          background-color: $secondary-light-red;
+        }
+
+        &.password a {
+          background-color: $secondary-purple;
+        }
+
+        a {
+          background-position: center 0;
+          display: block;
+          height: 54px;
+          text-indent: -9999px;
+        }
+      }
+    }
+  }
+
+
+  .tab-content {
+    background: $brand-gray;
+    margin: 0 -20px;
+    padding: $container-padding;
+
+    .tab-pane {
+
+      > p {
+        margin: 0 0 15px 10px;
+      }
+
+      label.control-label {
+        font-weight: normal;
+        font-family: "bree_serifregular", Georgia, "Times New Roman", Times, serif;
+      }
+
+      h4 {
+        color: #fff;
+        margin: -20px -20px 20px;
+        padding: 5px 20px;
+      }
+
+      &.privacy h4 {
+        background: $secondary-green;
+      }
+
+      &.notifications h4 {
+        background: $secondary-light-red;
+      }
+
+      &.password h4 {
+        background: $secondary-purple;
+      }
+
+    }
+  }
+}

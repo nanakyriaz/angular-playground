@@ -1,0 +1,68 @@
+#editDelivery {
+  div.products{
+    padding: 20px 0;
+
+    li{
+      list-style: none;
+      @media (max-width: $screen-xs-max) {
+        border-bottom: 3px solid #FFFFFF;
+
+        &:first-of-type{
+          border: none;
+        }
+      }
+    }
+  }
+
+  .delivery-header {
+
+      &.status-in-review {
+        background-color: #F9A11B;
+        color: #424242;
+      }
+
+      &.status-reviewed {
+        background-color: #92CA74;
+        color: #424242;
+      }
+
+      &.status-rejected {
+        background-color: #D12160;
+        color: white;
+      }
+  }
+
+  .delivery_item {
+    background: $brand-gray-lighter;
+    margin-bottom: 15px;
+    padding: 15px;
+  }
+
+  .deliveryItemContainer {
+    width: 100%;
+
+    textarea, input, select{
+      width: 100%;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      textarea{
+        height: 120px;
+      }
+    }
+    @media (min-width: $screen-sm-min) {
+      textarea{
+        height: 30px;
+      }
+    }
+
+  }
+  .increasedPadding{
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .increasedMargin{
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+}

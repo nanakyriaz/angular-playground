@@ -1,0 +1,13 @@
+[ {
+  "identifier" : "UK",
+  "name" : "United Kingdom"
+}, {
+  "identifier" : "FR",
+  "name" : "France"
+}, {
+  "identifier" : "IT",
+  "name" : "Italy"
+}, {
+  "identifier" : "HU",
+  "name" : "Hungary"
+} ]

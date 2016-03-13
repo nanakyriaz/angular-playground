@@ -1,0 +1,22 @@
+<article>
+  <section class="clearfix messaging">
+      <h1>Message Centre</h1>
+
+      <div class="clearfix messaging--toolbar">
+        <div class="pull-left create_message-button">
+          <a ui-sref="create_message" class="btn btn-success">Create a message</a>
+        </div>
+      </div>
+
+      <div class="messages-container clearfix" ng-show="conversationItems">
+          <div class="has-error" ng-hide="conversationItems.length">
+              <p>Sorry, you don't have any messages yet!</p>
+          </div>
+
+          <div ng-repeat="conversation in conversationItems" class="message-item-container">
+              <div pz-conversation conversation="conversation"></div>
+           </div>
+          <hr>
+      </div>
+  </section>
+</article>

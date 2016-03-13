@@ -1,0 +1,175 @@
+<article>
+    <section ng-video class="home-video">
+        <div class="home-video-container">
+            <div class="video cover"  ng-class="{'hidden' : playing }" >
+            </div>
+            <div class="video">
+                <video id="landing-vid" vi-screen></video>
+            </div>
+            <div class="video-buttons">
+                <div vi-feedback>
+                    <div vi-volume>
+                        <a vi-volume-mute class="mute" ng-show="player.volume">Turn Off Sound</a>
+                        <a vi-volume-loudest class="mute unmute" ng-show="!player.volume">Turn On Sound</a>
+                    </div>
+                </div>
+                <div vi-controls>
+                    <a vi-controls-play  class="play" ng-show="!playing">Play</a>
+                    <a vi-controls-pause  class="play pause" ng-show="playing">Pause</a>
+                </div>
+            </div>
+        </div>
+        <aside class="home-login"  ng-class="{'hidden-login' : playing }">
+            <div class="strapline" ng-show="!playing" >
+                <h1>Achieving zero food waste and hunger - see how we do this</h1>
+            </div>
+            <div class="video--callout">
+                <a vi-controls-play  class="play" ng-show="!playing">Play</a>
+            </div>
+            <div class="links" ng-hide="$root.isLoggedIn">
+                <a ui-sref="login" title="Sign in with your account" id="signin-button" class="btn btn-primary">Sign in</a>
+                <a ui-sref="registration" title="Join us" id="registration-button" class="btn btn-primary">Join us</a>
+            </div>
+        </aside>
+    </section>
+
+    <aside class="form-subscribe">
+        <h2 class="text-center">You can help in many ways</h2>
+
+        <div class="user_profile_callout">
+            <ul class="row clearfix">
+                <li class="col-xs-2 profile--block business">
+                    <a ui-sref="howyoucanhelp({target:'business'})">
+                        <img class="img-responsive" src="/images/icons/icon-business.png" alt="">
+                    </a>
+                    <span class="profile--type">Business</span>
+                    <span class="profile--desc">If you work for/are a business that has surplus food to donate</span>
+                </li>
+                <li class="col-xs-3 profile--block charity">
+                    <a ui-sref="howyoucanhelp({target:'charity'})">
+                        <img class="img-responsive" src="/images/icons/icon-charity.png" alt="Charity">
+                    </a>
+                    <span class="profile--type">Charity</span>
+                    <span class="profile--desc">If you are a charity that needs/redistributes food</span>
+                </li>
+                <li class="col-xs-2 profile--block volunteer">
+                    <a ui-sref="howyoucanhelp({target:'volunteer'})">
+                        <img class="img-responsive" src="/images/icons/icon-volunteer.png" alt="">
+                    </a>
+                    <span class="profile--type">Volunteer</span>
+                    <span class="profile--desc">If you can collect &amp; deliver food or spread the word</span>
+                </li>
+                <li class="col-xs-3 profile--block transporter">
+                    <a ui-sref="howyoucanhelp({target:'transporter'})">
+                        <img class="img-responsive" src="/images/icons/icon-transporter.png" alt="">
+                    </a>
+                    <span class="profile--type">Transporter</span>
+                    <span class="profile--desc">If you have a vehicle and can help to transport food</span>
+                </li>
+                <li class="col-xs-2 profile--block funder">
+                    <a ui-sref="howyoucanhelp({target:'funder'})">
+                        <img class="img-responsive" src="/images/icons/icon-funder.png" alt="">
+                    </a>
+                    <span class="profile--type">Funder</span>
+                    <span class="profile--desc">If you are able to donate to our cause</span>
+                </li>  
+            </ul>
+        </div>
+    </aside>
+    
+    <section class="secondary-gray-light" ng-show="successStories.length">
+        <h2>Zheroes stories</h2>
+
+        <!-- Content here -->
+        <div class="row clearfix story-container">
+
+            <div ng-repeat="successStory in successStories" class="col-sm-6 col-md-4 col-lg-3 story--item">
+
+                <div class="content-container">
+                    <h3><a ui-sref="success_stories_detail({id: successStory.id })">{{ successStory.title }}</a></h3>
+
+                    <p class="intro">{{ successStory.description }}</p>
+
+                    <div class="links">
+                        <!-- TODOPZ: make these dynamic -->
+                        <a ui-sref="success_stories_detail({ id: successStory.id })">Read more</a>
+                        <a ng-show="successStory.include_video" ui-sref="success_stories_video_detail({id: successStory.id })" class="btn btn-warning">Watch video</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="secondary-dark">
+        <h2>Donate to our cause</h2>
+        <div class="row clearfix donate-callout">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-md-push-4 col-lg-3 col-lg-push-6 ">
+                <img src="/images/placeholder-donate-callout-1.jpg">
+            </div>
+            <div class="hidden-xs col-sm-6 col-md-4 col-md-push-4 col-lg-3 col-lg-push-6 ">
+                <img src="/images/placeholder-donate-callout-2.jpg">
+            </div>
+            <div class="col-sm-12 col-md-4  col-md-pull-8 col-lg-6 col-lg-pull-6">
+                <p>
+                    It may be that you can’t spare the time to volunteer with us, but perhaps you might like to make a donation to help us in our work.  If you do we’ll love you forever – ok we do anyway!
+                </p>
+                <br>
+                <p>
+                 <a ui-sref="donate" title="Donate" target="_blank" class="btn btn-primary">Donate</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="secondary-dark">
+      <h2>Our sponsors and partners</h2>
+      <div class="supporters-list clearfix">
+        <ul class="row clearfix">
+          <li class="supporter-logo logo-esmeefairbairn"><a href="http://www.esmeefairbairn.org.uk"><img class="img-responsive" src="/images/sponsors/esmee_fairbairn.png" title="Esmee Fairbairn"></a></li>
+          <li class="supporter-logo logo-keytree"><a href="http://www.keytree.co.uk"><img class="img-responsive" src="/images/sponsors/keytree.png" title="Keytree"></a></li>
+          <li class="supporter-logo logo-garfield"><a href="http://www.garfieldweston.org/"><img class="img-responsive" src="/images/sponsors/garfield_weston.png" title="Garfield Weston"></a></li>
+          <li class="supporter-logo logo-rsa"><a href="http://www.thersa.org/"><img class="img-responsive" src="/images/sponsors/rsa.png" title="RSA Fellowship"></a></li>
+          <li class="supporter-logo logo-llyods"><a href="http://www.lloydsbank.com/"><img class="img-responsive" src="/images/sponsors/llyods.png" title="Llyods Bank"></a></li>
+          <li class="supporter-logo logo-lottery"><a href="http://www.lotterygoodcauses.org.uk/"><img class="img-responsive" src="/images/sponsors/lottery_funded.png" title="Lottery Funded"></a></li>
+          <li class="supporter-logo logo-sse"><a href="http://www.the-sse.org/"><img class="img-responsive" src="/images/sponsors/sse.png" title="school for social entrepreneurs"></a></li>
+          <li class="supporter-logo logo-ll"><a href="about:blank"><img class="img-responsive" src="/images/sponsors/london_leaders.png" title="London Leaders"></a></li>
+          <li class="supporter-logo logo-wrap"><a href="http://www.wrap.org.uk/"><img class="img-responsive" src="/images/sponsors/wrap.png" title="wrap"></a></li>
+          <li class="supporter-logo logo-lcitizen"><a href="about:blank"><img class="img-responsive" src="/images/sponsors/london_citizens.png" title="London Citizen"></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <aside class="form-subscribe">
+
+        <h2 ng-show="!subscribed">Subscribe to our newsletter to be kept in the loop with news and events</h2>
+
+        <div class="row" ng-show="subscribed">
+            <div class="col-md-8"><h2>Thank you! You are now signed up to our newsletter!</h2></div>
+            <div class="col-md-1 col-md-offset-3 text-center"> <img src="/images/icons/icon-mail-ok.png" alt="OK"></div>
+        </div>
+
+        <form class="form-inline" role="form" name="subscriptionForm" ng-show="!subscribed">
+            <fieldset>
+                <!-- Text input-->
+                <div class="form-group">
+                    <label for="email">Email</label>
+                        <input type="text" id="email" name="email"
+                               ng-model="email" class="form-control"
+                               ng-click="isEmailValid()"
+                               required>
+
+                <span ng-show="validateEmail" class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok' : validateEmail && subscriptionForm.email.$valid, 'glyphicon-warning-sign': validateEmail && subscriptionForm.email.$invalid}"></span>
+                        <div class="formError" id="inputEmailFormError" ng-show="validateEmail && subscriptionForm.email.$invalid">The email address is not valid</div>
+                </div>
+                <!-- Button (Double) -->
+
+                <button type="submit" id="subscribe" name="subscribe" class="btn btn-success"
+                        ng-click="subscribe()" ng-disabled="!validate()">
+                    Subscribe</button>
+                <div class="formError" id="inputEmailFormError" ng-show="validateEmail && subscriptionForm.email.$invalid">The email address is not valid</div>
+            </fieldset>
+        </form>
+
+    </aside>
+</article>

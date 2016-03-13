@@ -1,0 +1,66 @@
+<section id="reviewDelivery" class="clearfix">
+    <div class="row">
+        <h2>Food Donation</h2>
+
+      <div class="alert alert-success" role="alert" ng-if="isAcceptedDelivery">
+        <p><strong>Thank you for being part of this donation!</strong> The business and charity will be notified that you have accepted to help out with the transport of the food.</p>
+      </div>
+
+      <div class="alert alert-danger" role="alert" ng-if="!isAcceptedDelivery">
+        <p><strong>Sorry, you've missed this one.</strong> The transportation for this donation has already been arranged. Don't worry there will be more... keep an eye on your emails!</p>
+      </div>
+
+        <div class="delivery-header">
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <p>
+                      You can check all the details of the donation in the 
+                      <a href="/my_deliveries/?{{ donation.id }}">My food donations</a>
+                      tab.
+                    </p>
+                    <h3>Donor-Charity route</h3>
+                    <p>
+                      From 
+                      <a ui-sref="profile_detail({id:donation.creator.id})">{{ donation.creator.fullName }}</a>
+                      - {{ donation.creator.address.postcode }} (show in 
+                      <a href="https://www.google.co.uk/maps/search/{{ donation.creator.address.postcode }}/" target="_blank">map</a>
+                      )
+                      
+                      <br>
+
+                      To
+                      <a ui-sref="profile_detail({id:deliveryRequest.recipient.id})">{{ deliveryRequest.recipient.fullName }}</a>
+                      - {{ donation.recipient.address.postcode }} (show in 
+                      <a href="https://www.google.co.uk/maps/search/{{ donation.recipient.address.postcode }}/" target="_blank">map</a>
+                      )
+                    </p>
+
+                    <h3>Collection time</h3>
+                    <p>{{ donation.deliveryDate | date:shortDate }} <span ng-show="donation.startTime">{{ donation.startTime | time }}<span ng-show="donation.endTime"> - {{ donation.endTime | time }}</span></span></p>
+                </div>
+            </div>
+            <div class="row">
+              <div class="delivery-items-list deliveries-list">
+                <h3>Food</h3>
+                <table cellspacing="0" ng-show="deliveryItems">
+                  <colgroup>
+                    <col class="col-1">
+                  </colgroup>
+                  <tbody>
+                  <tr ng-repeat="listItem in deliveryItems">
+                    <td>
+                      <div>
+                        {{ listItem.quantity }} {{ listItem.unitOfMeasure.uomDescription || '' }} {{ listItem.productName }}
+                      </div>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+                <div class="empty" ng-hide="deliveryItems">
+                  <h2>No delivery items for this delivery.</h2>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</section>

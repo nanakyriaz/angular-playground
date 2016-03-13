@@ -1,0 +1,14 @@
+<div class="transporter-food-types-widget">
+  <div ng-repeat="foodType in foodTypesInfo track by $index">
+  
+      <div class="transporter-food-type-cell-container col-md-3 col-xs-3">
+        <div class="transporter-food-type-cell vcenter" ng-class="{active: foodTypes[$index]}" ng-click="toggleFoodType($index);">
+          <div class="section">
+          <div class="title">{{foodType.title}}</div>
+          <div class="description">{{foodType.description}}</div>
+          </div>
+        </div>
+      </div>
+  
+  </div>
+</div>

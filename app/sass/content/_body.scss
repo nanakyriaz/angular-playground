@@ -1,0 +1,63 @@
+#page-inner {
+  position: relative;
+  min-height: 100%;
+  background-color: white;
+  height: auto !important;
+  height: 100%;
+}
+
+@media (min-width: $planz-document-width) {
+
+  // fix the content of the page to a fixed width
+  #page-inner {
+    width: $planz-document-width;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: $body-breakpoint-max-width) {
+  body {
+    background: white url('../images/backgrounds/simple.png');
+  }
+
+  #page-inner {
+    width: $body-breakpoint-max-width;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.feedback {
+  width : 300px;
+  border : solid 2px #ff7562;
+  background-color: #fff;
+  position: fixed;
+  bottom: 0px;
+  right : 10px;
+  border-bottom: 0px;
+  z-index: 1001;
+
+  h3 {
+    padding : 5px 10px;
+    background-color: #ff7562;
+    color :#fff;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    cursor: pointer;
+    &:hover {
+      background-color: #FF8B7B;
+    }
+  }
+  .feedbackContent{
+    fieldset {
+      margin : 10px;
+      input, textarea {
+        width: 100%;
+      }
+      textarea {
+      min-height: 120px;
+      }
+    }
+  }
+}

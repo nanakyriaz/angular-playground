@@ -1,0 +1,178 @@
+// search form
+.searchGroup .places-searchbox {
+    width: 200px;
+}
+@media (min-width: $screen-sm-min) {
+    .community-search {
+        min-height: 1em;
+        .searchGroup {
+            float: right;
+        }
+    }
+}
+@media (max-width: $screen-sm-max) {
+    .community-search {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-top: 3px;
+        margin-bottom: 10px;
+        min-height: 30px;
+    }
+}
+@media (max-width: $screen-xs-max) {
+    .community-search {
+        margin-bottom: 20px;
+        .form-group {
+            display: inline-block;
+            margin-bottom: 0;
+            vertical-align: middle;
+        }
+    }
+}
+.my-community {
+    .empty {
+        width: 50%;
+        text-align: center;
+        margin: 0 auto;
+        padding: 62px 0;
+        @media (max-width: $screen-sm) {
+          width: 80%;
+        }
+    }
+    .community-tabs {
+        background: $brand-gray-light;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        font-family: "bree_serifregular", Georgia, "Times New Roman", Times, serif;
+        font-size: 18px;
+        li {
+            float: left;
+            width: 25%;
+            a {
+                color: $brand-gray-darker;
+            }
+        }
+        @media (min-width: $screen-sm-min) {
+            li {
+                border-left: 2px solid #fff;
+                &.active {
+                    background: $brand-gray;
+                    margin-top: -3px;
+                    &.businesses a {
+                        border-top: 3px solid $secondary-green;
+                    }
+                    &.charities a {
+                        border-top: 3px solid $secondary-red;
+                    }
+                    &.volunteers a {
+                        border-top: 3px solid $secondary-purple;
+                    }
+                    &.transporters a {
+                        border-top: 3px solid $secondary-pink;
+                    }
+                }
+                &:first-child {
+                    border-left: none;
+                }
+                a {
+                    background: none; // cancels out .icon-***-tab classes
+                    display: block;
+                    padding: 10px 20px;
+                }
+            }
+        }
+    }
+    @media (max-width: $screen-xs-max) {
+        .community-tabs {
+            margin: 0 -20px;
+            li {
+                &.businesses a {
+                    background-color: $secondary-green;
+                }
+                &.charities a {
+                    background-color: $secondary-light-red;
+                }
+                &.volunteers a {
+                    background-color: $secondary-purple;
+                }
+                &.transporters a {
+                    background-color: $secondary-pink;
+                }
+                a {
+                    background-position: center 0;
+                    display: block;
+                    height: 54px;
+                    text-indent: -9999px;
+                }
+            }
+        }
+    }
+    .tab-content {
+        background: $brand-gray;
+        margin: 0 -20px;
+        padding: $container-padding;
+        .tab-pane {
+            > p {
+                margin: 0 0 15px 10px;
+            }
+            h4 {
+                color: #fff;
+                margin: -20px -20px 20px;
+                padding: 10px 20px;
+                font-size: 18px;
+            }
+            &.businesses h4 {
+                background: $secondary-green;
+            }
+            &.charities h4 {
+                background: $secondary-light-red;
+            }
+            &.volunteers h4 {
+                background: $secondary-purple;
+            }
+            &.transporters h4 {
+                background: $secondary-pink;
+            }
+        }
+        .profile-list {
+            list-style-type: none;
+            margin: 0 0 0 -20px;
+            padding: 0;
+            li {
+                float: left;
+                margin: 0 0 20px 20px;
+                width: 260px;
+                a {
+                    display: block;
+                    position: relative;
+                    height: 195px;
+                    text-align: center;
+                    width: 100%;
+                    overflow: hidden;
+                    &:hover {
+                        opacity: 0.9;
+                    }
+                    p {
+                        background: $primary-purple;
+                        @include hp-opacity(0.9);
+                        color: #fff;
+                        margin: 0;
+                        padding: 15px 20px;
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        text-align: left;
+                        width: 100%;
+                    }
+                    img {                        
+                        width: 100%;
+                    }
+                }
+            }
+            + p {
+                margin-top: 20px;
+            }
+        }
+    }
+}

@@ -1,0 +1,35 @@
+<section class="clearfix">
+    <div class="row">
+        <h1 class="col-xs-12 col-sm-6">My Community</h1>
+    </div>
+
+    <!-- Map menu - tabbed content with show/hide access -->
+    <div class="my-community">
+
+        <!-- Nav tabs -->
+        <ul class="community-tabs clearfix">
+            <li class="businesses" ng-class="activeSection =='businesses' ? 'active' :''">
+                <a href data-toggle="tab" class="icon-business-tab" ng-click="changeSection('businesses')">Businesses</a>
+            </li>
+            <li class="charities" ng-class="activeSection =='charities' ? 'active' :''">
+                <a href data-toggle="tab" class="icon-charity-tab" ng-click="changeSection('charities')">Charities</a>
+            </li>
+            <li class="volunteers" ng-class="activeSection =='volunteers' ? 'active' :''">
+                <a href data-toggle="tab" class="icon-volunteer-tab" ng-click="changeSection('volunteers')">Volunteers</a>
+            </li>
+            <li class="transporters" ng-class="activeSection =='transporters' ? 'active' :''">
+                <a href data-toggle="tab" class="icon-transporter-tab" ng-click="changeSection('transporters')">Transporters</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content" ng-cloak>
+            <div pz-my-communities-tab tab-name="'businesses'" profile-type="'business'" active-section="activeSection" community-items="communityItems" updated-search-term="updatedSearchTerm" profile-items="profileItems"></div>
+            <div pz-my-communities-tab tab-name="'charities'" profile-type="'charity'" active-section="activeSection" community-items="communityItems" updated-search-term="updatedSearchTerm" profile-items="profileItems"></div>
+            <div pz-my-communities-tab tab-name="'volunteers'" profile-type="'volunteer'" active-section="activeSection" community-items="communityItems" updated-search-term="updatedSearchTerm" profile-items="profileItems"></div>
+            <div pz-my-communities-tab tab-name="'transporters'" profile-type="'transporter'" active-section="activeSection" community-items="communityItems" updated-search-term="updatedSearchTerm" profile-items="profileItems"></div>
+        </div>
+
+    </div>
+
+</section>

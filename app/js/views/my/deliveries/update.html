@@ -1,0 +1,153 @@
+<section id="createDelivery" class="clearfix">
+  <div class="row">
+    <h2>Create food donation</h2>
+    <ng-form name="editDeliveryForm" class="form-horizontal" role="form" novalidate>
+      <fieldset>
+        <legend>Food</legend>
+        <p>Describe the food you want to donate e.g. 10 kg Basmati rice</p>
+        <ul class="products">
+          <li class="container row pz_fade" ng-repeat="item in deliveryItems">
+            <div class="col-xs-6 col-sm-2 increasedPadding">
+              <div class="form-group deliveryItemContainer">
+                  <label for="quantityInput{{$index}}">Quantity <span class="required">*</span></label><br />
+                  <input type="text"
+                       id="quantityInput{{$index}}"
+                       name="quantityInput{{$index}}"
+                       class="form-control input-sm"
+                       placeholder="How many?"
+                       ng-value="item.quantity"
+                       ng-model="item.quantity"
+                       ng-required="true" pattern="^[0-9]*$" ng-pattern-restrict/>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-2 increasedPadding">
+              <div class="form-group deliveryItemContainer">
+              <label for="unitSelect{{$index}}">Unit (optional)</label><br />
+                <select ui-select2
+                        ng-model="item.unitOfMeasure"
+                        style="width:100%;"
+                        id="unitSelect{{$index}}"
+                        name="unitSelect{{$index}}"
+                        data-placeholder="kg, litres">
+                  <option value=""></option>
+                  <option value="{{measurement.id}}" ng-repeat="measurement in measurements | orderBy:uomDescription">{{measurement.uomDescription}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-5 increasedPadding">
+              <div class="form-group deliveryItemContainer">
+              <label for="productDescriptionInput{{$index}}">Product <span class="required">*</span></label>
+                <textarea id="productDescriptionInput{{$index}}"
+                          name="productDescriptionInput{{$index}}"
+                          class="form-control input-sm"
+                          placeholder="Description of the donated item"
+                          ng-value="item.productDesc"
+                          ng-model="item.productName"
+                          ng-required="true"></textarea>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-1 increasedPadding">
+              <a ng-show="deliveryItems.length > 1" ng-click="deleteItem($index)" class="btn btn-danger btn-sm">remove</a>
+            </div>
+            <hr class="visible-xs visible-sm"/>
+          </li>
+
+            <li class="row">
+            <div class="col-xs-6 col-sm-2 increasedPadding">
+                <button class="btn btn-info" ng-click="addNewProduct()">Add new product</button>
+            </div>
+            </li>
+        </ul>
+      </fieldset>
+
+        <fieldset class="row">
+            <legend>Date & Time</legend>
+            <p>Enter the latest date on which the food can be collected/delivered and the times between which collection/delivery can take place.</p>
+            <div class="form-group row">
+                <div class="col-lg-3">
+                    <p><label class="control-label" for="date">Date <span class="required">*</span></label></p>
+                    <div class="input-group">
+                        <input name="date" id="date" type="text"
+                               class="form-control"
+                               min-date="minDate"
+                               datepicker-popup="{{format}}"
+                               datepicker-options="dateOptions"
+                               date-disabled="disabled(date, mode)"
+                               is-open="opened"
+                               close-text="Close"
+                               ng-model="delivery.deliveryDate"
+                               ng-required="true">
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <p><label class="control-label" for="from">From <span>(Optional)</span></label></p>
+                    <div pz-timepicker name="from" id="from" class="form-control" ng-model="delivery.startTime" on-time-changed="onDeliveryTimeChanged(delivery.startTime, delivery.endTime, delivery.deliveryDate)"></div>
+                </div>
+                <div class="col-lg-2">
+                    <p><label class="control-label" for="to">To <span>(Optional)</span></label></p>
+                    <div pz-timepicker name="to" id="to" class="form-control" ng-model="delivery.endTime" on-time-changed="onDeliveryTimeChanged(delivery.startTime, delivery.endTime, delivery.deliveryDate)" ng-class="{'ng-dirty': editDeliveryForm.to.$dirty}"></div>
+                </div>
+            </div>
+        </fieldset>
+
+
+      <fieldset class="row">
+        <legend>Charities <span class="required">*</span></legend>
+        <p>Which charities or groups do you want to inform about the food you have?</p>
+
+        <div pz-profile-picker name="participants" ng-model="participants" class="pz-profile-picker">
+          <div pz-profile-pickers source="loadProfiles($query)" favourites="loadFavourites()"  class="pz-profile-pickers"></div>
+        </div>
+        <div class="formError" ng-show="missingParticipants">No relevant Charity has been found for your selection. If you have selected <em>"My Charities"</em> or <em>"Close to me"</em> you might not have any Charity profiles in your community or near your location. Please try again with another recipient.</div>
+      </fieldset>
+
+        <fieldset class="row">
+            <div class="col-lg-9">
+                <legend>Transportation <span class="required">*</span></legend>
+                <p>In case you could help with transportation.</p>
+
+                <div class="form-group row">
+                    <div class="radio">
+                        <input type="radio" name="collectionOnly" id="transportionAvailable" ng-model="delivery.collectionOnly" ng-value="false" required />
+                        <label for="transportionAvailable">I can deliver the donation </label>
+                    </div>
+                    <div class="radio">
+                        <input type="radio" name="collectionOnly" id="collectionOnly" ng-model="delivery.collectionOnly" ng-value="true" required />
+                        <label for="collectionOnly">I cannot deliver the donation (needs to be collected)</label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="row">
+            <div class="col-lg-9">
+                <legend>Additional info <span>(optional)</span></legend>
+                <label for="deliveryInfo">Any information that you think is important to describe the food donation.</label><br />
+                <div class="col-xs-12 col-md-7">
+                    <div class="form-group">
+                        <textarea id="deliveryInfo"
+                                  name="deliveryInfo"
+                                  class="form-control input-sm"
+                                  placeholder="Description of any specifics about the food donation"
+                                  ng-value="deliveryInfo"
+                                  ng-model="delivery.info"
+                                  ng-required="false"></textarea>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+      <div class="form_group">
+        <button class="btn btn-success" ng-click="saveNewDeliveries()" ng-disabled="editDeliveryForm.$invalid">Save</button>
+        <a ui-sref="my_donations" class="btn btn-inverse">Cancel</a>
+        <a href="" ng-click="removeDelivery()" class="pull-right">Remove this delivery</a>
+      </div>
+      <div class="warning message">
+        <p>NOTE: the charity will be notified and will be able to validate the donation.</p>
+      </div>
+    </ng-form>
+  </div>
+</section>

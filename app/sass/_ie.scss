@@ -1,0 +1,57 @@
+//button {
+//    &.plus {
+//      background-position: 94% center !important;
+//    }
+//    &.tick {
+//      background-position: 94% center !important;
+//    }
+//    &.cross {
+//      background-position: 94% center !important;
+//    }
+//    &.arrow {
+//      background-position: 94% center !important;
+//    }
+//}
+//
+//.modernBrowserImage{
+//  position: absolute;
+//  visibility: hidden;
+////  height: 0px;
+//}
+//
+//.oldBrowserImage{
+//  visibility: visible;
+//  position: relative;
+//}
+
+.login {
+  background-position: 0;
+
+  form {
+    background-color: #424242;
+  }
+}
+
+.callout {
+
+  .content-container {
+    background-color: white;
+  }
+}
+
+.home-login {
+  .strapline h1 {
+      background-color: white;
+  }
+}
+
+.home-video {
+  .video--callout,
+  .video-buttons {
+    display: none;
+  }
+}
+
+.contact-content {
+    background-color: #424242;
+}

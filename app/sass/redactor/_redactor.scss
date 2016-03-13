@@ -1,0 +1,21 @@
+.redactor-toolbar {
+    background: #000;
+}
+ 
+// toolbar buttons
+.redactor-toolbar li a {
+    color: #fff;
+}
+ 
+// buttons hover state
+.redactor-toolbar li a:hover {
+    background: $gray;
+    color: #fff;
+}
+ 
+// buttons active state
+.redactor-toolbar li a:active,
+.redactor-toolbar li a.redactor-act {
+    background: $primary-purple;
+    color: #aaa;
+}

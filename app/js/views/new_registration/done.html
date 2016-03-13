@@ -1,0 +1,45 @@
+<div class="step-title" ng-class="{business: registration.type==='business', charity: registration.type==='charity', transporter: registration.type==='transporter', volunteer: registration.type==='volunteer'}">
+  <div class="desktop">
+    <span>Step {{step}} - Done!</span>
+  </div>
+  <div class="mobile">
+    <div class="step-title-mobile">4. All done</div>
+  </div> 
+</div>
+
+<div class="done">
+  <div class="row inner-container">
+    <div class="col-md-12 card">
+      <div class="card-container first">
+        <div class="header">
+          <img src="images/new-registration/PZH_New registration assets_mobile_thankyou_icon.png"/>
+          <h2>Thank you for registering</h2>
+        </div>
+        <div class="body">
+          <p>You will receive an email shortly for final confirmation, meanwhile you can start to explore Plan Zheroes.</p>
+        </div>
+        <div class="toolbar">
+          <button class="btn btn-green bottom" ng-click="navigateToGetStarted()">Get started</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 card">
+      <form name="invite" novalidate>
+      <div class="card-container second">
+        <div class="header invite">
+          <img src="images/new-registration/PZH_New registration assets_mobile_spreadtheword_icon.png"/>
+          <h2>Spread the word and invite your colleagues or friends to join</h2>
+        </div>
+        <div class="body">
+          <p>The recipient will be sent a simple email offering them to join our cause nothing more...</p>
+          <input type="email" name="email" class="form-control" placeholder="Enter contact email" ng-model="inviteEmail" ng-required="true" pattern="/[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}/"/>
+        </div>
+        <div class="toolbar">
+          <button class="btn btn-green" ng-click="sendInvite(inviteEmail)" ng-disabled="invite.email.$invalid">Send invite to join Plan Zheroes</button>
+        </div> 
+      </div> 
+      </form> 
+    </div>
+  </div>
+</div>

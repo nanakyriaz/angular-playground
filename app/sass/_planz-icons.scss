@@ -1,0 +1,288 @@
+.icon {
+  position: relative;
+  top: 1px;
+
+  // font import parameters
+  font-family: 'icons';
+  display: inline-block;
+  vertical-align: middle;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  speak: none;
+  text-decoration: inherit;
+  text-transform: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon_account {
+  &:before {
+    content: "\e001";
+  }
+}
+
+.icon_availability {
+  &:before {
+    content: "\e002";
+  }
+}
+
+.icon_bad_result {
+  &:before {
+    content: "\e003";
+  }
+}
+
+.icon_beneficiaries {
+  &:before {
+    content: "\e004";
+  }
+}
+
+.icon_business {
+  &:before {
+    content: "\e005";
+  }
+}
+
+.icon_charity {
+  &:before {
+    content: "\e006";
+  }
+}
+
+.icon_charity_no {
+  &:before {
+    content: "\e007";
+  }
+}
+
+.icon_close {
+  &:before {
+    content: "\e008";
+  }
+}
+
+.icon_collection {
+  &:before {
+    content: "\e009";
+  }
+}
+
+.icon_collection_point {
+  &:before {
+    content: "\e00a";
+  }
+}
+
+.icon_confirmation {
+  &:before {
+    content: "\e00b";
+  }
+}
+
+.icon_contact_info {
+  &:before {
+    content: "\e00c";
+  }
+}
+
+.icon_distribution {
+  &:before {
+    content: "\e00d";
+  }
+}
+
+.icon_donate {
+  &:before {
+    content: "\e00e";
+  }
+}
+
+.icon_donation {
+  &:before {
+    content: "\e00f";
+  }
+}
+
+.icon_donation_alt {
+  &:before {
+    content: "\e010";
+  }
+}
+
+.icon_email {
+  &:before {
+    content: "\e011";
+  }
+}
+
+.icon_email_page {
+  &:before {
+    content: "\e012";
+  }
+}
+
+.icon_excel {
+  &:before {
+    content: "\e013";
+  }
+}
+
+.icon_facebook {
+  &:before {
+    content: "\e014";
+  }
+}
+
+.icon_filter {
+  &:before {
+    content: "\e015";
+  }
+}
+
+.icon_food_details {
+  &:before {
+    content: "\e016";
+  }
+}
+
+.icon_frequency {
+  &:before {
+    content: "\e017";
+  }
+}
+
+.icon_good_result {
+  &:before {
+    content: "\e018";
+  }
+}
+
+.icon_linkedin {
+  &:before {
+    content: "\e019";
+  }
+}
+
+.icon_location {
+  &:before {
+    content: "\e01a";
+  }
+}
+
+.icon_marker_business {
+  &:before {
+    content: "\e01b";
+  }
+}
+
+.icon_marker_charity {
+  &:before {
+    content: "\e01c";
+  }
+}
+
+.icon_marker_contactus {
+  &:before {
+    content: "\e01d";
+  }
+}
+
+.icon_marker_transport {
+  &:before {
+    content: "\e01e";
+  }
+}
+
+.icon_marker_volunteer {
+  &:before {
+    content: "\e01f";
+  }
+}
+
+.icon_messaging {
+  &:before {
+    content: "\e020";
+  }
+}
+
+.icon_notification {
+  &:before {
+    content: "\e021";
+  }
+}
+
+.icon_packaging {
+  &:before {
+    content: "\e022";
+  }
+}
+
+.icon_pause {
+  &:before {
+    content: "\e023";
+  }
+}
+
+.icon_play {
+  &:before {
+    content: "\e024";
+  }
+}
+
+.icon_print {
+  &:before {
+    content: "\e025";
+  }
+}
+
+.icon_share {
+  &:before {
+    content: "\e026";
+  }
+}
+
+.icon_shelf_life {
+  &:before {
+    content: "\e027";
+  }
+}
+
+.icon_transport {
+  &:before {
+    content: "\e028";
+  }
+}
+
+.icon_transport_delivery {
+  &:before {
+    content: "\e029";
+  }
+}
+
+.icon_twitter {
+  &:before {
+    content: "\e02a";
+  }
+}
+
+.icon_video {
+  &:before {
+    content: "\e02b";
+  }
+}
+
+.icon_volunteer {
+  &:before {
+    content: "\e02c";
+  }
+}
+
+.icon_youtube {
+  &:before {
+    content: "\e02d";
+  }
+}

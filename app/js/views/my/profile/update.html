@@ -1,0 +1,241 @@
+<article>
+<h1>My profile</h1>
+<section>
+
+    <ng-form action="" class="profile editing" name="updateForm">
+
+
+<div class="row clearfix">
+
+    <div class="col-sm-6 col-sm-push-6 col-md-4 col-md-push-8 col-lg-3 col-lg-push-9">
+        <div class="profile--status">
+            <h3>Profile status</h3>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="{{ profileStatus.progress }}" aria-valuemin="0" aria-valuemax="100" style="height: {{ profileStatus.progress }}%;">
+                    <span>{{ profileStatus.progress || 0 }}%</span>
+                </div>
+            </div>
+            <p>Fill in more details to improve your proﬁle!</p>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-sm-pull-6 col-md-pull-4 col-md-4 col-lg-3 col-lg-pull-3">
+        <div class="profile--image">
+            <div class="changeImage" ng-show="profile.hasAvatar">
+                <img ng-src="{{ imageUrl }}" alt="Image of {{ profile.fullName }}">
+            </div>
+            <div class="addImage" ng-show="!profile.hasAvatar">
+                <img src="images/my_profile_placeholder.png" alt="add profile image">
+            </div>
+
+            <button ng-file-select="onFileSelect($files)" accept="image/*" class="btn btn-info btn-lg">{{ photoButtonText }}</button>
+        </div>
+    </div>
+
+    <fieldset class="col-sm-12 col-md-4 col-md-pull-4 col-lg-6 col-lg-pull-3">
+        <div class="profile--summary profile--editable" ng-class="{'changed': updateForm.fullName.$dirty || updateForm.charityNumber.$dirty || updateForm.charityDesc.$dirty}">
+            <div class="form-group">
+                <label for="fullName">Name</label>
+                <input type="text" ng-maxlength="100"
+                       class="form-control"
+                       id="fullName"
+                       ng-model="profile.fullName"
+                       name="fullName"
+                       placeholder="Charity name"
+                       required>
+            </div>
+            <div  class="form-group">
+            <p class="profile-profile-type "><i class="profile-type  ng-class:profile.profileType;"></i><span class=" ng-class:profile.profileType;">{{profile.profileType || capitalizeFirstLetter}}</span></p>
+            </div>
+            <div class="form-group" ng-if="profile.profileType == 'charity'">
+                <label for="charityNumber">Charity number</label>
+                <input type="text"
+                       class="form-control"
+                       id="charityNumber"
+                       ng-model="profile.charityNumber"
+                       name="charityNumber"
+                       placeholder="Charity number"
+                       ng-maxlength="8">
+            </div>
+            <div class="form-group" ng-if="profile.profileType == 'business' || profile.profileType == 'transporter'">
+                <label for="foodRegistrationNumber">Food registration number</label>
+                <input type="text"
+                       class="form-control"
+                       id="foodRegistrationNumber"
+                       ng-model="profile.foodRegistrationNumber"
+                       name="foodRegistrationNumber"
+                       placeholder="Food registration number"
+                       ng-maxlength="20">
+            </div>
+            <div class="form-group">
+                <label for="charityDesc">Description</label>
+                <textarea class="form-control"
+                          ng-maxlength="200"
+                          id="charityDesc"
+                          ng-model="profile.description"
+                          name="charityDesc"
+                          rows="3"></textarea>
+            </div>
+        </div>
+    </fieldset>
+
+</div>
+
+<div class="row clearfix">
+
+    <div class="col-md-8 col-lg-9">
+
+        <div class="row clearfix">
+
+            <fieldset class="col-sm-6 col-md-6 col-lg-4 profile--detail">
+                <div class="profile--editable" ng-class="{'changed': updateForm.address1.$dirty || updateForm.address2.$dirty || updateForm.charityCity.$dirty || updateForm.charityPostcode.$dirty}">
+                    <h3>Location</h3>
+
+                    <div class="form-group">
+                        <label for="address1">Address 1<span class="required">*</span></label>
+                        <input required
+                               type="text"
+                               ng-maxlength="100"
+                               class="form-control"
+                               id="address1"
+                               name="address1"
+                               ng-model="profile.address.address1"
+                               placeholder="Floor etc.">
+                    </div>
+                    <div class="form-group">
+                        <label for="address2">Address 2</label>
+                        <input type="text"
+                               ng-maxlength="100"
+                               class="form-control"
+                               id="address2"
+                               name="address2"
+                               ng-model="profile.address.address2"
+                               placeholder="Street etc.">
+                    </div>
+                    <div class="form-group">
+                        <label for="charityCity">City<span class="required">*</span></label>
+                        <input required
+                               type="text"
+                               ng-maxlength="100"
+                               class="form-control"
+                               id="charityCity"
+                               name="charityCity"
+                               ng-model="profile.address.city"
+                               placeholder="City">
+                    </div>
+                    <div class="form-group">
+                        <label for="charityPostcode">Postcode<span class="required">*</span></label>
+                        <input required
+                               type="text"
+                               ng-maxlength="40"
+                               class="form-control"
+                               id="charityPostcode"
+                               name="charityPostcode"
+                               ng-model="profile.address.postcode"
+                               placeholder="Postcode">
+                    </div>
+                    <span class="required">*</span>indicates a mandatory field
+                </div>
+            </fieldset>
+
+            <fieldset class="col-sm-6 col-md-6 col-lg-4 profile--detail highlighted">
+
+                <!-- toggle class 'changed' when in details have been edited -->
+                <div class="profile--editable" ng-class="{'changed': updateForm.mainPhoneNumber.$dirty || updateForm.emailAddress.$dirty || updateForm.contactName.$dirty}">
+                    <h3>Contact Details</h3>
+                    <p>Only available to those Zheroes who are connected to you.</p>
+                    <div class="form-group">
+                        <label for="contactName">Contact name</label>
+                        <input type="text"
+                               required
+                               class="form-control"
+                               id="contactName"
+                               name="contactName"
+                               ng-model="profile.contactName"
+                               placeholder="contact name">
+                    </div>
+                    <div class="form-group">
+                        <label for="mainPhoneNumber">Phone</label>
+                        <input type="tel" pattern="^[0-9+ #]*$" ng-pattern-restrict
+                               class="form-control"
+                               ng-maxlength="15"
+                               id="mainPhoneNumber"
+                               name="mainPhoneNumber"
+                               ng-model="profile.contactPhoneNumber"
+                               placeholder="phone number">
+                    </div>
+                    <div class="form-group">
+                        <label for="emailAddress">Email</label>
+                        <input type="email"
+                               required
+                               class="form-control"
+                               id="emailAddress"
+                               name="emailAddress"
+                               ng-change="resetServerErrors()"
+                               ng-model="profile.email"
+                               placeholder="email address">
+                        <span class="icon-correct form-control-feedback" ng-show="updateForm.emailAddress.$invalid">Email address is already taken.</span>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="col-sm-6 col-md-6 col-lg-4 profile--detail">
+                <div class="profile--editable" ng-class="{'changed': updateForm.foodTypes.$dirty}">
+                    <h3>Food details</h3>
+                    <form name="foodTypes" class="clearfix">
+                        <div class="checkbox" ng-repeat="foodTypeItem in foodTypeList">
+                            <label for="foodType_{{ foodTypeItem.id }}">{{ foodTypeItem.description }}</label>
+                            <input type="checkbox"
+                                   id="foodType_{{ foodTypeItem.id }}"
+                                   name="foodType_{{ foodTypeItem.id }}"
+                                   checklist-model="selectedFoodTypes"
+                                   checklist-value="foodTypeItem.id">
+                        </div>
+                    </form>
+                </div>
+            </fieldset>
+
+            <fieldset class="col-sm-6 col-md-6 col-lg-4 profile--detail">
+                <div class="profile--editable" ng-class="{'changed': updateForm.donationSizes.$dirty}">
+                    <h3>Donation size</h3>
+                    <form name="donationSizes">
+                        <div class="checkbox" ng-repeat="item in donationSizeList">
+                            <label for="donationSize_{{ item.id }}">{{ item.description }}</label>
+                            <input type="checkbox"
+                                   id="donationSize_{{ item.id }}"
+                                   checklist-model="selectedDonationSizes"
+                                   checklist-value="item.id">
+                        </div>
+                    </form>
+                </div>
+            </fieldset>
+
+            <fieldset class="col-sm-6 col-md-6 col-lg-4 profile--detail">
+                <div class="profile--editable" ng-class="{'changed': updateForm.otherInformation.$dirty}">
+                    <h3>Other information</h3>
+                    <div class="form-group">
+                        <textarea class="form-control"
+                                  ng-maxlength="500"
+                                  name="otherInformation"
+                                  rows="3"
+                                  ng-model="profile.other"></textarea>
+                    </div>
+                </div>
+            </fieldset>
+
+        </div>
+
+    </div>
+</div>
+
+<fieldset>
+    <p>
+        <a ng-click="saveProfile()" class="btn btn-success" ng-disabled="updateForm.$invalid">Save</a>
+        <a ng-click="cancel()" class="btn btn-inverse">Cancel</a>
+    </p>
+</fieldset>
+
+</ng-form>
+</section>
+
+</article>

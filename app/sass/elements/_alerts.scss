@@ -1,0 +1,11 @@
+.alert {
+  clear: left;
+}
+.secondary-darker {
+
+  .alert-danger {
+    background: none;
+    border: none;
+    padding: 0;
+  }
+}

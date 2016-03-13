@@ -1,0 +1,59 @@
+#createDelivery{
+  ul.products{
+    padding: 20px 6px;
+    background: $brand-gray-lighter;
+    width : 100%;
+    margin-left : -15px;
+    @media (max-width: $screen-xs-max) {
+      width : auto;
+    }
+    li{
+      list-style: none;
+      @media (max-width: $screen-xs-max) {
+        border-bottom: 3px solid #FFFFFF;
+
+        &:first-of-type{
+          border: none;
+        }
+      }
+    }
+  }
+
+  .deliveryItemContainer{
+    width: 100%;
+
+    textarea, input, select{
+      width: 100%;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      textarea{
+        height: 120px;
+      }
+    }
+    @media (min-width: $screen-sm-min) {
+      textarea{
+        height: 30px;
+      }
+    }
+
+  }
+  .increasedPadding{
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .increasedMargin{
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+}
+
+label, legend {
+  span {
+    font-weight: normal;
+  }
+}
+
+.radio, .checkbox {
+  padding-left: 24px;
+}

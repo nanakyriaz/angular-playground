@@ -1,0 +1,39 @@
+<section class="clearfix">
+    <div class="col-md-8 private-message-writer">
+
+        <div ng-if="errorMessage !== false">{{ errorMessage }}</div>
+
+        <form class="clearfix" name="messageForm" id="messageForm" method="post">
+            <div class="form-group">
+                <label class="control-label" for="message">Message</label>
+                <textarea class="form-control" id="message" name="message" rows="3"
+                          ng-change="refreshMessage()"
+                          ng-blur="refreshMessage()"
+                          ng-model="message"
+                          ng-minlength="1"
+                          ng-maxlength="400"></textarea>
+                <div class="formError" ng-show="messageForm.message.$error.minlength">Sorry, you can have an empty message. Please amend.</div>
+                <div class="formError" ng-show="messageForm.message.$error.maxlength">Sorry, you can only use maximum 400 characters. Please amend.</div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="recipients">To</label>
+                <div pz-profile-picker name="recipients" id="recipients" ng-model="recipients" class="pz-profile-picker">
+                    <div pz-profile-pickers source="loadProfiles($query)" favourites="favourites" class="pz-profile-pickers"></div>
+                </div>
+                <div class="formError" ng-show="missingParticipants">No relevant Charity has been found for your selection. If you have selected <em>"My Charities"</em> or <em>"Close to me"</em> you might not have any Charity profiles in your community or near your location. Please try again with another recipient.</div>
+            </div>
+
+            <div class="form-group pull-right">
+                <em class="chars" ng-class="{'has-error':availableCharacters < 0}">{{ availableCharacters }}</em>
+                <button
+                        id="sendMessage()"
+                        class="btn btn-success"
+                        ng-click="sendMessage()"
+                        ng-disabled="!messageForm.$valid">Send</button>
+            </div>
+
+        </form>
+    </div>
+
+</section>

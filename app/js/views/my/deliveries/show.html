@@ -1,0 +1,107 @@
+<section id="reviewDelivery" class="clearfix">
+
+    <div class="row">
+        <h2>Delivery</h2>
+        <div class="delivery-header">
+            <div class="row" ng-if="isDeliveryCreator">
+               <a class="btn btn-success pull-right" ng-click="modifyDelivery()">Modify donation</a>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <h3>Deliver to</h3>
+                    <p>{{ delivery.recipient.fullName || 'Not addressed yet' }} <a ui-sref="profile_detail({id:delivery.recipient.id})" class="btn" ng-if="delivery.recipient.fullName">View profile</a></p>
+                    <div class="address-block" ng-show="delivery.recipient.address">
+                        <p>{{ delivery.recipient.address.address1 }}</p>
+                        <p>{{ delivery.recipient.address.address2 }}</p>
+                        <p ng-show="delivery.recipient.address.address3">{{ delivery.recipient.address.address3 }}</p>
+                        <p ng-show="delivery.recipient.address.address4">{{ delivery.recipient.address.address4 }}</p>
+                        <p><span class="postcode" ng-if="delivery.recipient.address.postcode">{{ delivery.recipient.address.postcode }},</span> <span class="city">{{ delivery.recipient.address.city }}</span></p>
+                        <p>{{ delivery.recipient.address.country }}</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <h3>Delivery date</h3>
+                    <p>{{ delivery.deliveryDate | date:shortDate }} <span ng-if="delivery.startTime && !delivery.endTime">after {{ delivery.startTime | time }}</span>
+                    <span ng-if="!delivery.startTime && delivery.endTime">before {{ delivery.endTime | time }}</span>
+                    <span ng-if="delivery.startTime && delivery.endTime">{{ delivery.startTime | time }} - {{ delivery.endTime | time }}</span><span ng-if="!delivery.startTime && !delivery.endTime">(time not specified)</span>
+                    </p>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                  <h3>Donation notes</h3>
+                  <p>{{ delivery.info || 'No notes' }}</p>
+                </div>
+
+                <div class="col-xs-12 col-md-6">
+                    <h3>Transportation</h3>
+                    <p ng-show="delivery.collectionOnly">The food needs to be collected.</p>
+                    <p ng-hide="delivery.collectionOnly">The donor can deliver</p>
+                </div>
+
+                <div class="col-xs-12 col-md-6" ng-if="delivery.isTransporter">
+                  <div ng-hide="delivery.deliveryStatus=='delivered' || delivery.deliveryStatus=='failed'">
+                    <h3>Have you completed the delivery?</h3>
+                    <p class="help-block">Have you completed the delivery successfully, click on the button below.</p>
+                    <p><a class="btn btn-success" ng-click="completeDelivery()">Mark delivery as completed</a></p>
+                  </div>
+                  <div ng-hide="delivery.deliveryStatus=='failed' || delivery.deliveryStatus=='delivered'">
+                    <h3>Were you unable to deliver the goods?</h3>
+                    <p class="help-block">Couldn't you deliver the goods unexpectedly, click on the button below.</p>
+                    <p><a class="btn btn-danger" ng-click="failDelivery()">Mark delivery as failed</a></p>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="delivery-header">
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <h3>Donor</h3>
+                    <p>{{ delivery.creator.fullName || 'Not addressed yet' }} <a ui-sref="profile_detail({id:delivery.creator.id})" class="btn" ng-if="delivery.creator.fullName">View profile</a></p>
+                    <div class="address-block" ng-show="delivery.creator.address">
+                      <p>{{ delivery.creator.address.address1 }}</p>
+                      <p>{{ delivery.creator.address.address2 }}</p>
+                      <p ng-show="delivery.creator.address.address3">{{ delivery.creator.address.address3 }}</p>
+                      <p ng-show="delivery.creator.address.address4">{{ delivery.creator.address.address4 }}</p>
+                      <p><span class="postcode" ng-if="delivery.creator.address.postcode">{{ delivery.creator.address.postcode }},</span> <span class="city">{{ delivery.creator.address.city }}</span></p>
+                      <p>{{ delivery.creator.address.country }}</p>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <h3>Volunteers / Transporters</h3>
+                    <p>{{ delivery.transporter.fullName || 'Not addressed yet' }} <a ui-sref="profile_detail({id:delivery.transporter.id})" class="btn" ng-if="delivery.transporter.fullName">View profile</a></p>
+                    <div class="address-block" ng-show="delivery.transporter.address">
+                      <p>{{ delivery.transporter.address.address1 }}</p>
+                      <p>{{ delivery.transporter.address.address2 }}</p>
+                      <p ng-show="delivery.transporter.address.address3">{{ delivery.transporter.address.address3 }}</p>
+                      <p ng-show="delivery.transporter.address.address4">{{ delivery.transporter.address.address4 }}</p>
+                      <p><span class="postcode" ng-if="delivery.transporter.address.postcode">{{ delivery.transporter.address.postcode }},</span> <span class="city">{{ delivery.transporter.address.city }}</span></p>
+                      <p>{{ delivery.transporter.address.country }}</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+            <fieldset>
+                <legend>Donation</legend>
+
+                <div class="delivery-items-list deliveries-list">
+                    <table cellspacing="0" ng-show="deliveryItems">
+                        <colgroup>
+                            <col class="col-1">
+                        </colgroup>
+                        <tbody>
+                        <tr ng-repeat="listItem in deliveryItems">
+                            <td>
+                                <div>
+                                    {{ listItem.quantity }} {{ listItem.unitOfMeasure.uomDescription || '' }} {{ listItem.productName }}
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="empty" ng-hide="deliveryItems">
+                        <h2>No delivery items for this delivery.</h2>
+                    </div>
+                </div>
+            </fieldset>
+    </div>
+</section>

@@ -1,0 +1,17 @@
+/*
+ * animations css stylesheet
+ */
+
+/*form validation*/
+
+.form-control {
+  -webkit-transition: 0.5s linear all;
+  -moz-transition: 0.5s linear all;
+  -o-transition: 0.5s linear all;
+  transition: 0.5s linear all;
+}
+.form-control.ng-invalid.ng-dirty {
+  border: 2px solid $brand-danger;
+  transition:0.5s linear all;
+  color: $brand-danger;
+}

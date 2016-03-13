@@ -1,0 +1,146 @@
+<div class="row">
+  <div class="agreement-title">Business agreement</div>
+  <div class="col-md-6 content">
+    <div class="section">
+      <h1>IMPORTANT:</h1>
+      <p>
+        In order to have access to surplus food donations and for your profile on Plan Zheroes platform to be fully activated, it is crucial to read this agreement and confirm you accept its terms and conditions.
+      </p>
+    </div>
+
+    <div class="section">
+      <h1>DEFINITIONS:</h1>
+      
+      <div>
+        <h2>Plan Zheroes -</h2>
+        <p>The Zhero Food Waste Heroes, C.I.O .</p>
+        <h2>Business -</h2>
+        <p>Named registered business as detailed below</p>
+        <h2>Food -</h2>
+        <p>Food and drink as defined by the Food Safety Act 1990</p>
+        <h2>Donors -</h2>
+        <p>Food donors donating food to the Charity as envisaged in this agreement</p>
+      </div>
+
+      <div>
+        <p><br/>If anything below is not correct please go back to correct</p>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Business name:</h2>
+        </div>
+        <div class="col-md-6">
+          <p>{{registration.name}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Business Address:</h2>
+        </div>
+        <div class="col-md-6">
+          <div ng-if="registration.address">
+           <p><span ng-if="registration.address.streetname">{{registration.address.streetname}}<br/></span>
+           <span ng-if="registration.address.lineTwo">{{registration.address.lineTwo}}<br/></span>
+           <span ng-if="registration.address.lineThree">{{registration.address.lineThree}}<br/></span>
+           <span ng-if="registration.address.town">{{registration.address.town}}<br/></span>
+           <span ng-if="registration.address.state">{{registration.address.state}}<br/></span>
+           <span ng-if="registration.address.postcode">{{registration.address.postcode}}<br/></span>
+           <span ng-if="registration.address.country">{{registration.address.country}}</span></p>
+          </div>
+          <div ng-if="registration.addressManual">
+            <p><span ng-if="registration.addressManual.lineTwo">{{registration.addressManual.streetname}}<br/></span>
+            <span ng-if="registration.addressManual.lineTwo">{{registration.addressManual.lineTwo}}<br/></span>
+            <span ng-if="registration.addressManual.lineThree">{{registration.addressManual.lineThree}}<br/></span>
+            <span ng-if="registration.addressManual.town">{{registration.addressManual.town}}<br/></span>
+            <span ng-if="registration.addressManual.state">{{registration.addressManual.state}}<br/></span>
+            <span ng-if="registration.addressManual.postcode">{{registration.addressManual.postcode}}<br/></span>
+            <span ng-if="registration.addressManual.country">{{registration.addressManual.country}}</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Food Registration Number:</h2>
+        </div>
+        <div class="col-md-6">
+          <p>{{registration.foodRegistrationNumber ||'not provided'}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Primary contact:</h2>
+        </div>
+        <div class="col-md-6">
+          <p><span>{{registration.firstName}} {{registration.lastname}}</span><br/>
+          <span>{{registration.email}}</span><br/>
+          <span>{{registration.mobile}}</span></p>
+        </div>
+      </div>
+      <div class="row" ng-if="registration.pcFirstName">
+        <div class="col-md-6">
+          <h2>Secondary contact:</h2>
+        </div>
+        <div class="col-md-6">
+          <p><span>{{registration.pcFirstName}} {{registration.pcLastName}}</span><br/>
+          <span>{{registration.pcEmail}}</span><br/>
+          <span>{{registration.pcPhone}}</span></p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section">
+      <h1>AGREEMENT:</h1>
+      <p>1. Background</p>
+      <p>It is important to Plan Zheroes that good food does not go to waste, so we inspire food donors (food retailers, caterers, restaurants, hotels etc.) to donate food that would otherwise be thrown away at the end of the day to reputable charities. The
+      food is donated so that the charities may distribute it to those in genuine need. This agreement clarifies the conditions Plan Zheroes makes in linking donors to charities.</p>
+      <p>2. Diverting food</p>
+      <p>Plan Zheroesâ€™ primary objective is to identify and facilitate the links between donors and charities. The Charity acknowledges and agrees that Plan Zheroes will not be involved in the logistics of transporting food from donors to the Charity, nor in the preparation, packaging or any other operations of the donors. Plan Zheroes does not take responsibility for any private arrangements or agreements made between donors and the Charity.</p>
+    </div>
+  </div>
+  <div class="col-md-6 content">
+    <div>
+      <p>3. Transportation of food</p>
+      <p>The Charity will make arrangements with relevant donors to ensure that there are clear responsibilities for transportation of food. The Charityâ€™s arrangements with donors will ensure that:
+      - transportation of food will be kept to a minimum:
+      - all collected food will be kept chilled at or below 8Â°C using either refrigerated transport or insulated containers and ice packs;
+      - where chilled facilities are not available,it will not keep any food at any temperature warmer than 8Â°C for longer than 30 minutes.</p>
+      <p>4. Use of donated food</p>
+      <p>Food donated to the Charity shall only be used:
+      a) On premises managed by the Charity
+      b) In designated soup runs
+      No donated food may be sold, exchanged or used in any other way. Any unused food must be disposed of responsibly after
+      first removing any packaging or anything that could identify the food as originating from a specific donor.</p>
+      <p>5. Liability</p>
+      <p>Plan Zheroes accepts no liability in respect of food or food products whether in the possession and control of the Charity or relevant donors.
+      The Charity acknowledges and agrees that in facilitating links between donors and charities, Plan Zheroes does not take on any relationship of agency, partnership, joint venture with or on behalf of either donors or the Charity.
+      The Charity undertakes that it will comply with legal standards of hygiene in the handling, storage, distribution, preparation and serving of products, and will observe good practice and current legislation to ensure the products supplied remain safe and legal. It will ensure that all staff involved in handling of products will be trained in food hygiene to a level commensurable with their duties as required by current legislation.</p>
+      <p>6. Indemnity</p>
+      <p>The Charity shall indemnify Plan Zheroes against all claims, liabilities, costs, actions, proceedings or expenses incurred by Plan Zheroes arising out of, or in consequence of, any act, neglect or default of the Charity, its agents, employees or clients including service users consuming donated food.</p>
+      <p>7. General</p>
+      <p>This Agreement shall be governed by English law. Amendments to this Agreement are permissible only by written agreement.<br/>This Agreement may not be assigned by the Charity.</p>
+    </div>
+
+    <div class="form-group">
+      <h2>I confirm that I accept the above agreement and have the authority to accept this agreement on behalf of the above named Business: *</h2>
+      <div class="agreement-box">
+        <label class="accepted-agreement">
+          <input type="radio" ng-model="registration.acceptedAgreement" ng-value="true" ng-required="true"> I accept this agreement
+        </label>
+        <br/>
+        <label class="accepted-agreement">
+          <input type="radio" ng-model="registration.acceptedAgreement" ng-value="false" ng-required="true"> I do not accept this agreement
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <p>The tick in the above box represents my authorised signature under s.7 of the Electronic Communications Act 2000, and the maker of this declaration does so with the properly given authority of the above named Charity.</p> 
+      <label>
+        <input type="checkbox" name="acceptTerms" ng-model="registration.acceptedTerms" ng-required="true"> I accept Terms and Conditions
+      </label>
+    </div>
+
+  </div>
+</div>

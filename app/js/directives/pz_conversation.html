@@ -1,0 +1,89 @@
+<div class="col-sm-2 hidden-xs">
+    <img ng-src="{{ conversation.firstMessage.sender.avatarImages.thumb }}" alt="{{ conversation.firstMessage.sender.name }}"
+         class="img-responsive">
+</div>
+<div class="col-sm-10 message-item">
+    <div class="message-content {{ conversation.firstMessage.senderProfileType }}">
+        <strong ng-show="conversation.seen" class="pull-right">UNREAD</strong>
+
+        <p class="profile-name"><a ui-sref="profile_detail({id:conversation.firstMessage.sender.id})">{{
+            conversation.firstMessage.senderName }}</a></p>
+
+        <p class="message-text" ng-bind-html="conversation.firstMessage.message | linky"></p>
+
+        <p class="message-date">{{ conversation.firstMessage.sentAt | date:'short' }}</p>
+    </div>
+    <div class="replies-container">
+        <div ng-repeat="response in conversation.replies | skipMessageId:conversation.firstMessage.id | orderBy:sentAt:true | limitTo:viewLimit"
+             class="reply-container clearfix">
+            <div class="col-sm-2 hidden-xs" id="message-{{ response.id }}">
+                <img ng-src="{{ response.sender.avatarImages.thumb }}" alt="{{ response.senderName }}"
+                     class="img-responsive">
+            </div>
+            <div class="col-sm-10 reply-item {{ response.senderProfileType }}">
+                <!-- add user type as class for styling -->
+                <div class="reply-content">
+                    <p class="profile-name">
+                        <a ui-sref="profile_detail({id:response.sender.id})">{{ response.senderName }}</a>
+                    </p>
+                    <p class="profile-name">
+                        <a ui-sref="profile_detail({id:response.recipients.id})">{{ response.recipients }}</a>
+                    </p>
+
+                    <p class="reply-text" ng-bind-html="response.message | linky"></p>
+
+                    <div class="message-attachments" ng-if="response.messageAttachment">
+                        <p class="reply-date">Message attachments:</p>
+
+                        <div class="message-attachment">
+                            <img ng-src="{{ response.messageAttachment.imageUrl }}"
+                                 alt="Attachment: {{ response.messageAttachment.originalFilename }}"
+                                 class="img-responsive">
+                        </div>
+                    </div>
+
+
+                    <p class="reply-date">{{ response.sentAt | date:'short' }}</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="show-more" ng-show="hasMoreItemsToShow()">
+            <a href="" ng-click="showMoreItems(conversation)">Show more {{ numberOfAvailableMessages }} response(s)</a>
+        </p>
+    </div>
+    <form class="reply-form" id="messageForm-{{conversation.id}}" name="messageForm" enctype="multipart/form-data">
+        <div class="form-group has-error">
+            <textarea class="form-control" rows="3"
+                      name="message"
+                      ng-change="refreshMessage()"
+                      ng-blur="refreshMessage() && validateMessage()"
+                      ng-model="message"
+                      placeholder="Reply to this message"></textarea>
+
+            <div class="formError" id="inputMessageFormError" ng-show="messageForm.message.$invalid">The message can not be empty.</div>
+        </div>
+    </form>
+    <div class="reply-message-attachments">
+        <div class="reply-image" ng-repeat="attachment in messageAttachments">
+            <a class="remove" ng-click="clearMessageAttachment(attachment)">Remove</a>
+            <img ng-show="attachment" ng-src="{{attachment.imageUrl}}" type="{{attachment.mimetype}}"
+                 class="img-responsive"/>
+        </div>
+    </div>
+    <div class="reply-buttons clearfix">
+        <form class="message-attachment-upload hidden" name="messageAttachmentForm">
+            <input type="file" ng-file-select="onFileSelect($files)" value="Add a photo" multiple accept="image/*">
+
+            <p class="warning">Note: An uploaded image might be available to the public</p>
+        </form>
+
+        <div class="pull-right">
+            <em class="chars" ng-class="{'has-error':availableCharacters < 0}">{{ availableCharacters }}</em>
+            <button class="btn btn-success"
+                    ng-click="replyMessage()"
+                    ng-disabled="!validMessage">{{ buttonLabel }}
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,234 @@
+<div class="row clearfix">
+    <form role="form" name="registerForm" class="col-md-10 col-lg-8 custom-form section">
+        <fieldset class="section secondary-gray-light">
+            <legend>Tell us what you want to do</legend>
+            <div class="form-group form-callout has-feedback" ng-class="{'has-success' : validateProfileType && registerForm.profileType.$valid}">
+                <label for="profileType" class="control-label">I am...</label>
+                <select id="profileType" name="profileType" class="form-control right-padding-10"
+                        ng-model="profileType"
+                        ng-blur="validations.ProfileType = true; isProfileTypeValid()"
+                        ng-change="isProfileTypeValid()"
+                        required>
+                    <option value="" selected="selected">Please select one</option>
+                    <option value="business">Business</option>
+                    <option value="charity">Charity</option>
+                    <option value="transporter">Transporter</option>
+                    <option value="volunteer">Volunteer</option>
+                </select>
+                <!--<span ng-hide="profileType == ''" class="glyphicon glyphicon-ok form-control-feedback"></span>-->
+                <p class="help-block">
+                    <a ng-click="displayAccountInfoPopup()" id="profileType-popup-dialog">(I don't know what to select)</a>
+                </p>
+            </div>
+        </fieldset>
+
+        <fieldset ng-hide="profileType == ''">
+            <legend>Your account info</legend>
+
+            <div class="form-group">
+                <label for="email" class="control-label">Email address</label>
+                <input type="text" id="email" name="email" type="email"
+                       ng-blur="validations.Email = true"
+                       ng-change="isEmailValid()"
+                       ng-model="email" class="form-control"
+                       required>
+                <!--<span ng-show="validations.Email" class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok' : validations.Email && registerForm.email.$valid, 'glyphicon-warning-sign': validations.Email && registerForm.email.$invalid}"></span>-->
+                <div class="formError" id="inputEmailUniqueFormError" ng-show="validations.Email && registerForm.email.$error.server">The email address is already in use.</div>
+                <div class="formError" id="inputEmailFormError" ng-show="validations.Email && registerForm.email.$invalid">The email address is not valid</div>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': validations.Password && registerForm.password.$invalid}">
+                <label for="password" class="control-label">Password</label>
+                <input type="password" id="password" name="password" placeholder="Create a password"
+                       ng-blur="validations.Password = true" ng-change="firstPasswordMatches()"
+                       ng-model="password1" class="form-control"
+                       password-format
+                       required>
+                <p class="help-block">At least 6 characters and should contain one uppercase character and one number</p>
+                <!--<span class="icon-correct form-control-feedback" ng-show="validations.Password && registerForm.password.$valid"></span>-->
+                <!--<span class="icon-incorrect form-control-feedback" ng-show="validations.Password && registerForm.password.$invalid"></span>-->
+                <div class="formError" id="inputPassword1Error" ng-show="validations.Password && registerForm.password.$invalid" translate="messages.passwordRule"></div>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': validations.RepeatPassword && registerForm.repeatPassword.$invalid}">
+                <label for="repeatPassword" class="control-label">Confirm password</label>
+                <input type="password" id="repeatPassword" name="repeatPassword" placeholder=""
+                       ng-blur="validations.RepeatPassword = true"
+                       ng-change="passwordMatches()"
+                       ng-model="password2" class="form-control" password-format>
+                <p class="help-block">At least 6 characters and should contain one uppercase character and one number</p>
+                <!--<span class="icon-correct form-control-feedback" ng-show="validations.RepeatPassword && registerForm.repeatPassword.$valid"></span>-->
+                <!--<span class="icon-incorrect form-control-feedback" ng-show="validations.RepeatPassword && registerForm.repeatPassword.$invalid"></span>-->
+                <div class="formError" id="inputPassword2Error" ng-show="validations.RepeatPassword && registerForm.repeatPassword.$invalid">Your passwords do not match. Please check and re-type passwords</div>
+            </div>
+        </fieldset>
+
+        <fieldset ng-hide="profileType == ''">
+            <legend>... just a few more details</legend>
+            <p>All this information is mandatory and it will help us to create your brand-new Zheroes profile and suggest you new connections. Thanks for your time!</p>
+
+            <div class="form-group" ng-class="{'has-error': validations.FullName && registerForm.fullName.$invalid}">
+                <label for="fullName" class="control-label">Your name</label>
+                <input type="text" id="fullName" name="fullName" placeholder="E.g. John Smith or Deborah Ford"
+                       ng-model="fullName" ng-maxlength="100"
+                       ng-blur="validations.FullName = true"
+                       ng-change="fullNameValid()"
+                       class="form-control">
+                <!--<span class="icon-correct form-control-feedback" ng-show="validations.FullName && registerForm.fullName.$valid"></span>-->
+                <!--<span class="icon-incorrect form-control-feedback" ng-show="validations.FullName && registerForm.fullName.$invalid"></span>-->
+                <div class="formError" id="inputFullNameError" ng-show="validations.FullName && registerForm.fullName.$invalid">Your name is required</div>
+            </div>
+
+            <!-- Only form business and charity -->
+            <div class="form-group" ng-class="{'has-error': validations.CharityName && registerForm.charityName.$invalid}" ng-show="profileType == 'charity'">
+                <label for="charityName" class="control-label">Charity name</label>
+                <input type="text" id="charityName" name="charityName" placeholder="Charity name"
+                       ng-model="charityName" ng-maxlength="100"
+                       ng-blur="validations.CharityName = true"
+                       ng-change="charityNameValid()"
+                       class="form-control">
+                <!--<span class="icon-correct form-control-feedback" ng-show="validations.CharityName && registerForm.charityName.$valid"></span>-->
+                <!--<span class="icon-incorrect form-control-feedback" ng-show="validations.CharityName && registerForm.charityName.$invalid"></span>-->
+                <div class="formError" id="inputCharityNameError" ng-show="validations.CharityName && registerForm.charityName.$invalid">Charity name is required</div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': validations.BusinessName && registerForm.businessName.$invalid}" ng-show="profileType == 'business'">
+                <label for="businessName" class="control-label">Business name</label>
+                <input type="text" id="businessName" name="businessName" placeholder="Business name"
+                       ng-model="businessName"  ng-maxlength="100"
+                       ng-blur="validations.BusinessName = true"
+                       ng-change="businessNameValid()"
+                       class="form-control">
+                <!--<span class="icon-correct form-control-feedback" ng-show="validations.BusinessName && registerForm.businessName.$valid"></span>-->
+                <!--<span class="icon-incorrect form-control-feedback" ng-show="validations.BusinessName && registerForm.businessName.$invalid"></span>-->
+                <div class="formError" id="inputBusinessNameError" ng-show="validations.BusinessName && registerForm.businessName.$invalid">Business name is required</div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': validations.PostCode && registerForm.postCode.$invalid}">
+                <label for="postcode" class="control-label">Postcode</label>
+                <input type="text" id="postCode" name="postCode" placeholder="E.g. EC1A 1BB"
+                       ng-blur="validations.PostCode = true"
+                       ng-change="isPostCodeCorrect()"
+                       ng-model="postCode"
+                       maxlength="40"
+                       required
+                       class="form-control">
+                <p class="help-block" ng-hide="profileType == 'volunteer'">This will help us to recommend you Zheroes near to you.</p>
+                <p class="help-block" ng-show="profileType == 'volunteer'">A location postcode where you are usually around so we could propose you nearby places which need a hand.</p>
+                <!--<span class="icon-correct form-control-feedback" ng-show="validations.PostCode && registerForm.postCode.$valid"></span>-->
+                <!--<span class="icon-incorrect form-control-feedback" ng-show="validations.PostCode && registerForm.postCode.$invalid"></span>-->
+                <div class="formError" id="inputPostcodeError" ng-show="validations.PostCode && registerForm.postCode.$invalid">Post code is invalid</div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': validations.CharityNumber && registerForm.charityNumber.$invalid}" ng-show="profileType == 'charity'">
+                <label for="charityNumber" class="control-label">Charity number <span class="control-optional">(Optional)</span></label>
+                <input type="text" id="charityNumber" name="charityNumber" placeholder="E.g. 12345678"
+                       ng-model="charityNumber"
+                       ng-blur="validations.CharityNumber = true"
+                       class="form-control" ng-maxlength="8">
+                <!--ng-change="charityNumberValid()"-->
+                <!--<span class="icon-correct form-control-feedback" ng-show="validations.CharityNumber && registerForm.charityNumber.$valid"></span>-->
+                <!--<span class="icon-incorrect form-control-feedback" ng-show="validations.CharityNumber && registerForm.charityNumber.$invalid"></span>-->
+            </div>
+            <div class="form-group" ng-class="{'has-error': validations.PhoneNumber && registerForm.phoneNumber.$invalid}">
+                <label for="phoneNumber" class="control-label">Phone number</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" placeholder="E.g. 020-1234 5678"
+                       ng-model="phoneNumber"  pattern="^[0-9+ #]*$" ng-pattern-restrict
+                       ng-blur="validations.PhoneNumber = true"
+                       ng-change="phoneNumberValid()"
+                       ng-maxlength="15"
+                       class="form-control">
+                <p class="help-block">You will be able to control who can see this information.</p>
+                <!--<span class="icon-correct form-control-feedback" ng-show="validations.PhoneNumber && registerForm.phoneNumber.$valid"></span>-->
+                <!--<span class="icon-incorrect form-control-feedback" ng-show="validations.PhoneNumber && registerForm.phoneNumber.$invalid"></span>-->
+                <div class="formError" id="inputPhoneNumberError" ng-show="validations.PhoneNumber && registerForm.phoneNumber.$invalid">Phone number is invalid</div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': validations.TransportationMode && registerForm.transportationMode.$invalid}" ng-show="profileType == 'transporter'">
+                <label for="transportationMode" class="control-label">Means of transportation</label>
+                <select id="transportationMode" name="transportationMode"
+                        ng-model="transportationMode"
+                        ng-blur="validations.TransportationMode = true"
+                        ng-change="transportationModeValid()"
+                        class="form-control">
+                    <option value="" selected="selected">Please select one</option>
+                    <option value="insulated">Insulated boxes, thermoboxes, etc</option>
+                    <option value="chilled">Chilled (0°C to 6°C)</option>
+                    <option value="frozen">Frozen (-10°C to -25°C)</option>
+                </select>
+                <!--<span class="icon-correct form-control-feedback" ng-show="validations.TransportationMode && registerForm.transportationMode.$valid"></span>-->
+                <!--<span class="icon-incorrect form-control-feedback" ng-show="validations.TransportationMode && registerForm.transportationMode.$invalid"></span>-->
+                <div class="formError" id="inputTransportationModeError" ng-show="validations.TransportationMode && registerForm.transportationMode.$invalid">Mode of transportation is required</div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': validations.CollectionTime && registerForm.collectionTime.$invalid}" ng-show="profileType == 'business'">
+                <label for="collectionTime" class="control-label">Best collection time</label>
+                <select id="collectionTime" name="collectionTime"
+                        ng-model="collectionTime"
+                        ng-blur="validations.CollectionTime = true"
+                        ng-change="collectionTimeValid()"
+                        ng-options="c.id as c.description for c in collectionTimeList"
+                        class="form-control">
+                    <option value="" selected="selected">Please select one</option>
+                </select>
+                <!--<span class="icon-correct form-control-feedback" ng-show="validations.CollectionTime && registerForm.collectionTime.$valid"></span>-->
+                <!--<span class="icon-incorrect form-control-feedback" ng-show="validations.CollectionTime && registerForm.collectionTime.$invalid"></span>-->
+                <div class="formError" id="inputCollectionTimeError" ng-show="validations.CollectionTime && registerForm.collectionTime.$invalid">Collection time is required</div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': validations.DonationFrequency && registerForm.donationFrequency.$invalid}" ng-show="profileType == 'business'">
+                <label for="donationFrequency" class="control-label">Donation frequency</label>
+                <select id="donationFrequency" name="donationFrequency"
+                        ng-model="donationFrequency"
+                        ng-blur="validations.DonationFrequency = true"
+                        ng-change="donationFrequencyValid()"
+                        class="form-control">
+                    <option value="" selected="selected">Please select one</option>
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                </select>
+                <!--<span class="icon-correct form-control-feedback" ng-show="validations.DonationFrequency && registerForm.donationFrequency.$valid"></span>-->
+                <!--<span class="icon-incorrect form-control-feedback" ng-show="validations.DonationFrequency && registerForm.donationFrequency.$invalid"></span>-->
+                <div class="formError" id="inputDonationFrequencyError" ng-show="validations.DonationFrequency && registerForm.donationFrequency.$invalid">Donation frequency is required</div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': validations.DonationSize && registerForm.donationSize.$invalid}" ng-show="profileType == 'business'">
+                <label for="donationSize" class="control-label">Donation size</label>
+                <select id="donationSize" name="donationSize"
+                        ng-model="donationSize"
+                        ng-change="validations.Country = true && donationSizeValid()"
+                        ng-options="c.id as c.description for c in donationSizeList"
+                        ng-change="donationSizeValid()"
+                        class="form-control">
+                    <option value="" selected="selected">Please select one</option>
+                </select>
+                <!--<span class="icon-correct form-control-feedback" ng-show="validations.DonationSize && registerForm.donationSize.$valid"></span>-->
+                <!--<span class="icon-incorrect form-control-feedback" ng-show="validations.DonationSize && registerForm.donationSize.$invalid"></span>-->
+                <div class="formError" id="inputDonationSizeError" ng-show="validations.DonationSize && registerForm.donationSize.$invalid">Donation size is required</div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': validations.CharityBeneficiaries && registerForm.charityBeneficiaries.$invalid}" ng-show="profileType == 'charity'">
+                <label for="charityBeneficiaries" class="control-label">Number of beneficiaries</label>
+                <select id="charityBeneficiaries" name="charityBeneficiaries"
+                        ng-model="charityBeneficiaries"
+                        ng-blur="validations.CharityBeneficiaries = true"
+                        ng-change="charityBeneficiariesValid()"
+                        class="form-control">
+                    <option value="" selected="selected">Please select one</option>
+                    <option value="1">1-10</option>
+                    <option value="2">11-100</option>
+                    <option value="100">more than 100</option>
+                </select>
+                <p class="help-block">The number of beneficiaries the charity has.</p>
+                <!--<span class="icon-correct form-control-feedback" ng-show="validations.CharityBeneficiaries && registerForm.charityBeneficiaries.$valid"></span>-->
+                <!--<span class="icon-incorrect form-control-feedback" ng-show="validations.CharityBeneficiaries && registerForm.charityBeneficiaries.$invalid"></span>-->
+                <div class="formError" id="inputCharityBeneficiariesError" ng-show="validations.CharityBeneficiaries && registerForm.charityBeneficiaries.$invalid">Number of beneficiaries is required</div>
+            </div>
+            <!-- End -->
+
+            <div class="toolbar">
+              <button
+                id="sendRegistration"
+                class="btn btn-info"
+                ng-click="sendRegistration()"
+                ng-disabled="registerForm.$invalid">Join us</button>
+            </div>
+            <div ng-hide="profileType == ''">
+              <p>By clicking Join us you accept the <a ui-sref="terms_and_conditions" target="_blank">Terms and conditions</a>. <span ng-show="profileType == 'business' || profileType == 'charity'">We will send you an email with further instructions about the <a href="/downloads/charity/donor_agreement.pdf" target="_blank">charity</a>/<a href="/downloads/business/donor_agreement.pdf" target="_blank">donor agreement</a>.</span></p>
+            </div>
+        </fieldset>
+    </form>
+</div>

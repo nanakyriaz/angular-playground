@@ -1,0 +1,36 @@
+<article>
+    <h1>Manage Newsletter subscribers <small>(<a ui-sref="admin">Back to Administration dashboard</a>)</small></h1>
+
+    <div class="toolbar clearfix">
+        <a ng-click="exportList()" class="btn btn-primary">Export</a>
+    </div>
+
+    <section class="clearfix profiles-list">
+        <table cellspacing="0" ng-hide="!recordItems.length">
+            <colgroup>
+                <col class="col-1">
+            </colgroup>
+            <thead>
+            <tr>
+                <th class="col-creator">
+                    <div>E-mail</div>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in recordItems">
+                <td class="col-title">
+                    <div>{{item.email}}</div>
+                </td>
+            </tr>
+            </tbody>
+            </table>
+
+
+        <!-- if no profiles -->
+        <div class="empty" ng-hide="recordItems">
+            <h2>No newsletter subscribers available.</h2>
+        </div>
+        <!-- end if -->
+    </section>
+</article>

@@ -1,0 +1,97 @@
+/* Simple */
+
+section, .section {
+    margin-top: $content-padding;
+    padding: 10px 20px 0;
+    @media (max-width: $screen-md) {
+        padding-top: 20px;
+    }
+    h1 {
+        margin-top: 0;
+        margin-bottom: 30px;
+        color: $brand-gray-darker;
+        font-size: $font-size-h1;
+        @media (max-width: $screen-md) {
+            margin-bottom: 20px;
+        }
+    }
+    h2 {
+        color: $brand-gray-darker;
+        font-size: $font-size-h2;
+        margin-top: 0;
+    }
+    .content-container {
+        margin-top: $container-padding;
+    }
+    &:first-child {
+        margin-top: 0;
+    }
+    &:last-child {
+        margin-bottom: $container-padding;
+    }
+    .slide-container + .content-container {
+        margin-top: 0;
+    }
+    //
+    .control-label {
+        margin-bottom: 10px;
+    }
+    //
+    .toolbar {
+        margin-top: $container-padding;
+        margin-bottom: ceil($container-padding/2);
+    }
+}
+.gray-dark {
+    background-color: $brand-gray-dark;
+}
+.item--quote {
+    margin-left: 2em;
+}
+.secondary {
+    background-color: $secondary-gray;
+}
+.secondary-gray-light {
+    background-color: $secondary-gray-light;
+}
+.secondary-dark {
+    background-color: $secondary-dark;
+}
+.secondary-darker {
+    background-color: $secondary-darker;
+    color: white;
+    h1, .h1, h2, .h2, h3, .h3, a {
+        color: white;
+    }
+}
+aside {
+    background-color: $brand-inverse;
+    color: white;
+    font-family: $font-family-serif;
+    margin-top: $content-padding;
+    padding: $container-padding;
+}
+/* Complex Structure */
+
+article {
+    margin: 0 0 $content-padding;
+    padding: 0;
+    position: relative;
+    > section {
+        margin: $content-padding 0 0 0;
+        position: relative;
+    }
+    > h1 {
+        margin: 10px 0 0;
+        padding: 0 115px 0 25px;
+        @media (min-width: 860px) {
+            padding-right: 240px; // push the text to give some space for the elements on the right
+        }
+    }
+}
+// homepage overrides TODOPZ: remove using db setup?
+.home #body-container > article {
+    > h1, .share {
+        display: none;
+    }
+}

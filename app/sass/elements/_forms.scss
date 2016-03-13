@@ -1,0 +1,96 @@
+@import "forms/subscribe";
+@import "forms/login";
+
+legend {
+  border: none;
+  float: left;
+  font-family: $font-family-serif;
+
+  &.h1 {
+    margin-top: 0;
+  }
+}
+
+.form-group {
+  clear: left;
+}
+
+span.required {
+  font-weight: bold;
+  color: red;
+}
+
+em.chars {
+  font-style: normal;
+  margin-right: 16px;
+
+  &.has-error {
+    color: #a94442;
+  }
+}
+
+// Set input elements that are required to red border on load
+input.ng-invalid-required{
+  border: 2px solid #d9534f;
+  color: #d9534f;
+}
+
+input.ng-invalid-required.ng-pristine {
+  border: 1px solid #CCC;
+  color: #424242;
+}
+
+/* Solve the problem that the checkboxes are considered too small on iPad devices */
+@media (max-width: $screen-lg-min) {
+
+  .radio label,
+  .checkbox label {
+    display: inline-block;
+    padding-bottom: 15px;
+  }
+}
+
+
+.custom-form {
+
+  fieldset {
+    margin-bottom: 30px;
+  }
+
+  .form-group {
+    margin-bottom: 30px;
+
+    .control-label {
+      font-family: $font-family-serif;
+      .control-optional{
+        color: #707070;
+        font-weight: regular;
+      }
+    }
+
+    .form-control,
+    .help-block {
+      margin: 0 auto 5px;
+      width: 94%;
+    }
+  }
+
+  .form-control-feedback {
+    position: absolute;
+    top: ($line-height-computed + 9); // Height of the `label` and its margin
+    right: 23px;
+  }
+
+  select + .form-control-feedback {
+    right: 30px;
+  }
+
+  @media screen and (min-width: $screen-md-min) {
+    .form-control-feedback {
+      right: -60px;
+    }
+    .section .form-control-feedback {
+      right: -80px;
+    }
+  }
+}

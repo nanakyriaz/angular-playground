@@ -1,0 +1,38 @@
+<article>
+    <section class="login clearfix">
+
+        <form class="form-horizontal login-form" role="form">
+            <fieldset>
+                <legend ng-show="!scenario">Confirm your email address</legend>
+                <p>To confirm your email enter the address you registered with.</p>
+                <div class="form-group">
+                    <label for="inputEmail" class="control-label">Email</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="inputEmail"
+                            placeholder="Email"
+                            ng-model="email"
+                            type="email"
+                            ng-blur="validateEmail = true"
+                            ng-change="userNotFound = false"
+                            required>
+                    <span class="icon-correct form-control-feedback" ng-show="validateEmail && isEmailValid()"></span>
+                    <span class="icon-incorrect form-control-feedback" ng-show="validateEmail && !isEmailValid()"></span>
+                    <div class="formError" id="inputEmailFormError" ng-show="validateEmail && !isEmailValid() ">The email address is not valid</div>
+                    <div class="formError" ng-show="userNotFound">We could not find an account for that email address</div>
+                </div>
+                <div class="buttons">
+                    <button class="btn btn-success" ng-click="requestPasswordReset()" ng-disabled="!validate()">Confirm</button>
+                    <br>
+
+                    <a class="cancel" ng-click="cancel()">< Back to login</a>
+
+                </div>
+
+
+            </fieldset>
+        </form>
+
+    </section>
+</article>

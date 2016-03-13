@@ -1,0 +1,28 @@
+<div class="informOverlay">
+    <div class="titleWrapper">
+        <div class="title">
+            <h1 class="white">{{ config.title }}</h1>
+            <span class="icon icon-trials-white" ng-if="config.headerIcon === 'trial'"></span>
+            <span class="icon icon-content-set-white" ng-if="config.headerIcon === 'content'"></span>
+            <span class="icon icon-app-white" ng-if="config.headerIcon === 'app'"></span>
+            <span class="icon icon-manage" ng-if="config.headerIcon === 'cog'"></span>
+            <span class="icon icon-feature-white" ng-if="config.headerIcon === 'feature'"></span>
+        </div>
+
+    </div>
+    <div class="content">
+
+        <div class="textContent">
+            <h3 ng-if="config.mainMessage" ng-bind-html="config.mainMessage"></h3>
+            <p ng-if="config.secondaryMessage" ng-bind-html="config.secondaryMessage"></p>
+        </div>
+
+    </div>
+
+    <div class="footer-buttons">
+        <button
+                class="standard positiveAction tick"
+                ng-click="close()" >OK</button>
+    </div>
+
+</div>

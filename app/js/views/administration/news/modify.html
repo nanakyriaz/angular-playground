@@ -1,0 +1,43 @@
+<article>
+    <h1>{{contentAction }} {{ contentType }}</h1>
+    <a ng-click="goBack()" class="btn">Go back to overview</a>
+
+    <section class="clearfix profiles-list">
+        <ng-form name="contentModifyForm" class="form-horizontal" role="form" novalidate>
+            <div class="form-group">
+                <label for="title" class="control-label">Title</label>
+                <input type="text" id="title" name="title"
+                       ng-value="contentItem.title"
+                       ng-model="contentItem.title"
+                       nq-required
+                       class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="control-label">Description</label>
+                      <textarea id="description"
+                                name="description"
+                                class="form-control input-sm"
+                                ng-value="contentItem.description"
+                                ng-model="contentItem.description"
+                                ng-required="true"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="content" class="control-label">Content</label>
+                      <textarea id="content"
+                                name="content"
+                                class="form-control input-sm"
+                                ng-value="contentItem.content"
+                                ng-model="contentItem.content"
+                                ng-required="true" redactor="{plugins: ['video', 'fontsize', 'table', 'imageurl']}"></textarea>
+            </div>
+
+
+            <div class="form_group">
+                <button class="btn btn-success" ng-click="saveContent()" ng-disabled="contentModifyForm.$invalid">Save</button>
+                <a ng-click="deleteContent()" class="btn btn-inverse" ng-if="contentItem.id">Delete content</a>
+            </div>
+        </ng-form>
+    </section>
+</article>

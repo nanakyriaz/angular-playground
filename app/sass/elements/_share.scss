@@ -1,0 +1,97 @@
+//== Share module
+//
+.share {
+  text-align: left;
+  margin: 0 0 0 20px;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  right: $container-padding;
+}
+
+.share > li {
+  display: inline-block;
+  text-align: center;
+
+  border-right: 1px solid #F1F1F1;
+  margin-left: 5px;
+  padding-right: 5px;
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:last-child {
+    padding-right: 0;
+    border-right: none;
+  }
+}
+
+.share > li > a {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  text-indent: -9000px;
+
+  &.donate {
+    background: transparent url('../images/buttons/donate-purple.png') no-repeat center center;
+  }
+
+  &.share-item {
+    background: transparent url('../images/buttons/share-purple.png') no-repeat center center;
+  }
+
+  &.mail-item {
+    background: transparent url('../images/buttons/email-purple.png') no-repeat center center;
+  }
+
+  &.print-item {
+    background: transparent url('../images/buttons/print-purple.png') no-repeat center center;
+  }
+}
+
+.contact-us .share > li > a {
+  &.donate {
+    background: transparent url('../images/buttons/donate-white.png') no-repeat center center;
+  }
+
+  &.share-item {
+    background: transparent url('../images/buttons/share-white.png') no-repeat center center;
+  }
+
+  &.mail-item {
+    background: transparent url('../images/buttons/email-white.png') no-repeat center center;
+  }
+
+  &.print-item {
+    background: transparent url('../images/buttons/print-white.png') no-repeat center center;
+  }
+
+}
+
+.share .social-share{
+  padding-left: 0;
+  color: $text-color;
+
+  li{
+    list-style-type: none;
+    margin: 5px;
+    cursor: pointer;
+  }
+
+
+}
+@media screen and (max-width: $screen-xs-max) {
+  .share > li {
+    display: none;
+  }
+
+  .share > li:first-child,
+  .share > li:first-child + li {
+    display: inline-block;
+    border-right: none;
+    padding-right :0;
+  }
+}

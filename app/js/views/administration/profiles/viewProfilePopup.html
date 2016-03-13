@@ -1,0 +1,108 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" ng-click="cancel()" aria-hidden="true">&times;</button>
+
+    <div class="row clearfix">
+        <div class="col-sm-4">
+            <div class="profile--image">
+                <img ng-show="selectedProfile.avatar" ng-src="{{ selectedProfile.avatarImages.mid ? selectedProfile.avatarImages.mid : '/images/profile-placeholder.png' }}" alt="Image of {{ selectedProfile.fullName }}">
+                <img ng-show="!selectedProfile.avatar" src="images/my_profile_placeholder.png" alt="{{ selectedProfile.fullName }}">
+            </div>
+        </div>
+
+        <div class="col-sm-8">
+            <h3>{{ selectedProfile.fullName | capitalizeFirstLetter }}</h3>
+
+            <div class="">
+                <p>{{ selectedProfile.description }}</p>
+
+                    <span ng-if="!selectedProfile.isFriend"><a title="Add to My Community" ng-click="addProfileAsFriend()"
+                                                               class="btn btn-primary">Add to My Community</a></span>
+
+                    <span ng-if="selectedProfile.isFriend"><a title="Remove from my Community" ng-click="removeProfileAsFriend()"
+                                                              class="btn btn-primary">Remove from my Community</a></span>
+                <a ng-if="selectedProfile.approvedProfile" ng-click="openProfile(selectedProfile.id)" class="btn btn-success">Go to full profile</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-body">
+    <hr>
+    <div class="row clearfix">
+
+        <fieldset class="col-sm-6 col-md-6 profile--detail">
+            <div class="location icon">
+                <h3>Location</h3>
+
+                <div class="address-block" ng-if="selectedProfile.address">
+                    <p>{{ selectedProfile.address.address1 }},</p>
+                    <p>{{ selectedProfile.address.address2 }},</p>
+                    <p ng-show="selectedProfile.address.address3">{{ selectedProfile.address.address3 }},</p>
+                    <p ng-show="selectedProfile.address.address4">{{ selectedProfile.address.address4 }},</p>
+                    <p><span class="city">{{ selectedProfile.address.city }},</span></p>
+                    <p>
+                        <span class="postcode">{{ selectedProfile.address.postcode }},</span>
+                    </p>
+                    <p>{{ selectedProfile.address.country }}</p>
+                </div>
+                <div class="warning-block" ng-if="!selectedProfile.address">No location details available for this
+                    profile.
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="col-sm-6 col-md-6 profile--detail">
+
+            <div class="contact icon">
+                <h3>Contact Details</h3>
+                <p ng-show="selectedProfile.contactPhoneNumber"><span>Phone number: </span> <a
+                        href="phone:{{ selectedProfile.contactPhoneNumber }}"
+                        title="Call {{ selectedProfile.contactPhoneNumber }}">{{ selectedProfile.contactPhoneNumber
+                    }}</a></p>
+                <p ng-show="selectedProfile.user.email"><span>Email address: </span> <a
+                        href="mailto:{{ selectedProfile.user.email }}"
+                        title="Mail to {{ selectedProfile.user.email }}">{{
+                    selectedProfile.user.email }}</a></p>
+                <div class="warning-block"
+                     ng-if="!selectedProfile.contactPhoneNumber && !selectedProfile.user.email">No contact
+                    details available for this profile.
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <fieldset class="col-sm-6 col-md-6 profile--detail" ng-show="selectedProfile.foodTypes">
+        <div class="food icon">
+            <h3>Food type</h3>
+
+            <ul>
+                <li ng-repeat="item in selectedProfile.foodTypes">{{ item.description }}</li>
+            </ul>
+            <p class="missing-content" ng-hide="selectedProfile.foodTypes.length">N/A</p>
+        </div>
+    </fieldset>
+
+    <fieldset class="col-sm-6 col-md-6 profile--detail" ng-show="selectedProfile.donationSizes">
+        <div class="donation icon">
+            <h3>Donation size</h3>
+
+            <ul>
+                <li ng-repeat="item in selectedProfile.donationSizes">{{ item.description }}</li>
+            </ul>
+            <p class="missing-content" ng-hide="selectedProfile.donationSizes.length">N/A</p>
+        </div>
+    </fieldset>
+
+
+    <fieldset class="col-sm-6 col-md-6 profile--detail" ng-show="selectedProfile.other">
+        <div class="otherInfo icon">
+            <h3>Other information</h3>
+
+            <div class=collection-time" ng-if="selectedProfile.collectionTime">
+                <h4>Collection Time</h4>
+
+                <p>{{ selectedProfile.collectionTime.description }}</p>
+            </div>
+            <p>{{ selectedProfile.other || 'No other information available' }}</p>
+        </div>
+    </fieldset>
+</div>

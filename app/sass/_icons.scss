@@ -1,0 +1,135 @@
+
+.icon-correct {
+  @include background('../images/icons/correct.png', $repeat: no-repeat);
+}
+
+.icon-incorrect {
+  @include background('../images/icons/incorrect.png', $repeat: no-repeat);
+}
+
+.icon-warning {
+  @include background('../images/icons/warning.png', $repeat: no-repeat);
+}
+
+.icon-warning {
+  @include background('../images/icons/attention.png', $repeat: no-repeat);
+}
+
+.icon-business-tab {
+  @include background('../images/icons/icon-business-tab.png', $repeat: no-repeat);
+}
+
+.icon-charity-tab {
+  @include background('../images/icons/icon-charity-tab.png', $repeat: no-repeat);
+}
+
+.icon-transporter-tab {
+  @include background('../images/icons/icon-transporter-tab.png', $repeat: no-repeat);
+}
+
+.icon-volunteer-tab {
+  @include background('../images/icons/icon-volunteer-tab.png', $repeat: no-repeat);
+}
+
+.icon-filter {
+  @include background('../images/icons/icon-filter.png', $repeat: no-repeat);
+}
+
+.icon-message {
+  @include background('../images/icons/icon-message.png', $repeat: no-repeat);
+}
+
+.icon-donations {
+  @include background('../images/icons/icon-donations.png', $repeat: no-repeat);
+}
+
+.icon-create {
+  @include background('../images/icons/icon-create.png', $repeat: no-repeat);
+}
+
+.icon-excel {
+  @include background('../images/icons/icon-excel.png', $repeat: no-repeat);
+}
+
+.icon-list {
+  @include background('../images/icons/icon-list.png', $repeat: no-repeat);
+  height: 27px;
+  width: 32px;
+}
+
+.icon-chart {
+  @include background('../images/icons/icon-chart.png', $repeat: no-repeat);
+  height: 27px;
+  width: 39px;
+}
+
+.icon-smiley-face {
+  @include background('../images/icons/icon-smiley-face.png', $repeat: no-repeat);
+  display: inline-block;
+  height: 27px;
+  width: 26px;
+}
+
+.icon-calendar {
+  @include background('../images/icons/icon-calendar.png', $repeat: no-repeat);
+  display: inline-block;
+  height: 30px;
+  width: 31px;
+}
+
+.icon-charity-dark {
+  @include background('../images/icons/icon-charity-dark.png', $repeat: no-repeat);
+  display: inline-block;
+  height: 27px;
+  width: 31px;
+}
+
+.icon-donation {
+  @include background('../images/icons/icon-donation.png', $repeat: no-repeat);
+  display: inline-block;
+  height: 32px;
+  width: 40px;
+}
+
+.icon-status {
+  @include background('../images/icons/icon-status.png', $repeat: no-repeat);
+  display: inline-block;
+  height: 31px;
+  width: 14px;
+}
+
+.icon-status-in_review {
+  @include background('../images/icons/icon-status-in-review.png', $repeat: no-repeat);
+  display: inline-block;
+  height: 21px;
+  width: 9px;
+}
+
+.icon-status-reviewed {
+  @include background('../images/icons/icon-status-reviewed.png', $repeat: no-repeat);
+  display: inline-block;
+  height: 16px;
+  width: 20px;
+}
+
+.icon-status-accepted {
+  @include background('../images/icons/icon-status-reviewed.png', $repeat: no-repeat);
+  display: inline-block;
+  height: 16px;
+  width: 20px;
+}
+
+.icon-status-partially-rejected,
+.icon-status-rejected {
+  @include background('../images/icons/icon-status-rejected.png', $repeat: no-repeat);
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+}
+
+.icon-status-shared {
+  @include background('../images/icons/icon-status-shared.png', $repeat: no-repeat);
+  display: inline-block;
+  height: 16px;
+  width: 28px;
+}

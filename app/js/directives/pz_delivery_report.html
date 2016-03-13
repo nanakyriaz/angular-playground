@@ -1,0 +1,227 @@
+<div class="deliveries-views">
+
+<!-- Tab panes -->
+<div class="tab-content">
+
+<div class="tab-pane fade deliveries-list deliveries-overview-list" ng-class="viewMode =='list' ? 'active in' :''" id="list">
+    <table cellspacing="0" ng-show="currentReport.items">
+        <colgroup>
+            <col class="col-1">
+            <col class="col-2">
+            <col class="col-3">
+            <col class="col-4">
+        </colgroup>
+        <thead>
+        <tr>
+            <th class="col-when">
+                <div><i class="icon-calendar"></i>When <span class="subtitle">Collection Date</span></div>
+            </th>
+            <th class="col-business">
+                <div><i class="icon-charity-dark"></i>Charity</div>
+            </th>
+            <th class="col-donation">
+                <div><i class="icon-donation"></i>Donation</div>
+            </th>
+            <th class="col-status">
+                <div><i class="icon-status"></i>Status</div>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="listItem in currentReport.items | orderBy: deliveryDate" class="table--row  {{ listItem.status }}" ng-class="{'item--editable': listItem.isEditable, 'item--shared': listItem.isShared}" ng-click="modifyDelivery(listItem)">
+            <td class="col-when">
+                <div>
+                  <span>{{ listItem.deliveryDate | date: shortdate }}</span>
+                  <div class="delivery--time pull-right">{{ listItem.startTime | time }}<br>{{ listItem.endTime | time }}</div>
+                </div>
+            </td>
+            <td class="col-business">
+                <div>
+                    {{ listItem.recipient.fullName || 'Not addressed yet' }}
+                </div>
+            </td>
+            <td class="col-donation">
+                <div>{{ listItem.items | pluck:'itemName' | join:', ' }}</div>
+            </td>
+            <td class="col-status {{ listItem.status }}">
+                <div>
+                    <span class="status-{{ listItem.uiStatus }}" title="{{ listItem.notes }}">{{ listItem.uiStatus | translate }}</span>
+                     <i class="icon-status-{{ listItem.uiStatus }} pull-right"></i>
+               </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- if no donations -->
+    <div class="empty" ng-hide="currentReport.items">
+        <h2>No donations during this month</h2>
+
+        <p ng-if="$root.user.profileType === 'business'">Tell other Zheroes when <a ui-sref="donate"><b>you have food</b></a>
+            or check the <a ui-sref="map"><b>map</b></a> to know what's going on in your area</p>
+
+        <p ng-if="$root.user.profileType !== 'business'">Check the <a ui-sref="map"><b>map</b></a> to know what's going on in your area</p>
+    </div>
+    <!-- end if -->
+
+</div>
+<div class="tab-pane fade chart" ng-class="viewMode =='chart' ? 'active in' :''" id="chart">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                <h3>Deliveries</h3>
+
+                <div class="deliveries-graph">
+                    <table cellspacing="0" class="deliveries-table">
+                        <tfoot>
+                        <tr>
+                            <td>
+                                <div class="tfoot-inner">
+                                    <table cellspacing="0">
+                                        <colgroup>
+                                            <col class="col-1">
+                                            <col class="col-2">
+                                            <col class="col-3">
+                                            <col class="col-4">
+                                            <col class="col-5">
+                                        </colgroup>
+                                        <tr>
+                                            <td>
+                                                <div class="hidden-xs">week 1</div>
+                                                <div class="visible-xs">W1</div>
+                                            </td>
+                                            <td>
+                                                <div class="hidden-xs">week 2</div>
+                                                <div class="visible-xs">W2</div>
+                                            </td>
+                                            <td>
+                                                <div class="hidden-xs">week 3</div>
+                                                <div class="visible-xs">W3</div>
+                                            </td>
+                                            <td>
+                                                <div class="hidden-xs">week 4</div>
+                                                <div class="visible-xs">W4</div>
+                                            </td>
+                                            <td>
+                                                <div class="hidden-xs">week 5</div>
+                                                <div class="visible-xs">W5</div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="tbody-inner">
+                                    <table cellspacing="0">
+                                        <colgroup>
+                                            <col class="col-1">
+                                            <col class="col-2">
+                                            <col class="col-3">
+                                            <col class="col-4">
+                                            <col class="col-5">
+                                        </colgroup>
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <span class="count">{{ currentReport.byWeek.week1.total || 0 }}</span>
+                                                    <span class="bar"
+                                                          style="height: {{ currentReport.byWeek.week1.barHeight }}px"></span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <span class="count">{{ currentReport.byWeek.week2.total || 0  }}</span>
+                                                    <span class="bar"
+                                                          style="height: {{ currentReport.byWeek.week2.barHeight }}px"></span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <span class="count">{{ currentReport.byWeek.week3.total || 0  }}</span>
+                                                    <span class="bar"
+                                                          style="height: {{ currentReport.byWeek.week3.barHeight }}px"></span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <span class="count">{{ currentReport.byWeek.week4.total || 0  }}</span>
+                                                    <span class="bar"
+                                                          style="height: {{ currentReport.byWeek.week4.barHeight }}px"></span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <span class="count">{{ currentReport.byWeek.week5.total || 0  }}</span>
+                                                    <span class="bar"
+                                                          style="height: {{ currentReport.byWeek.week5.barHeight }}px"></span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <h3>Totals</h3>
+
+                <div class="deliveries-totals">
+                    <table cellspacing="0" class="deliveries-totals-table">
+                        <colgroup>
+                            <col class="col-1">
+                            <col class="col-2">
+                            <col class="col-3">
+                        </colgroup>
+                        <tfoot>
+                        <tr>
+                            <td>
+                                <div>
+                                    <span>Deliveries</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <span>Kilos</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <span>Boxes</span>
+                                </div>
+                            </td>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div>
+                                    <span class="count deliveries">{{ currentReport.statistics.totalDeliveries || 0  }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <span class="count kilos">{{ currentReport.statistics.totalKilograms || 0  }}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <span class="count boxes">{{ currentReport.statistics.totalBoxes || 0  }}</span>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>

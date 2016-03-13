@@ -1,0 +1,61 @@
+ pz-profile-pickers,
+.pz-profile-pickers {
+
+  .autocomplete {
+    position: absolute;
+    padding: 5px 0;
+    z-index: 999;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #E4E4E4;
+    border-top: 0;
+
+    /* Enable scrolling of the suggestion list */
+    height: 160px;
+    overflow-y: scroll;
+
+    /* Suggestion list */
+    .favourites-list,
+    .suggestion-list {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+
+    .suggestion-item {
+      padding: 5px 10px;
+      cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font: 16px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #000;
+      background-color: #fff;
+
+      img {
+        max-height: 20px;
+      }
+
+      &.favourites--item-ended {
+        border-bottom: 1px solid #ccc;
+      }
+
+      &.selected {
+        color: #fff;
+        background-color: #0097cf;
+
+        em {
+          color: #fff;
+          background-color: #0097cf;
+        }
+      }
+
+      em {
+        font: 16px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-weight: bold;
+        color: #000;
+        background-color: #fff;
+      }
+    }
+  }
+}

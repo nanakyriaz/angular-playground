@@ -1,0 +1,14 @@
+<div class="role-types-widget">
+  <div ng-repeat="roleType in roles track by $index">
+  
+      <div class="role-cell-container col-md-4 col-xs-4">
+        <div class="role-cell vcenter" ng-class="{active: roleTypes[$index]}" ng-click="toggleRoleType($index);">
+          <div class="role-section">
+          <div class="role-title">{{roleType.title}}</div>
+          <div class="role-description">{{roleType.description}}</div>
+          </div>
+        </div>
+      </div>
+  
+  </div>
+</div>

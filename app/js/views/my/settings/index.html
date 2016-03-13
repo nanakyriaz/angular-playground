@@ -1,0 +1,184 @@
+<section class="clearfix">
+    <div class="title">
+        <h1>Settings</h1>
+    </div>
+
+    <!-- Map menu - tabbed content with show/hide access -->
+    <div class="my-settings">
+
+        <!-- Nav tabs -->
+
+
+        <ul class="settings-tabs clearfix">
+            <li class="privacy" ng-class="activeSection =='privacy' ? 'active' :''">
+                <a href data-toggle="tab" class="icon-privacy-tab" ng-click="activeSection = 'privacy'">Privacy</a>
+            </li>
+            <li class="notifications" ng-class="activeSection =='notifications' ? 'active' :''">
+                <a href data-toggle="tab" class="icon-notifications-tab" ng-click="activeSection = 'notifications'">Notifications</a>
+            </li>
+            <li class="password" ng-class="activeSection =='password' ? 'active' :''">
+                <a href data-toggle="tab" class="icon-password-tab" ng-click="activeSection = 'password'">Password</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane fade in" id="privacy" ng-class="activeSection == 'privacy' ? 'active' :''">
+                <h4 class="visible-xs">Privacy</h4>
+
+                <div ng-show="privacySaved">
+                    <div class="content">
+                        <div class="textContent">
+                            <p>Your privacy settings have been saved successfully.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form name="privacyForm">
+
+                    <div class="form-group" >
+                        <label for="location" class="control-label">Location</label>
+                        <p class="help-block">Who can see your location info?</p>
+                        <select id="location" name="location"
+                                ng-model="userSettings.location_visibility"
+                                class="form-control">
+                            <option value="" selected="selected">Please select one</option>
+                            <option value="everybody">Every Zheroes</option>
+                            <option value="friends">My community</option>
+                            <option value="nobody">Nobody</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" >
+                        <label for="contact" class="control-label">Contact details</label>
+                        <p class="help-block">Who can see your contact details (i.e. email and phone)?</p>
+                        <select id="contact" name="contact"
+                                ng-model="userSettings.contact_visibility"
+                                class="form-control">
+                            <option value="" selected="selected">Please select one</option>
+                            <option value="everybody">Every Zheroes</option>
+                            <option value="friends">My community</option>
+                            <option value="nobody">Nobody</option>
+                        </select>
+                    </div>
+
+                    <div class="action-toolbar">
+                        <button
+                                id="submitPrivacyForm"
+                                class="btn btn-success"
+                                ng-click="sendPrivacy()"
+                                ng-disabled="privacyForm.$invalid">Save</button>
+                        <a class="btn btn-info" ng-click="cancel()">Cancel</a>
+                    </div>
+                </form>
+
+            </div>
+            <div class="tab-pane fade in" id="notifications" ng-class="activeSection == 'notifications' ? 'active' :''">
+                <h4 class="visible-xs">Notifications</h4>
+
+                <div ng-show="notificationsSaved">
+                    <div class="content">
+                        <div class="textContent">
+                            <p>Your notification settings have been saved successfully.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form name="notificationsForm">
+                    <div class="form-group" >
+                        <label class="control-label">Activity</label>
+                        <p class="help-block">Please select which notifications you would like to receive by email:</p>
+                        <div class="checkbox">
+                            <input type="checkbox" ng-model="userSettings.messaging" id="messaging"><label for="messaging">Message centre</label>
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" ng-model="userSettings.deliveries_statuses" id="deliveries_statuses"><label for="deliveries_statuses">My food donations status</label>
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" ng-model="userSettings.friend_suggestions" id="friend_suggestions"><label for="friend_suggestions">Zheroes suggestions</label>
+                        </div>
+                        <div class="checkbox">
+                            <input type="checkbox" ng-model="userSettings.newsletter" id="newsletter"><label for="newsletter">Plan Zheroes news</label>
+                        </div>
+
+                        <p class="help-block">Please change these settings if you no longer wish to receive notifications.</p>
+                    </div>
+
+                    <div class="action-toolbar">
+                        <button
+                                id="submitNotificationsForm"
+                                class="btn btn-success"
+                                ng-click="sendNotifications()"
+                                ng-disabled="notificationsForm.$invalid">Save</button>
+                        <a class="btn btn-info" ng-click="cancel()">Cancel</a>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade in" id="password" ng-class="activeSection == 'password' ? 'active' :''">
+                <h4 class="visible-xs">Password</h4>
+
+                <div ng-show="passwordSaved" class="passwordSaved">
+                    <div class="content">
+                        <div class="textContent">
+                            <p>Your password has been saved successfully.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form name="passwordForm">
+                    <div class="form-group" ng-class="{'has-success' : validateCurrentPassword && passwordForm.currentPassword.$valid, 'has-error': validateCurrentPassword && passwordForm.currentPassword.$invalid}">
+                        <label for="currentPassword" class="control-label">Current password</label>
+                        <input type="password" id="currentPassword" name="currentPassword"
+                               ng-blur="validateCurrentPassword = true"
+                               ng-model="currentPassword" class="form-control"
+                               password-format
+                               required>
+                        <p class="help-block">At least 6 characters and should contain one uppercase character and one number</p>
+                        <span class="icon-correct form-control-feedback" ng-show="validateCurrentPassword && passwordForm.currentPassword.$valid"></span>
+                        <span class="icon-incorrect form-control-feedback" ng-show="validateCurrentPassword && passwordForm.currentPassword.$invalid"></span>
+                        <div class="formError" id="inputCurrentPasswordError" ng-show="validateCurrentPassword && passwordForm.currentPassword.$invalid" translate="messages.passwordRule"></div>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-success' : validatePassword && passwordForm.password.$valid, 'has-error': validatePassword && passwordForm.password.$invalid}">
+                        <label for="password" class="control-label">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Create a password"
+                               ng-blur="validatePassword = true"
+                               ng-model="newPassword" class="form-control"
+                               password-format
+                               required>
+                        <p class="help-block">At least 6 characters and should contain one uppercase character and one number</p>
+                        <span class="icon-correct form-control-feedback" ng-show="validatePassword && passwordForm.password.$valid"></span>
+                        <span class="icon-incorrect form-control-feedback" ng-show="validatePassword && passwordForm.password.$invalid"></span>
+                        <div class="formError" id="inputPassword1Error" ng-show="validatePassword && passwordForm.password.$invalid" translate="messages.passwordRule"></div>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-success' : validateRepeatPassword && passwordForm.repeatPassword.$valid, 'has-error': validateRepeatPassword && passwordForm.repeatPassword.$invalid}">
+                        <label for="repeatPassword" class="control-label">Confirm password</label>
+                        <input type="password" id="repeatPassword" name="repeatPassword" placeholder=""
+                               ng-blur="validateRepeatPassword = true"
+                               ng-model="repeatPassword" class="form-control"
+                               password-format>
+                        <p class="help-block">At least 6 characters and should contain one uppercase character and one number</p>
+                        <span class="icon-correct form-control-feedback" ng-show="validateRepeatPassword && passwordForm.repeatPassword.$valid"></span>
+                        <span class="icon-incorrect form-control-feedback" ng-show="validateRepeatPassword && passwordForm.repeatPassword.$invalid"></span>
+                        <div class="formError" id="inputPassword2Error" ng-show="validateRepeatPassword && passwordForm.repeatPassword.$invalid">Your passwords do not match. Please check and re-type passwords</div>
+                        </div>
+
+
+                    <div class="action-toolbar">
+                        <button
+                                id="submitPasswordForm"
+                                class="btn btn-success"
+                                ng-click="sendPassword()"
+                                ng-disabled="passwordForm.$invalid">Save</button>
+                        <a class="btn btn-info" ng-click="cancel()">Cancel</a>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

@@ -1,0 +1,194 @@
+<article>
+    <h1>Profiles Overview
+        <small>(<a ui-sref="admin">Back to Administration dashboard</a>)</small>
+    </h1>
+
+    <section>
+        <div class="row">
+
+            <!-- Navigation Buttons -->
+            <div class="col-md-3">
+                <ul class="nav nav-pills nav-stacked">
+                    <li ng-class="{active: tab === 'approved'}">
+                        <a href ng-click="tab = 'approved'">
+                            Zheroes
+                            <span class="badge" style="position: relative">{{approvedProfiles.length}}</span></a>
+                    </li>
+                    <li ng-class="{active: tab === 'unapproved'}">
+                        <a href ng-click="tab = 'unapproved'">
+                            Zheroes (to be approved)
+                            <span class="badge" style="position: relative;">{{unapprovedProfiles.length}}</span></a>
+                    </li>
+                    <li ng-class="{active: tab === 'siteContent'}">
+                        <a href ng-click="tab = 'siteContent'">
+                            Site Content</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Content -->
+            <div class="col-md-9">
+                <div class="tab-content">
+                    <div class="tab-pane profiles-list" ng-class="{active: tab === 'approved'}">
+
+                        <div class="navbar-collapse collapse">
+                            <form class="navbar-form navbar-left" role="search">
+                                <div class="form-group">
+                                    <input type="checkbox"
+                                           ng-model="allApprovedSelected"
+                                           ng-checked="selectedApprovedProfiles.length == approvedProfiles.length"
+                                           ng-click="selectedApprovedProfiles = toggleSelectAll(selectedApprovedProfiles, approvedProfiles)">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Search"
+                                           ng-model="approvedSearch.fullName">
+                                </div>
+                            </form>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <button type="button" class="btn btn-default btn-primary navbar-btn"
+                                            ng-click="exportList(true)">Export</button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn btn-default navbar-btn"
+                                            ng-click="deactivateProfiles(selectedApprovedProfiles, approvedProfiles)">Delete</button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn btn-default navbar-btn"
+                                            ng-click="unapproveProfiles(selectedApprovedProfiles)">Unapprove
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <table cellspacing="0" ng-hide="!approvedProfiles.length">
+                            <colgroup>
+                                <col class="col-1">
+                                <col class="col-2">
+                                <col class="col-3">
+                            </colgroup>
+                            <tbody>
+                            <tr ng-repeat="profile in approvedProfiles | filter: approvedSearch">
+                                <td class="col-md-1">
+                                    <input type="checkbox" id="approvedProfileSelect-{{profile.id}}"
+                                           ng-model="isSelected"
+                                           ng-checked="selectedApprovedProfiles.indexOf(profile) > -1"
+                                           ng-change="isSelected ? selectedApprovedProfiles.push(profile) : selectedApprovedProfiles.splice(selectedApprovedProfiles.indexOf(profile), 1)">
+                                    <label for="approvedProfileSelect-{{profile.id}}" class="sr-only">Select</label>
+                                </td>
+                                <td class="col-md-8">
+                                    <div><strong>{{profile.fullName}} - {{profile.user.email}}</strong>
+                                        ({{profile.profileType | capitalizeFirstLetter}})
+                                    </div>
+                                    <div>Joined {{profile.createdAt | date:shortDate}}</div>
+                                </td>
+                                <td class="col-md-2">
+                                    <div>
+                                        <a href ng-click="viewProfile(profile)">
+                                            <span>View Profile</span>
+                                        </a>
+                                        <br>
+                                        <a href="" ng-click="approveProfile(profile)" ng-hide="profile.approvedProfile">
+                                            <span>Approve</span>
+                                            <i class="icon-status-in-review"></i>
+                                        </a>
+                                        <!--<a href="" ng-click="unapproveProfile(profile)"-->
+                                        <!--ng-show="profile.approvedProfile">-->
+                                        <!--<span>Unapprove</span>-->
+                                        <!--</a>-->
+                                        <!--|-->
+                                        <!--<a href ng-click="deactivateProfile(profile, approvedProfiles)">-->
+                                        <!--<span>Delete</span>-->
+                                        <!--</a>-->
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- if no profiles -->
+                        <div class="empty" ng-hide="approvedProfiles">
+                            <h2>No profiles available.</h2>
+
+                            <p>Currently, there are no approved profiles available.</p>
+                        </div>
+                        <!-- end if -->
+                    </div>
+                    <div class="tab-pane profiles-list" ng-class="{active: tab === 'unapproved'}">
+
+                        <div class="navbar-collapse collapse">
+                            <form class="navbar-default navbar-left" role="search">
+                                <!--<div class="form-group">-->
+                                <!--<input type="checkbox" ng-click="toggleSelectAll()">-->
+                                <input type="text" class="form-control" placeholder="Search"
+                                       ng-model="unapprovedSearch.fullName">
+                                <!--</div>-->
+                            </form>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <button type="button" class="btn btn-default btn-primary navbar-btn"
+                                            ng-click="exportList(false)">Export</button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <table cellspacing="0" ng-hide="!unapprovedProfiles.length">
+                            <colgroup>
+                                <col class="col-1">
+                                <col class="col-2">
+                                <!--<col class="col-3">-->
+                            </colgroup>
+                            <tbody>
+                            <tr ng-repeat="profile in unapprovedProfiles | filter: unapprovedSearch"
+                                ng-class="{success: isSelected}">
+                                <!--<td class="col-md-1">-->
+                                <!--<input type="checkbox" ng-model="selectedUnapprovedProfiles[profile.id]">-->
+                                <!--</td>-->
+                                <td class="col-md-9">
+                                    <div><strong>{{profile.fullName}} - {{profile.user.email}}</strong>
+                                        ({{profile.profileType | capitalizeFirstLetter}})
+                                    </div>
+                                    <div>Joined {{profile.createdAt | date:shortDate}}</div>
+                                </td>
+                                <td class="col-md-3">
+                                    <div>
+                                        <a href ng-click="viewProfile(profile)">
+                                            <span>View Profile</span>
+                                        </a>
+                                        <br>
+                                        <a href="" ng-click="approveProfile(profile)" ng-hide="profile.approvedProfile">
+                                            <span>Approve</span>
+                                            <i class="icon-status-in-review"></i>
+                                        </a>
+                                        <a href="" ng-click="unapproveProfile(profile)"
+                                           ng-show="profile.approvedProfile">
+                                            <span>Unapprove</span>
+                                        </a>
+                                        |
+                                        <a href ng-click="deactivateProfile(profile, unapprovedProfiles)">
+                                            <span>Delete</span>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- if no profiles -->
+                        <div class="empty" ng-hide="unapprovedProfiles">
+                            <h2>No profiles to be approved.</h2>
+
+                            <p>Currently, there are no profiles which needs your approval attention.</p>
+                        </div>
+                        <!-- end if -->
+                    </div>
+                    <div class="tab-pane" ng-class="{active: tab === 'siteContent'}">
+                        <h3><a ui-sref="admin_success_story">Manage Zheroes stories</a></h3>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</article>

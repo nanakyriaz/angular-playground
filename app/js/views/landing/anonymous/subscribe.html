@@ -1,0 +1,41 @@
+<article>
+    <h1>Subscribe to newsletter</h1>
+    <pz-share></pz-share>
+
+    <section>
+        <p ng-show="!subscribed">
+            Would you like to keep up-to-date with all our latest news and progress?  Of course you would!  Just add your details here and we promise not to share them with anyone else.
+        </p>
+        <div class="form-subscribe">
+
+            <div class="row" ng-show="subscribed">
+                <div class="col-md-8"><h2>Thank you! You are now signed up to our newsletter!</h2></div>
+                <div class="col-md-1 col-md-offset-3 text-center"> <img src="/images/icons/icon-mail-ok.png" alt="OK"></div>
+            </div>
+
+            <form class="form-inline" role="form" name="subscriptionForm" ng-show="!subscribed">
+                <fieldset>
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email"
+                               ng-model="email" class="form-control"
+                               ng-click="isEmailValid()"
+                               required>
+
+                        <span ng-show="validateEmail" class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok' : validateEmail && subscriptionForm.email.$valid, 'glyphicon-warning-sign': validateEmail && subscriptionForm.email.$invalid}"></span>
+                        <div class="formError" id="inputEmailFormError" ng-show="validateEmail && subscriptionForm.email.$invalid">The email address is not valid</div>
+                    </div>
+                    <!-- Button (Double) -->
+
+                    <button type="submit" id="subscribe" name="subscribe" class="btn btn-success"
+                            ng-click="subscribe()" ng-disabled="!validate()">
+                        Subscribe</button>
+                    <div class="formError" id="inputEmailFormError" ng-show="validateEmail && subscriptionForm.email.$invalid">The email address is not valid</div>
+                </fieldset>
+            </form>
+
+        </div>
+    </section>
+</article>
+

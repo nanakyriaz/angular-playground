@@ -1,0 +1,72 @@
+<div class="row">
+<div class="top-container">
+
+    <div id="form-container" class="new-registration"> 
+
+
+        <ng-form name="form" id="form" class="form-horizontal" role="form" novalidate ng-submit="processForm()" stop-navigation>
+            
+
+            <h1>Great you want to register!</h1>
+            <div class="row">
+              <div class="col-md-7">
+                <fieldset class="section secondary-gray-light">
+                    <legend>Tell us what you want to do</legend>
+                    <div class="form-group form-callout has-feedback">
+                        <label for="profileType" class="control-label">I am a...</label>
+                        <div ng-class="{'green-ticker-reference': registration.type!=='none'}">
+                        <select class="form-control right-padding-10"
+                                name="profileType"
+                                ng-model="registration.type"
+                                ng-change="reset()"
+                                required>
+                            <option value="none" selected="selected">Please select one</option>
+                            <option value="business">Business</option>
+                            <option value="charity">Charity</option>
+                            <option value="transporter">Transporter</option>
+                            <option value="volunteer">Volunteer</option>
+                        </select>
+                        </div>
+                        <p class="help-block">
+                            <a ng-click="displayAccountInfoPopup()">(I don't know what to select)</a>
+                        </p>
+                    </div>
+                </fieldset>
+              </div>
+              <div class="col-md-5"></div>
+            </div>
+            
+            
+            <div ng-if="registration.type!=='none'"> 
+              <div class="steps-header row">
+                <div class="step-tab col-md-3 col-xs-3" ng-class="{active: step===1, business: registration.type==='business', charity: registration.type==='charity', transporter: registration.type==='transporter', volunteer: registration.type==='volunteer'}">
+                    <div class="step first" ng-click="go('newregistration.newaccount')"><span>1</span> New Account</div>
+                </div>
+                <div class="step-tab col-md-3 col-xs-3" ng-class="{active: step===2, business: registration.type==='business', charity: registration.type==='charity', transporter: registration.type==='transporter', volunteer: registration.type==='volunteer'}">
+                    <div class="step" ng-click="go('newregistration.address')"><span>2</span> Address Details</div>
+                </div>
+                <div class="step-tab col-md-3 col-xs-3" ng-class="{active: step===3, business: registration.type==='business', charity: registration.type==='charity', transporter: registration.type==='transporter', volunteer: registration.type==='volunteer'}">
+                    <div class="step" ng-click="go('newregistration.donation')"><span>3</span> Donation Information</div>
+                </div>
+                <div class="step-tab col-md-3 col-xs-3" ng-class="{active: step===4, business: registration.type==='business', charity: registration.type==='charity', transporter: registration.type==='transporter', volunteer: registration.type==='volunteer'}">
+                    <div class="step" ng-click="go('newregistration.finish')"><span>4</span> Finish</div>
+                </div>
+            </div> 
+            <div class="registration-views" ui-view></div>
+            
+            <div class="toolbar loading-address-container" ng-if="!done"> 
+              <div ng-show="loading" ng-class="{'loading-address':loading}">
+                    <div>Please wait a moment while we find your postcode, thank you!</div>
+              </div>
+              <button class="btn btn-info btn-back" ng-click="back()" ng-if="step>1">Back</button>
+              <button class="btn btn-info btn-next" ng-click="next()" ng-disabled="form.$invalid" ng-if="step<4">Next</button>
+              <button class="btn btn-info" ng-click="register()" ng-disabled="form.$invalid" disabled="disabled" ng-if="step===4">Join us</button>
+            </div>
+            
+          </div>
+        </ng-form>
+    </div>
+    <!-- <pre>{{ registration }}</pre> -->
+
+</div>
+</div>

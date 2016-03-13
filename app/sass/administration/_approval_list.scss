@@ -1,0 +1,122 @@
+.profiles-list {
+
+  table {
+    width: 100%;
+
+    col {
+      width: 25%;
+    }
+
+    th {
+      font-size: 18px;
+
+      > div {
+        padding: 10px 5px 20px 50px;
+        position: relative;
+
+        i {
+          background-position: center 0;
+          position: absolute;
+          bottom: 24px;
+          left: 0;
+          width: 40px;
+        }
+
+        @media (max-width: $screen-sm-max) {
+
+          i {
+            display: none;
+          }
+        }
+      }
+    }
+
+    tr {
+
+      td {
+        border-bottom: 1px solid $brand-gray;
+      }
+
+      &:last-child {
+
+        td {
+          border: none;
+        }
+      }
+    }
+
+    td {
+
+      > div {
+        padding: 10px 10px 10px 50px;
+      }
+    }
+
+    .col-fullname {
+      font-weight: bold;
+    }
+
+    .col-status {
+
+      a {
+        display: block;
+        width: 65%;
+
+        i {
+          background-position: center 0;
+          float: right;
+          width: 20px;
+        }
+      }
+
+      @media (max-width: $grid-float-breakpoint-max) {
+
+        a {
+          width: auto;
+
+          span {
+            display: none;
+          }
+
+          i {
+            float: none;
+          }
+        }
+
+      }
+    }
+
+    @media (max-width: $screen-xs-max) {
+
+      col {
+        width: 40%;
+      }
+
+      .col-email,
+      th.col-status > div {
+        display: none;
+      }
+
+      th > div,
+      td > div {
+        padding-left: 0;
+      }
+
+      .col-status a {
+        text-align: center;
+      }
+    }
+  }
+
+  .empty {
+    margin: 0 auto;
+    text-align: center;
+
+    @media (min-width: $screen-md-min) {
+      width: 50%;
+    }
+    @media (min-width: $screen-lg-min) {
+      width: 35%;
+    }
+  }
+}

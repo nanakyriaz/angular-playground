@@ -1,0 +1,24 @@
+article.donate {
+    .thumbnail {
+        height: auto;
+        text-align: center;
+        .thumbnail-image {
+            width: 180px;
+            margin: 0 auto;
+        }
+        h3 {
+            color: #5A2E75;
+            font-size: 28px;
+        }
+        @media (min-width: $screen-md) {
+            .btn.btn-success {
+                margin-bottom: 20px;
+            }
+        }
+    }
+    @media (min-width: $screen-md) {
+        .col-sm-offset-2 {
+            margin-left: 0%;
+        }
+    }
+}

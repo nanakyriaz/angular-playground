@@ -1,0 +1,89 @@
+<section id="reviewDelivery" class="clearfix">
+    <div class="row">
+        <h2>Review Delivery</h2>
+        <div class="delivery-header">
+            <div class="row">
+                <div class="col-xs-12 col-md-4">
+                    <h3>Donor</h3>
+                    <p>{{ delivery.creator.fullName }}  <a ui-sref="profile_detail({id:delivery.creator.id})" class="btn" ng-if="delivery.creator.fullName">View profile</a></p>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <h3>Date</h3>
+                    <p>{{ delivery.deliveryDate | date:shortDate }}</p>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <h3>Status</h3>
+
+                    <i class="icon-status-{{ delivery.status }}"></i>
+                    <span class="status-{{ delivery.status }}">{{ delivery.status | translate }}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>Volunteer / Transporter</h3>
+                    <p>{{ delivery.transporter.fullName || 'Not addressed yet' }}  <a ui-sref="profile_detail({id:delivery.transporter.id})" class="btn" ng-if="delivery.transporter.fullName">View profile</a></p>
+                </div>
+            </div>
+        </div>
+        <ng-form name="reviewDeliveryForm" class="form-horizontal" role="form" novalidate>
+            <fieldset>
+                <legend>Donation</legend>
+
+                <div class="delivery-items-list deliveries-list">
+                    <table cellspacing="0" ng-show="deliveryItems">
+                        <colgroup>
+                            <col class="col-1">
+                            <col class="col-2">
+                            <col class="col-3">
+                        </colgroup>
+                        <tbody>
+                        <tr ng-repeat="listItem in deliveryItems">
+                            <td>
+                                <div>
+                                    {{ listItem.quantity }} {{ listItem.unitOfMeasure.uomDescription || '' }} {{ listItem.productName }}
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <span class="status-checked" ng-show="listItem.status=='accepted'">Checked <i class="icon-status-reviewed"></i></span>
+                                    <a ng-hide="listItem.status=='accepted'" ng-click="acceptItem(listItem)">Check</a>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <span class="status-rejected" ng-show="listItem.status=='rejected'">Rejected <i class="icon-status-rejected"></i></span>
+                                    <a ng-hide="listItem.status=='rejected'" ng-click="rejectItem(listItem)">Reject</a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="empty" ng-hide="deliveryItems">
+                        <h2>No delivery items for this delivery.</h2>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Comments</legend>
+                <p class="help-block">Please give the donor some comments, especially if you have rejected some items.</p>
+
+                <div class="form-group">
+                    <textarea class="form-control" maxlength="500" ng-model="delivery.notes"></textarea>
+                </div>
+            </fieldset>
+
+            <div class="form-group pull-left">
+                <button
+                        id="saveDelivery"
+                        class="btn btn-success"
+                        ng-click="saveDelivery()">Save</button>
+                <button
+                        class="btn btn-inverse"
+                        ng-click="cancel()">Cancel</button>
+            </div>
+            <div class="message warning pull-right">
+                <p>NOTE: the donor will be notified</p>
+            </div>
+        </ng-form>
+    </div>
+</section>

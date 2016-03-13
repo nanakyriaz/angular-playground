@@ -1,0 +1,53 @@
+<section>
+<h1>My food donations</h1>
+
+<article class="clearfix deliveries">
+<div class="clearfix">
+    <div class="pull-left create_delivery-button">
+        <a ui-sref="create_donation" class="btn btn-success" ng-if="currentProfile.profileType=='business' || currentProfile.profileType=='charity'">Create food donation</a>
+    </div>
+    <div class="pull-left export-menu">
+        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+            Export <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li ng-repeat="reportPeriod in availableReports"><a class="icon-excel button" ng-href="{{ generateReportUrl(reportPeriod.reportDate) }}" target="_blank">{{ reportPeriod.reportDate | date:'MMMM y' }} deliveries (Excel)</a></li>
+            <li><a class="icon-excel" ng-href="{{ generateYearReportUrl() }}" target="_blank">Yearly deliveries (Excel)</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="deliveries-header clearfix">
+
+    <div class="range-navbar">
+        <div class="previous-month" ng-show="nextReportPeriod">
+            <a ng-click="goPreviousPeriod()"><span class="icon-arrow-left">{{ nextReportPeriod.reportDate | date:'MMMM y'}}</span></a>
+        </div>
+
+        <div class="current-month">
+            {{ currentReportPeriod.reportDate | date:'MMMM y'}}
+        </div>
+
+        <div class="next-month" ng-show="prevReportPeriod">
+            <a ng-click="goNextPeriod()"><span class="icon-arrow-right">{{ prevReportPeriod.reportDate | date:'MMMM y'}}</span></a>
+        </div>
+    </div>
+
+    <h2 class="delivery-type pull-left"><i class="icon-smiley-face"></i>{{ pageTitle }} </h2>
+
+    <!-- Nav tabs -->
+    <ul class="deliveries-tabs pull-right">
+        <li class="list" ng-class="viewMode =='list' ? 'active' :''">
+            <a ng-click="switchViewMode('list')" data-toggle="tab" class="icon-list">List</a>
+        </li>
+        <li class="chart" ng-class="viewMode =='chart' ? 'active' :''">
+            <a  ng-click="switchViewMode('chart')" data-toggle="tab" class="icon-chart">Chart</a>
+        </li>
+    </ul>
+</div>
+
+<div pz-delivery-report view-mode="viewMode" current-report-period="currentReportPeriod"></div>
+
+</article>
+
+</section>

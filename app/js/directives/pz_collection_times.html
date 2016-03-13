@@ -1,0 +1,41 @@
+<div>
+<table class="collection-table">
+  <thead>
+    <tr>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Wednesday</th>
+      <th>Thursday</th>
+      <th>Friday</th>
+      <th>Saturday</th>
+      <th>Sunday</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="row in collectionTimes track by $index" ng-class="'time-row'+$index">
+      <td ng-repeat="col in row track by $index" ng-click="toggleOption($parent.$index, $index);">
+        
+        <div ng-switch on="$parent.$index">
+          <div class="time-cell center-block" ng-class="{active: col}" ng-switch-when="0">
+            <div class="time-title">Morning</div>
+            <div class="time-period">6am-12pm</div>
+          </div>
+          <div class="time-cell center-block" ng-class="{active: col}" ng-switch-when="1">
+            <div class="time-title">Afternoon</div>
+            <div class="time-period">12pm-6pm</div>
+          </div>
+          <div class="time-cell center-block" ng-class="{active: col}" ng-switch-when="2">
+            <div class="time-title">Evening</div>
+            <div class="time-period">6pm-12am</div>
+          </div>
+          <div class="time-cell center-block" ng-class="{active: col}" ng-switch-when="3">
+            <div class="time-title">Night</div>
+            <div class="time-period">12am-6am</div>
+          </div>
+        </div>
+        
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>

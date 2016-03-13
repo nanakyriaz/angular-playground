@@ -1,0 +1,26 @@
+<div class="step-title" ng-class="{business: registration.type==='business', charity: registration.type==='charity', transporter: registration.type==='transporter', volunteer: registration.type==='volunteer'}">
+  <span>Step {{step}} - </span>
+  <span ng-switch on="registration.type">
+    <span ng-switch-when="business">Add your food donation information... Nearly there :)</span>
+    <span ng-switch-when="charity">Add what food you are interested in receiving... Nearly there :)</span>
+    <span ng-switch-when="transporter">Add your cargo capacity information... Nearly there :)</span>
+    <span ng-switch-when="volunteer">How do you want to help?</span>
+  </span>
+</div>
+
+<div class="row">
+  <div class="">
+    <div class="form-group">
+        <label for="foodRegistrationNumber">Food Registration Number</label>
+        <input type="text" class="form-control" name="foodRegistrationNumber" ng-model="registration.foodRegistrationNumber">
+    </div>
+    <div pz-transporter-food-types food-types="registration.transporterFoodTypes" ng-show="registration.type==='transporter'"></div>
+    
+    <div pz-food-types food-types="registration.donationFoodTypes" ng-if="registration.type!=='volunteer' && registration.type!=='transporter'"></div>
+    <div pz-role-types role-types="registration.roleTypes" ng-if="registration.type==='volunteer'"></div>
+
+    <div pz-collection-times collection-times="registration.collectionTimes" ng-show="registration.type!=='volunteer' || registration.roleTypes[2]"></div>
+    <div pz-volunteer-food-types food-types="registration.volunteerFoodTypes" ng-show="registration.type==='volunteer' && registration.roleTypes[2]"></div>
+    
+</div>
+</div>

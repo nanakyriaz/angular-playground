@@ -1,0 +1,22 @@
+.slide-container {
+  position: relative;
+  display: block;
+  overflow: hidden;
+
+  figure{
+    position: absolute;
+    opacity: 0;
+    transition: 1s opacity;
+  }
+
+  figure.show {
+    opacity: 1;
+    position: static;
+    transition: 1s opacity;
+  }
+
+  .pagination {
+    position: relative;
+    left: 50%;
+  }
+}

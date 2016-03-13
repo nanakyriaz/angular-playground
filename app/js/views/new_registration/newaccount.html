@@ -1,0 +1,218 @@
+<div class="step-title" ng-class="{business: registration.type==='business', charity: registration.type==='charity', transporter: registration.type==='transporter', volunteer: registration.type==='volunteer'}">
+  <div class="desktop">
+    <span>Step {{step}} - </span>
+    <span ng-switch on="registration.type">
+      <span ng-switch-when="business">Create a new business account</span>
+      <span ng-switch-when="charity">Create a new charity account</span>
+      <span ng-switch-when="transporter">Create a new transporter account</span>
+      <span ng-switch-when="volunteer">Create a new volunteer account</span>
+    </span>
+  </div>
+  <div class="mobile">
+    <!--<div class="step-title-mobile">1. New Account</div>-->
+    <div class="step-subtitle-mobile">
+      <span>Step {{step}} - </span>
+      <span ng-switch on="registration.type">
+        <span ng-switch-when="business">Create a new business account</span>
+        <span ng-switch-when="charity">Create a new charity account</span>
+        <span ng-switch-when="transporter">Create a new transporter account</span>
+        <span ng-switch-when="volunteer">Create a new volunteer account</span>
+      </span>
+    </div>
+  </div>
+</div>
+<div class="steps-header-mobile row mobile">
+  <div class="col-xs-3 step-container">
+      <div class="step-box" ng-class="{done: step>1, current: step===1}"> 
+        <div class="step-number first" ng-click="go('newregistration.newaccount')">1</div>
+      </div>
+  </div>
+  <div class="col-xs-3 step-container">
+      <div class="step-box" ng-class="{done: step>2, current: step===2, ahead: step<2}"> 
+        <div class="step-number" ng-click="go('newregistration.address')">2</div>
+      </div>
+  </div>
+  <div class="col-xs-3 step-container">
+      <div class="step-box" ng-class="{done: step>3, current: step===3, ahead: step<3}"> 
+        <div class="step-number" ng-click="go('newregistration.donation')">3</div>
+      </div>
+  </div>
+  <div class="col-xs-3 step-container">
+      <div class="step-box" ng-class="{current: step===4, ahead: step<4}"> 
+        <div class="step-number" ng-click="go('newregistration.finish')">4</div>
+      </div>
+  </div>
+</div> 
+
+<div class="row inner-container">
+  <div class="col-md-4">
+    
+    <legend>Your details</legend>
+    <div class="form-group" 
+      ng-if="['business','charity'].indexOf(registration.type)>=0">
+      <label ng-if="registration.type==='business'">Are you the primary contact in the business?</label>
+      <label ng-if="registration.type==='charity'">Are you the primary contact in the charity?</label>
+      <div class="form-inline radio-box">
+        <div class="radio col-xs-3 col-md-3">
+          <label>
+            <input type="radio" name="primarycontact" ng-value="true" ng-model="registration.primaryContact">
+            <span class="radio-label">Yes</span>
+          </label>
+        </div>
+        <div class="radio col-xs-3 col-md-3">
+          <label>
+            <input type="radio" name="primarycontact" ng-value="false" ng-model="registration.primaryContact">
+            <span class="radio-label">No</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-md-offset-1 mobile" ng-if="!registration.primaryContact">
+      <div class="mobile"><hr/></div>
+      <legend>Primary contact details</legend>
+      <div class="form-group ">
+          <label for="pcFirstName">First name</label>
+          <input type="text" class="form-control" name="pcFirstName" ng-model="registration.pcFirstName" ng-required="true" ng-class="{'has-error': form.pcFirstName.$invalid}" placeholder="Eg: John or Deborah">
+          <div class="formError" ng-show="form.pcFirstName.$invalid && form.pcFirstName.$dirty">First name is required</div>
+      </div> 
+      
+      <div class="form-group">
+          <label for="pcLastName">Last name</label>
+          <input type="text" class="form-control" name="pcLastName" ng-model="registration.pcLastName" ng-required="true" ng-class="{'has-error': form.pcLastName.$invalid}" placeholder="Eg: Smith or Ford">
+          <div class="formError" ng-show="form.pcLastName.$invalid && form.pcLastName.$dirty">Last name is required</div>
+      </div>
+
+      <div class="form-group ">
+          <label for="pcEmail">Email address</label>
+          <input type="email" class="form-control" name="pcEmail" ng-model="registration.pcEmail" ng-required="true" ng-class="{'has-error': form.pcEmail.$invalid}">
+          <div class="formError" ng-show="form.pcEmail.$invalid && form.pcEmail.$dirty">Email is required</div>
+      </div>
+
+      <div class="row form-group">
+        <div class="col-xs-12 col-md-8">
+            <label for="pcPhone">Phone number (optional)</label>
+            <input type="text" class="form-control" name="pcPhone" ng-model="registration.pcPhone">
+        </div>
+        <div class="col-xs-6 col-md-4">
+            <label for="pcPhoneExtension" class="extension">Ext number</label>
+            <input type="text" class="form-control" name="pcPhoneExtension" ng-model="registration.pcPhoneExtension">
+        </div>
+      </div>
+
+      <div class="form-group ">
+        <label for="pcMobile">Mobile number</label>
+        <input type="text" class="form-control" name="pcMobile" ng-model="registration.pcMobile" ng-required="true" placeholder="Eg: 0000 000000">
+        <div class="formError" ng-show="form.pcMobile.$invalid && form.pcMobile.$dirty">Mobile number is required</div>
+      </div>
+    </div>
+
+    <div class="mobile" ng-if="!registration.primaryContact">
+      <hr/>
+      <legend>Your details</legend>
+    </div>
+    <div class="form-group ">
+        <label for="firstName">First name</label>
+        <input type="text" class="form-control" name="firstName" ng-model="registration.firstName" ng-required="true" ng-class="{'has-error': form.firstName.$invalid}" placeholder="Eg: John or Deborah">
+        <div class="formError" ng-show="form.firstName.$invalid && form.firstName.$dirty">First name is required</div>
+    </div> 
+    
+    <div class="form-group">
+        <label for="lastname">Last name</label>
+        <input type="text" class="form-control" name="lastname" ng-model="registration.lastname" ng-required="true" ng-class="{'has-error': form.firstname.$invalid}" placeholder="Eg: Smith or Ford">
+        <div class="formError" ng-show="form.lastname.$invalid && form.lastname.$dirty">Last name is required</div>
+    </div>
+
+    <div class="mobile"><hr/></div>
+    <legend ng-if="['business','transporter'].indexOf(registration.type)>=0">Your business details</legend>
+    <legend ng-if="registration.type==='volunteer'">Your contact details</legend>
+
+    <div class="form-group" ng-if="['business','transporter','charity'].indexOf(registration.type)>=0">
+        <label for="name" ng-if="['business','transporter'].indexOf(registration.type)>=0">Business name</label>
+        <label for="name" ng-if="registration.type==='charity'">Charity name</label>
+
+        <input type="text" class="form-control" name="name" ng-model="registration.name" ng-required="true" ng-class="{'has-error': form.name.$invalid}" placeholder="Eg: Dinos Grocery">
+        <div class="formError" ng-show="form.name.$invalid && form.name.$dirty" ng-if="['business','transporter'].indexOf(registration.type)>=0">Business name is required</div>
+        <div class="formError" ng-show="form.name.$invalid && form.name.$dirty" ng-if="registration.type==='charity'">Charity name is required</div>
+    </div>
+
+    <div class="row form-group" ng-if="['business','transporter','charity'].indexOf(registration.type)>=0">
+      <div class="col-xs-12 col-md-8">
+          <label for="phone" ng-if="['business','transporter'].indexOf(registration.type)>=0">Business phone number (optional)</label>
+          <label for="phone" ng-if="registration.type==='charity'">Charity phone number (optional)</label>
+
+          <input type="text" class="form-control" name="phone" ng-model="registration.phone">
+      </div>
+      <div class="col-xs-6 col-md-4">
+          <label for="phoneExtension" class="extension">Ext number</label>
+          <input type="text" class="form-control" name="phoneExtension" ng-model="registration.phoneExtension">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="mobile">Mobile number</label>
+      <input type="text" class="form-control" name="mobile" ng-model="registration.mobile" ng-required="true" placeholder="Eg: 0000 000000">
+      <div class="formError" ng-show="form.mobile.$invalid && form.mobile.$dirty">Mobile number is required</div>
+    </div>
+
+    <div class="mobile"><hr/></div>
+    <legend>Account details</legend>
+    <div class="form-group ">
+        <label for="email">Email address</label>
+        <input type="text" class="form-control" name="email" ng-model="registration.email" ng-required="true" ng-class="{'has-error': form.email.$invalid}" placeholder="This will be used as your login">
+        <div class="formError" ng-show="form.email.$invalid && form.email.$dirty">Email is required</div>
+    </div>
+
+    <div class="form-group ">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" ng-model="registration.password" ng-required="true" ng-class="{'has-error': form.password.$invalid}">
+        <div class="formError" ng-show="form.password.$invalid && form.password.$dirty">Password is required</div>
+    </div>
+
+    <div class="form-group ">
+        <label for="confirmation">Confirm password</label>
+        <input type="password" class="form-control" name="confirmation" ng-model="registration.confirmation" ng-required="true" ng-class="{'has-error': form.confirmation.$invalid}" >
+        <div class="formError" ng-show="form.confirmation.$invalid && form.confirmation.$dirty">Confirmation is required</div>
+    </div>
+
+  </div>
+
+  <div class="col-md-4 col-md-offset-1 desktop" ng-if="!registration.primaryContact">
+    <div class="mobile"><hr/></div>
+    <legend>Primary contact details</legend>
+    <div class="form-group ">
+        <label for="pcFirstName">First name</label>
+        <input type="text" class="form-control" name="pcFirstName" ng-model="registration.pcFirstName" ng-required="true" ng-class="{'has-error': form.pcFirstName.$invalid}" placeholder="Eg: John or Deborah">
+        <div class="formError" ng-show="form.pcFirstName.$invalid && form.pcFirstName.$dirty">First name is required</div>
+    </div> 
+    
+    <div class="form-group">
+        <label for="pcLastName">Last name</label>
+        <input type="text" class="form-control" name="pcLastName" ng-model="registration.pcLastName" ng-required="true" ng-class="{'has-error': form.pcLastName.$invalid}" placeholder="Eg: Smith or Ford">
+        <div class="formError" ng-show="form.pcLastName.$invalid && form.pcLastName.$dirty">Last name is required</div>
+    </div>
+
+    <div class="form-group ">
+        <label for="pcEmail">Email address</label>
+        <input type="text" class="form-control" name="pcEmail" ng-model="registration.pcEmail" ng-required="true" ng-class="{'has-error': form.pcEmail.$invalid}">
+        <div class="formError" ng-show="form.pcEmail.$invalid && form.pcEmail.$dirty">Email is required</div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-xs-12 col-md-8">
+          <label for="pcPhone">Phone number (optional)</label>
+          <input type="text" class="form-control" name="pcPhone" ng-model="registration.pcPhone">
+      </div>
+      <div class="col-xs-6 col-md-4">
+          <label for="pcPhoneExtension" class="extension">Ext number</label>
+          <input type="text" class="form-control" name="pcPhoneExtension" ng-model="registration.pcPhoneExtension">
+      </div>
+    </div>
+
+    <div class="form-group ">
+      <label for="pcMobile">Mobile number</label>
+      <input type="text" class="form-control" name="pcMobile" ng-model="registration.pcMobile" ng-required="true" placeholder="Eg: 0000 000000">
+      <div class="formError" ng-show="form.pcMobile.$invalid && form.pcMobile.$dirty">Mobile number is required</div>
+    </div>
+  </div>
+</div>

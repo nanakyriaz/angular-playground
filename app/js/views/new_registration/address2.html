@@ -1,0 +1,113 @@
+<div class="step-title" ng-class="{business: registration.type==='business', charity: registration.type==='charity', transporter: registration.type==='transporter', volunteer: registration.type==='volunteer'}">
+  <div class="desktop">
+    <span>Step {{step}} - Add your address details</span>
+  </div>
+  <div class="mobile">
+     <div class="step-title-mobile">2. Address details</div>
+     <div class="step-subtitle-mobile">
+      <span>Step {{step}} - Add your address details</span>
+    </div>
+  </div>
+</div>
+<div class="steps-header-mobile row mobile loading-address-container">
+    <div ng-show="loading" ng-class="{loading:loading}" class="custom-preloader">
+      <div>
+        Please wait a moment while we find your postcode, thank you!
+        <br />
+        <a ng-click="cancelLoading()">Cancel</a>
+      </div>
+    </div>
+  <div class="col-xs-3 step-container">
+      <div class="step-box" ng-class="{done: step>1, current: step===1}"> 
+        <div class="step-number first" ng-click="go('newregistration.newaccount')">1</div>
+      </div>
+  </div>
+  <div class="col-xs-3 step-container">
+      <div class="step-box" ng-class="{done: step>2, current: step===2, ahead: step<2}"> 
+        <div class="step-number" ng-click="go('newregistration.address')">2</div>
+      </div>
+  </div>
+  <div class="col-xs-3 step-container">
+      <div class="step-box" ng-class="{done: step>3, current: step===3, ahead: step<3}"> 
+        <div class="step-number" ng-click="go('newregistration.donation')">3</div>
+      </div>
+  </div>
+  <div class="col-xs-3 step-container">
+      <div class="step-box" ng-class="{current: step===4, ahead: step<4}"> 
+        <div class="step-number" ng-click="go('newregistration.finish')">4</div>
+      </div>
+  </div>
+</div> 
+
+<div class="row loading-address-container">
+    <div ng-show="loading" ng-class="{'loading-address':loading}">Loading... <a ng-click="cancelLoading()">Cancel</a></div>
+    <div class="inner-container">
+
+      <legend>Address details</legend>
+      <div class="form-group col-md-7 col-xs-12">
+        <label for="postcode">Your Postcode</label>
+        <div class="row">
+          <div class="col-md-6">
+            <input type="text" class="form-control force-block ng-valid ng-dirty" name="postcode" ng-model="registration.postcode" placeholder="EC..." ng-change="resetAddressResults()" style="">
+          </div>
+          <div class="col-md-6">
+            <p class="help-address">Enter your postcode and click find address to see a list of matching addresses</p>
+          </div>
+        </div>
+        <div class="row find-address form-group">
+          <div class="col-md-2">
+            <input type="button" class="btn btn-sm btn-info desktop" value="Find Address" ng-click="findAddress(registration.postcode)" ng-disabled="!registration.postcode">
+            <input type="button" class="btn btn-info mobile" value="Find Address" ng-click="findAddress(registration.postcode)" ng-disabled="!registration.postcode">
+          </div>
+          <div class="col-md-3 vcenter">
+            <a ng-click="manualAddress()">Enter manually</a>
+          </div>
+        </div>
+        <div class="row col-md-6 form-group">
+          <a ng-click="manualAddress()">If you are based outside the UK please use our international form</a>
+        </div>
+
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6 col-xs-6">
+              <!-- Address fields to be populated by AddressNow -->
+              <Address form>
+                  <input id="addressField1">
+                  <input id="addressField2">
+                  <input id="addressField3">
+              </Address form>
+              <!-- Address fields to be populated by AddressNow -->
+          </div>
+        </div>
+      </div>
+      
+      <input type="hidden" ng-model="registration.address" ng-required="true">
+      <div ng-if="addressResults && registration.postcode">
+
+        <div class="form-group col-md-8">
+          <div class ="desktop"><hr /></div>
+          <label for="address">Select an address for {{registration.postcode}}</label>
+          <div class="row">
+            <div class="form-group col-md-5">
+              <select ng-model="registration.address" class="form-control" ng-options="address.streetname for address in addressResults" ng-required="true">
+              </select>
+            </div>
+          </div>
+          <div class="desktop"><hr /></div>
+          <div class="row" ng-show="registration.address">
+            <div class="form-group col-md-5">
+              <label>Address selected for {{registration.postcode}}:</label>
+              <div>
+                <div class="address-icon" ng-class="{business: registration.type==='business', charity: registration.type==='charity', transporter: registration.type==='transporter', volunteer: registration.type==='volunteer'}"></div>
+                <div class="address-title">{{registration.address.streetname}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="desktop"><hr /></div>
+        </div>
+      </div>
+    </div>
+
+</div>

@@ -1,0 +1,66 @@
+/* line 4, ../../sass/components/profile_picker_autocomplete.scss */
+pz-profile-pickers .autocomplete,
+.pz-profile-pickers .autocomplete {
+  position: absolute;
+  padding: 5px 0;
+  z-index: 999;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #E4E4E4;
+  border-top: 0;
+  /* Enable scrolling of the suggestion list */
+  height: 160px;
+  overflow-y: scroll;
+  /* Suggestion list */
+}
+/* line 18, ../../sass/components/profile_picker_autocomplete.scss */
+pz-profile-pickers .autocomplete .favourites-list,
+pz-profile-pickers .autocomplete .suggestion-list,
+.pz-profile-pickers .autocomplete .favourites-list,
+.pz-profile-pickers .autocomplete .suggestion-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+/* line 25, ../../sass/components/profile_picker_autocomplete.scss */
+pz-profile-pickers .autocomplete .suggestion-item,
+.pz-profile-pickers .autocomplete .suggestion-item {
+  padding: 5px 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font: 16px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #000;
+  background-color: #fff;
+}
+/* line 35, ../../sass/components/profile_picker_autocomplete.scss */
+pz-profile-pickers .autocomplete .suggestion-item img,
+.pz-profile-pickers .autocomplete .suggestion-item img {
+  max-height: 20px;
+}
+/* line 39, ../../sass/components/profile_picker_autocomplete.scss */
+pz-profile-pickers .autocomplete .suggestion-item.favourites--item-ended,
+.pz-profile-pickers .autocomplete .suggestion-item.favourites--item-ended {
+  border-bottom: 1px solid #ccc;
+}
+/* line 43, ../../sass/components/profile_picker_autocomplete.scss */
+pz-profile-pickers .autocomplete .suggestion-item.selected,
+.pz-profile-pickers .autocomplete .suggestion-item.selected {
+  color: #fff;
+  background-color: #0097cf;
+}
+/* line 47, ../../sass/components/profile_picker_autocomplete.scss */
+pz-profile-pickers .autocomplete .suggestion-item.selected em,
+.pz-profile-pickers .autocomplete .suggestion-item.selected em {
+  color: #fff;
+  background-color: #0097cf;
+}
+/* line 53, ../../sass/components/profile_picker_autocomplete.scss */
+pz-profile-pickers .autocomplete .suggestion-item em,
+.pz-profile-pickers .autocomplete .suggestion-item em {
+  font: 16px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  color: #000;
+  background-color: #fff;
+}

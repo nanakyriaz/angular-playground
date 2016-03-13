@@ -1,0 +1,112 @@
+<article>
+    <section>
+        <div class="row clearfix">
+
+            <div class="col-sm-6 col-sm-push-6 col-md-4 col-md-push-8 col-lg-3 col-lg-push-9">
+            </div>
+
+            <div class="col-sm-6 col-sm-pull-6 col-md-pull-4 col-md-4 col-lg-3 col-lg-pull-3">
+                <div class="profile--image">
+                <img ng-show="selectedItem.avatar" ng-src="{{ selectedItem.avatarImages.mid ? selectedItem.avatarImages.mid : '/images/profile-placeholder.png' }}" alt="Image of {{ selectedItem.fullName }}">
+                <img ng-show="!selectedItem.avatar" src="images/my_profile_placeholder.png" alt="{{ selectedItem.fullName }}">
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-4 col-md-pull-4 col-lg-6 col-lg-pull-3">
+                <div class="profile--summary profile--editable">
+                    <h3>{{ selectedItem.fullName }}</h3>
+                    <p class="profile-profile-type "><i class="profile-type  ng-class:selectedItem.profileType;"></i><span class=" ng-class:selectedItem.profileType;">{{selectedItem.profileType | capitalizeFirstLetter}}</span></p>
+
+                    <p ng-if="selectedItem.charityNumber" class="help-block"><span>Charity Number: </span> {{ selectedItem.charityNumber }}</p>
+                    <div class="profile--description">
+                        <p>{{ selectedItem.description }}</p>
+
+                        <div role-granted="PROFILE_APPROVED">
+                            <div class="friend widget" ng-if="isLoggedIn && !selectedItem.isCurrentUser">
+                                <p ng-show="!selectedItem.isFriend"><a title="Add as Friend" ng-click="addProfileAsFriend()" class="btn btn-primary">Add to My Community</a></p>
+                                <p ng-show="selectedItem.isFriend"><a title="Remove as friend" ng-click="removeProfileAsFriend()" class="btn btn-primary">Remove from my Community</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row clearfix">
+
+            <div class="col-md-8 col-lg-9">
+
+                <div class="row clearfix">
+
+                    <fieldset class="col-sm-6 col-md-6 col-lg-4 profile--detail">
+                        <div class="profile--editable location icon">
+                            <h3>Location</h3>
+                            <p class="help-block">This information will help us to recommend you Zheroes near to you.</p>
+                            <div class="address-block" ng-if="selectedItem.address">
+                                <p>{{ selectedItem.address.address1 }},</p>
+                                <p>{{ selectedItem.address.address2 }},</p>
+                                <p ng-show="selectedItem.address.address3">{{ selectedItem.address.address3 }},</p>
+                                <p ng-show="selectedItem.address.address4">{{ selectedItem.address.address4 }},</p>
+                                <p><span class="city">{{ selectedItem.address.city }},</span></p>
+                                <p><span class="postcode">{{ selectedItem.address.postcode }}</span> </p>
+                                <p>{{ selectedItem.address.country }}</p>
+                            </div>
+                            <div class="warning-block" ng-if="!selectedItem.address">No location details available for this profile.</div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="col-sm-6 col-md-6 col-lg-4 profile--detail">
+
+                        <!-- toggle class 'changed' when in details have been edited -->
+                        <div class="profile--editable changed contact icon">
+                            <h3>Contact Details</h3>
+                            <p class="help-block">Only available to those Zheroes who are connected to you.</p>
+                            <p ng-show="selectedItem.contactPhoneNumber"><span>Phone number: </span> <a href="phone:{{ selectedItem.contactPhoneNumber }}" title="Call {{ selectedItem.contactPhoneNumber }}">{{ selectedItem.contactPhoneNumber }}</a></p>
+                            <p ng-show="selectedItem.user.email"><span>Email address: </span> <a href="mailto:{{ selectedItem.user.email }}" title="Mail to {{ selectedItem.user.email }}">{{ selectedItem.user.email }}</a></p>
+                            <div class="warning-block" ng-if="!selectedItem.contactPhoneNumber && !selectedItem.user.email">No contact details available for this profile.</div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="col-sm-6 col-md-6 col-lg-4 profile--detail">
+                        <div class="profile--editable food icon">
+                            <h3>Food type</h3>
+                            <p class="help-block" ng-show="selectedItem.profileType=='charity'">What type of food are you willing to accept or do you specially need?</p>
+                            <p class="help-block" ng-show="selectedItem.profileType=='business'">What type of food are you willing to offer?</p>
+                            <ul>
+                                <li ng-repeat="item in selectedItem.foodTypes">{{ item.description }}</li>
+                            </ul>
+                            <p class="missing-content" ng-hide="selectedItem.foodTypes">N/A</p>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="col-sm-6 col-md-6 col-lg-4 profile--detail">
+                        <div class="profile--editable donation icon">
+                            <h3>Donation size</h3>
+                            <p class="help-block">What quantities would you be able to manage?</p>
+                            <ul>
+                                <li ng-repeat="item in selectedItem.donationSizes">{{ item.description }}</li>
+                            </ul>
+                            <p class="missing-content" ng-hide="selectedItem.donationSizes">N/A</p>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="col-sm-6 col-md-6 col-lg-4 profile--detail">
+                        <div class="profile--editable otherInfo icon">
+                            <h3>Other information</h3>
+                            <p class="help-block">E.g. preferable times to deliver donations or other comments.</p>
+                            <div class="collection-time" ng-if="selectedItem.collectionTime">
+                                <h4>Collection Time</h4>
+                                <p>{{ selectedItem.collectionTime.description }}</p>
+                            </div>
+                            <p>{{ selectedItem.other || 'No other information available' }}</p>
+                        </div>
+                    </fieldset>
+
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+</article>

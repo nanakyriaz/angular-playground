@@ -1,0 +1,176 @@
+/* Marker Overlay Styling */
+
+.map-pin-32x32 {
+  height: 32px;
+  width: 32px;
+  background-repeat: no-repeat
+}
+
+.map-pin-50x50 {
+  height: 50px;
+  width: 50px;
+  background-repeat: no-repeat
+}
+
+
+/* Html Marker */
+div.map-label-marker,
+div.map-label-marker.map-pin-state-normal,
+div.map-label-marker.map-pin-state-highlighted {
+  position: absolute;
+  white-space: nowrap;
+  text-align: center;
+  font: .7em/1em sans-serif;
+  cursor: pointer
+}
+
+.map-html-marker {
+  position: absolute;
+  white-space: nowrap;
+  cursor: pointer;
+  line-height: normal
+}
+
+/* Styling */
+div.map-pin-state-normal {
+  width: 16px;
+  height: 30px;
+  padding-top: 3px
+}
+
+div.map-pin-state-highlighted {
+  width: 24px;
+  height: 36px;
+  padding-top: 3px;
+  font-weight: bold;
+  color: red
+}
+
+.map-layer-icon-places-business {
+  background-image: url('/images/maps/business-map-icon.png');
+}
+
+.map-layer-icon-places-image{
+  border-radius: 15px;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 4px;
+  left: 8px;
+}
+
+.map-layer-icon-places-selected-business {
+  background-image: url('/images/maps/business-selected-map-icon.png');
+}
+
+.map-layer-icon-places-charity {
+  background-image: url('/images/maps/charities-map-icon.png');
+}
+
+.map-layer-icon-places-selected-charity {
+  background-image: url('/images/maps/charities-selected-map-icon.png');
+}
+
+.map-layer-icon-places-volunteer {
+  background-image: url('/images/maps/volunteers-map-icon.png');
+}
+
+.map-layer-icon-places-selected-volunteer {
+  background-image: url('/images/maps/volunteers-selected-map-icon.png');
+}
+
+.map-layer-icon-places-transporter {
+  background-image: url('/images/maps/transporters-map-icon.png');
+}
+
+.map-layer-icon-places-selected-transporter {
+  background-image: url('/images/maps/transporters-selected-map-icon.png');
+}
+
+.map-label-marker span {
+  color: black;
+  text-align: center;
+  padding-right: 1px
+}
+
+/* User Location */
+ .userlocation-dot-holder {
+  position: relative;
+  height: 100px;
+  width: 100px
+}
+
+ .userlocation-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -8px;
+  margin-left: -8px;
+  background-color: #1a5a92;
+  box-shadow: 0 2px 0 0 #a8a8a8;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  border: 2px solid white
+}
+
+.userlocation-pulse {
+  position: absolute;
+  background-color: rgba(255,255,255,0.7);
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  animation: newpulse 3s ease-out;
+  animation-iteration-count: infinite;
+  -webkit-animation: newpulse 3s ease-out;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation: newpulse 3s ease-out;
+  -moz-animation-iteration-count: infinite
+}
+
+@keyframes newpulse {
+  from {
+    transform: scale(0)
+  }
+
+  50% {
+    opacity: .8
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 0
+  }
+}
+
+@-webkit-keyframes newpulse {
+  from {
+    -webkit-transform: scale(0)
+  }
+
+  50% {
+    opacity: .8
+  }
+
+  to {
+    -webkit-transform: scale(1);
+    opacity: 0
+  }
+}
+
+@-moz-keyframes pulse {
+  from {
+    -moz-transform: scale(0)
+  }
+
+  50% {
+    opacity: .8
+  }
+
+  to {
+    -moz-transform: scale(1);
+    opacity: 0
+  }
+}
+
+/* Breakpoint specific optimalisations */

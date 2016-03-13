@@ -1,0 +1,505 @@
+.create_delivery-button {
+  margin-right: 15px;
+}
+tr.table--row.new:last-child {
+    background: rgba(255, 255, 0, 0.19);
+}
+.export-menu {
+  position: relative;
+
+  .dropdown-menu {
+    background-color: $brand-info;
+    border: darken($btn-info-bg, 5%);
+    border-radius: 0;
+    color: $btn-default-color;
+    padding: 0;
+    top: 120%;
+
+    li {
+
+      a {
+        background-position: 10px 10px;
+        padding: 15px 10px 10px 35px;
+
+        &:hover {
+          color: $brand-gray-darker;
+          background-color: darken($brand-info, 8%);
+        }
+      }
+    }
+  }
+
+  @media (max-width: $screen-xs-max) {
+
+    .dropdown-menu {
+      right: 0;
+      left: auto;
+    }
+  }
+}
+
+.delivery-header {
+  padding-top: 0px;
+  padding: 15px;
+  margin-top: 0px;
+  margin-bottom: 15px;
+  background-color: #F1F1F1;
+}
+
+.deliveries-header {
+  margin: 15px 0;
+  text-align: center;
+
+  .range-navbar {
+    display: inline-block;
+
+    div {
+      display: inline-block;
+    }
+
+    a span {
+      display: none;
+    }
+
+    .current-month {
+      font-family: "bree_serifregular", Georgia, "Times New Roman", Times, serif;
+      font-size: 22px;
+      position: relative;
+      top: -6px;
+    }
+
+    .previous-month {
+      margin: 20px 0;
+
+      a {
+        background: url("/images/icons/icon-arrow-left-large.png") 0 0 no-repeat;
+        display: inline-block;
+        height: 30px;
+        margin-right: 10px;
+        width: 19px;
+      }
+    }
+
+    .next-month {
+      margin: 20px 0;
+
+      a {
+        background: url("/images/icons/icon-arrow-right-large.png") 0 0 no-repeat;
+        display: inline-block;
+        height: 30px;
+        margin-left: 10px;
+        width: 19px;
+      }
+    }
+
+  }
+
+  h2 {
+    line-height: 27px;
+
+    i {
+      float: left;
+      margin-right: 10px;
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: inline-block;
+      margin-left: 15px;
+
+      a {
+        display: inline-block;
+        text-indent: -9999px;
+      }
+
+      &.active {
+
+        a {
+          background-position: 0 -30px;
+        }
+      }
+    }
+  }
+}
+
+.delivery-items-list {
+
+    table {
+      clear: both; /* fixes issue in Firefox */
+    }
+
+    tr {
+        border-bottom: 1px solid $gray-light;
+
+        &:last-child {
+          border-bottom: none;
+        }
+    }
+
+}
+
+.deliveries-views {
+  background-color: $brand-gray-light;
+  margin: 0 -20px;
+  padding: 20px;
+}
+
+.deliveries-list {
+
+  .status-new,
+  .ico-status-new {
+    color: inherit;
+  }
+
+  .status-in_review,
+  .ico-status-in_review {
+    color: #F9A11B;
+  }
+
+  .status-reviewed,
+  .ico-status-reviewed {
+    color: #92CA74;
+  }
+
+  .status-rejected,
+  .icon-status-rejected {
+    color: #D12160;
+  }
+
+  .subtitle {
+    display: block;
+    font-size: 14px;
+    color: #808080;
+  }
+
+  table {
+    clear: both; /* fixes issue in Firefox */
+    width: 100%;
+
+    col {
+      width: 25%;
+    }
+
+    th {
+      font-size: 18px;
+
+      > div {
+        padding: 10px 5px 20px 50px;
+        position: relative;
+
+        i {
+          background-position: center 0;
+          position: absolute;
+          bottom: 24px;
+          left: 0;
+          width: 40px;
+        }
+
+        .subtitle {
+          font-size: 14px;
+          color: #808080;
+        }
+
+
+        @media (max-width: $screen-sm-max) {
+
+          i {
+            display: none;
+          }
+        }
+      }
+    }
+
+    tr {
+
+      td {
+        border-bottom: 1px solid $brand-gray;
+      }
+
+      &.item--editable {
+        background-color: $secondary-dark;
+      }
+
+      &:last-child {
+
+        td {
+          border: none;
+        }
+      }
+    }
+
+    td {
+
+      > div {
+        padding: 10px 10px 10px 10px;
+      }
+    }
+
+    .col-when {
+        font-weight: bold;
+    }
+
+    .col-status {
+
+      a {
+        display: block;
+        width: 65%;
+
+        i {
+          background-position: center 0;
+          float: right;
+          width: 20px;
+        }
+      }
+
+      @media (max-width: $grid-float-breakpoint-max) {
+
+        a {
+          width: auto;
+
+          span {
+            display: none;
+          }
+
+          i {
+            float: none;
+          }
+        }
+
+      }
+    }
+
+    @media (max-width: $screen-xs-max) {
+
+      col {
+        width: 40%;
+      }
+
+      .col-donation,
+      th.col-status > div {
+        display: none;
+      }
+
+      th > div,
+      td > div {
+       padding-left: 0;
+      }
+
+      .col-status a {
+        text-align: center;
+      }
+    }
+  }
+
+  .empty {
+    margin: 0 auto;
+    text-align: center;
+
+    @media (min-width: $screen-md-min) {
+      width: 50%;
+    }
+    @media (min-width: $screen-lg-min) {
+      width: 35%;
+    }
+  }
+}
+
+.delivery--accepted {
+  background-color: $alert-success-bg;
+  color: $alert-success-text;
+  padding: 0 0 10px 15px;
+}
+
+.delivery--time {
+  position: relative;
+  top: -5px;
+  color: #424242;
+}
+
+.deliveries-overview-list {
+
+  td {
+
+    > div {
+      padding: 10px 10px 10px 50px;
+    }
+  }
+
+  tbody {
+    tr.new {
+      &:last-of-type {
+        background-color: #ffd588;
+      }
+    }
+    tr:hover {
+      color: $row-selected-color;
+      background-color: $row-selected-bg;
+    }
+  }
+}
+
+.deliveries-table {
+  width: 100%;
+
+  col {
+    width: 20%;
+  }
+
+  .tbody-inner {
+    background-color: $brand-danger;
+  }
+
+  .tfoot-inner,
+  .tbody-inner {
+    padding: 0 15px;
+
+    @media (max-width: $screen-xs-max){
+      padding: 0 5px;
+    }
+
+    > table {
+      width: 100%;
+    }
+  }
+
+  .tfoot-inner td {
+    text-align: center;
+  }
+
+
+  td {
+    vertical-align: bottom;
+
+    > div {
+      padding: 15px;
+
+      @media (max-width: $screen-xs-max){
+        padding: 15px 10px;
+      }
+    }
+  }
+
+  .count {
+    color: #fff;
+    display: block;
+    font-size: 50px;
+    margin-bottom: 20px;
+    text-align: center;
+
+    @media (max-width: $screen-xs-max){
+      font-size: 18px;
+    }
+  }
+
+  .bar {
+    background-color: $secondary-orange;
+    border-radius: 6px;
+    display: block;
+    min-height: 42px;
+    position: relative;
+
+    &:before {
+      background-image: url("/images/backgrounds/deliveries-bar-x.png");
+      background-position: center 0;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      content: " ";
+      display: block;
+      height: 24px;
+      position: absolute;
+      top: -18px;
+      width: 100%;
+    }
+
+    &.zero {
+      background-color: #ccc;
+    }
+
+    &.zero:before {
+      background-image: url("/images/backgrounds/deliveries-bar-0.png");
+    }
+  }
+}
+
+.deliveries-totals-table {
+  text-align: center;
+  width: 100%;
+
+  col {
+    width: 33.333%
+  }
+
+  tfoot {
+
+    @media (max-width: $screen-md-max) {
+      font-size: 26px;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      font-size: 26px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 14px;
+    }
+  }
+
+  .count {
+    border-radius: 50%;
+    color: #fff;
+    display: block;
+    margin: 0 auto 15px;
+
+    @media (min-width: $screen-lg) {
+      font-size: 24px;
+      height: 80px;
+      line-height: 80px;
+      width: 80px;
+    }
+
+    @media (max-width: $screen-md-max) {
+      font-size: 44px;
+      height: 160px;
+      line-height: 160px;
+      width: 160px;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      font-size: 34px;
+      height: 120px;
+      line-height: 120px;
+      width: 120px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 21px;
+      height: 72px;
+      line-height: 72px;
+      width: 72px;
+    }
+
+    &.deliveries {
+      background-color: $secondary-green;
+    }
+
+    &.kilos {
+      background-color: $secondary-purple;
+    }
+
+    &.boxes {
+      background-color: $secondary-blue;
+    }
+  }
+}
+
+tr.table--row.new.item--shared:last-child {
+  background:#ffd891;
+}
+tr.table--row.new.item--shared:last-child:hover {
+  background:#4c9ec6;
+}

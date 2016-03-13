@@ -1,0 +1,154 @@
+<div class="new-profile">
+  <div class="row header" ng-class="{business: registration.type==='business', charity: registration.type==='charity', transporter: registration.type==='transporter', volunteer: registration.type==='volunteer'}">
+    <div class="col-md-4 vertical-bar">
+      <div class="picture-section">
+        <div class="title">{{registration.name}}</div>
+        <div class="subtitle">
+          <span ng-switch on="registration.type">
+            <span ng-switch-when="business">Business Profile</span>
+            <span ng-switch-when="charity">Charity Profile</span>
+            <span ng-switch-when="transporter">Transporter Profile</span>
+            <span ng-switch-when="volunteer">Volunteer Profile</span>
+          </span>
+        </div>
+        <div class="profile--image">
+            <img ng-show="selectedItem.avatar" ng-src="{{ imageUrl }}" alt="Image of {{ selectedItem.fullName }}">
+            <div class="addImage" ng-show="!selectedItem.avatar">
+                <img src="images/my_profile_placeholder.png" alt="add profile image">
+            </div>
+        </div>
+        <div class="profile-description">
+          {{registration.description}}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="details-section">
+        <!-- contact details -->
+        <div class="contact-icon"></div>
+        <div class="details-content">
+          <div class="title">Contact Details</div>
+          <div class="row">
+            <div class="col-md-6" ng-if="registration.pcFirstName">
+              <p><span>{{registration.pcFirstName}} {{registration.pcLastName}}</span><br/>
+                <span>{{registration.pcEmail}}</span><br/>
+                <span>{{registration.pcPhone}}</span>
+                <span ng-if="registration.pcPhoneExtension">({{registration.pcPhoneExtension}})</span>
+                <br/>
+                <span>{{registration.pcMobile}}</span></p>
+            </div>
+            <div class="col-md-6">
+              <p><span>{{registration.firstName}} {{registration.lastname}}</span><br/>
+              <span>{{registration.email}}</span><br/>
+              <span>{{registration.phone}}</span>
+              <span ng-if="registration.phoneExtension">({{registration.phoneExtension}})</span>
+              <br/>
+              <span>{{registration.mobile}}</span></p>
+            </div>
+          </div>
+        </div>
+        <!-- address -->
+        <div class="address-icon"></div>
+        <div class="details-content">
+          <div class="title">Address</div>
+          <div ng-if="registration.address">
+           <p><span ng-if="registration.address.streetname">{{registration.address.streetname}}<br/></span>
+           <span ng-if="registration.address.lineTwo">{{registration.address.lineTwo}}<br/></span>
+           <span ng-if="registration.address.lineThree">{{registration.address.lineThree}}<br/></span>
+           <span ng-if="registration.address.town">{{registration.address.town}}<br/></span>
+           <span ng-if="registration.address.state">{{registration.address.state}}<br/></span>
+           <span ng-if="registration.address.postcode">{{registration.address.postcode}}<br/></span>
+           <span ng-if="registration.address.country">{{registration.address.country}}</span></p>
+          </div>
+          <div ng-if="registration.addressManual">
+            <p><span ng-if="registration.addressManual.lineTwo">{{registration.addressManual.streetname}}<br/></span>
+            <span ng-if="registration.addressManual.lineTwo">{{registration.addressManual.lineTwo}}<br/></span>
+            <span ng-if="registration.addressManual.lineThree">{{registration.addressManual.lineThree}}<br/></span>
+            <span ng-if="registration.addressManual.town">{{registration.addressManual.town}}<br/></span>
+            <span ng-if="registration.addressManual.state">{{registration.addressManual.state}}<br/></span>
+            <span ng-if="registration.addressManual.postcode">{{registration.addressManual.postcode}}<br/></span>
+            <span ng-if="registration.addressManual.country">{{registration.addressManual.country}}</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4" ng-if="false">
+      <div class="profile--status">
+          <section>
+              <h3>Profile status</h3>
+              <div class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="{{ profileStatus.progress }}"
+                       aria-valuemin="0" aria-valuemax="100" style="height: {{profileStatus.progress}}%;">
+                      <span>{{ profileStatus.progress || 0 }}%</span>
+                  </div>
+              </div>
+              <div ng-if="profileStatus.progress < 100">
+                  <p>Fill in more details to improve your profile and know more Zheroes!</p>
+                  <a ui-sref="my_profile_modify" class="btn btn-success btn-edit">Complete your profile</a>
+              </div>
+              <div ng-if="profileStatus.progress == 100">
+                  Your profile is complete - good job!
+              </div>
+          </section>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="body">
+
+      <div class="form-group" ng-if="['business','charity','transporter'].indexOf(registration.type)>=0 && registration.foodRegistrationNumber">
+          <div class="title-view" for="foodRegistrationNumber">Food registration number (TNR)</div>
+          <div class="description-view"><span>{{registration.foodRegistrationNumber}}</span></div>
+      </div>
+      <div class="form-group" ng-if="registration.type==='transporter'">
+          <div class="title-view">Food types</div>
+          <div pz-transporter-food-types food-types="registration.transporterFoodTypes" view-mode="'view'"></div>
+      </div> 
+      <div class="form-group" ng-if="registration.type==='volunteer'">
+          <div class="title-view">Roles</div>
+          <div pz-role-types role-types="registration.roleTypes"  view-mode="'view'"></div>
+      </div> 
+      
+      <div class="form-group" ng-if="['business','charity'].indexOf(registration.type)>=0">
+          <div class="title-view">Donation Food Types</div>
+          <div pz-food-types food-types="registration.donationFoodTypes"  view-mode="'view'"></div>
+      </div>
+
+      <div class="row" ng-if="(['business','charity','transporter'].indexOf(registration.type)>=0 || registration.roleTypes[2]) && registration.averageDonation">
+        <div class="form-group">
+            <div class="title-view" ng-if="['business','charity'].indexOf(registration.type)>=0">Donation size</div>
+            <div class="title-view" ng-if="registration.type==='transporter'">Capacity of transport</div>
+            <div class="title-view" ng-if="registration.type==='volunteer'">Donation size</div>
+            <div class="description-view">
+              <span ng-switch on="registration.averageDonation">
+                <span ng-switch-when="0">Small (up to 1 Kg.)</span>
+                <span ng-switch-when="1">Medium (up to 10 Kg.)</span>
+                <span ng-switch-when="2">Large (10 Kg. or more)</span>
+              </span>
+            </div>
+        </div>
+        <div class="form-group" ng-if="['business','charity','volunteer'].indexOf(registration.type)>=0">
+            <div class="title-view">Food transportation</div>
+            <div class="description-view">
+              <span ng-switch on="registration.averageDonation">
+                <span ng-switch-when="0">No</span>
+                <span ng-switch-when="1">Yes</span>
+              </span>
+            </div>
+        </div>
+      </div>
+
+      <div class="form-group" ng-if="['business','charity','transporter'].indexOf(registration.type)>=0 || registration.roleTypes[2]">
+          <div class="title-view">Collection Time(s)</div>
+          <div pz-collection-times collection-times="registration.collectionTimes" view-mode="'view'"></div>
+      </div>
+
+      <div class="form-group" ng-show="registration.type==='volunteer' && registration.roleTypes[2]">
+          <div class="title-view">Types of food</div>
+          <div pz-volunteer-food-types food-types="registration.volunteerFoodTypes" view-mode="'view'"></div>
+      </div>
+
+    </div> 
+  </div>
+
+</div>

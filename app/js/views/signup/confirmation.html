@@ -1,0 +1,79 @@
+<article class="verification_email">
+    <section class="col-md-offset-2 col-md-8 col-md-offset-2" ng-show="confirmationStatus">
+        <h1>Hurray ! Your email has now been verified.</h1>
+        <p>Thank you for setting up an account with Plan Zheroes, <strong>you are a pioneer!</strong> We can't wait to work together on saving food surplus from being wasted.</p>
+
+        <div class="confirmation--steps">
+            <div ng-if="profileType == 'volunteer'">
+                <div class="row step">
+                    <div class="stepno">
+                        <strong></strong>
+                    </div>
+                    <div class="text pull-left">
+                        <strong>Look out for an email from us about the next welcome meeting</strong>
+                        <p>Volunteers are key to helping redistribute surplus food. So that you have all the training and resources you need, we would like to invite you to a welcome meeting by the Plan Zheroes team.</p>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="profileType == 'transporter'">
+                <div class="row step">
+                    <div class="stepno">
+                        <strong></strong>
+                    </div>
+                    <div class="text pull-left">
+                        <strong>Enter your food registration number</strong>
+                        <p>Trust is key in building successful relationships and so we require businesses and charities to be approved by local authorities to carry out food operations.</p>
+                        <p>Access <a ui-sref="my_profile_modify">your profile</a> to enter your Food Registration Number or <a ui-sref="contact">contact us</a> (<a href="mailto:info@planzheroes.org">info@planzheroes.org</a> or 07505 617 844) if you need further assistance.</p>
+                        <a ui-sref="my_profile_modify" title="Enter registration number" class="btn btn-success">Enter registration number</a>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="profileType == 'charity' || profileType == 'business'">
+                <p>Please, remember that you need to complete <strong>two more steps</strong>:</p>
+                <div class="row step">
+                    <div class="stepno">
+                        <strong>1</strong>
+                    </div>
+                    <div class="text pull-left" ng-if="profileType == 'business'">
+                        <strong>Sign and send back the charity/donor agreement</strong>
+                        <p>This is essential to start to participate in the PZ network. Please, <a href="downloads/business/donor_agreement.pdf">download the charity/donor agreement</a>. Further instructions in the document.</p>
+                        <a href="downloads/business/donor_agreement.pdf" target="_blank" title="Donor agreement" class="btn btn-success">Download agreement</a>
+                    </div>
+                    <div class="text pull-left" ng-if="profileType == 'charity'">
+                        <strong>Sign and send back the charity/donor agreement</strong>
+                        <p>This is essential to start to participate in the PZ network. Please, <a href="downloads/charity/donor_agreement.pdf">download the charity/donor agreement</a>. Further instructions in the document.</p>
+                        <a href="downloads/charity/donor_agreement.pdf" target="_blank" title="Donor agreement" class="btn btn-success">Download agreement</a>
+                    </div>
+                </div>
+                <div class="row step">
+                    <div class="stepno">
+                        <strong>2</strong>
+                    </div>
+                    <div class="text pull-left">
+                        <strong>Enter your food registration number</strong>
+                        <p>Trust is a major part to build successful relationships between businesses and charities. And so we require to businesses and charities they are approved by local authorities to carry out food operations.</p>
+                        <p>Access <a ui-sref="my_profile_modify">your profile</a> to enter your Food Registration Number or <a ui-sref="contact">contact us</a> (<a href="mailto:info@planzheroes.org">info@planzheroes.org</a> or 07505 617 844) if you need further assistance.</p>
+                        <a ui-sref="my_profile_modify" title="Enter registration number" class="btn btn-success">Enter registration number</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="small">Just a little bit of patience while we approve your profile on our end... In the meantime please note that you will <strong>not be visible to other users</strong> but you can have a look at the map and other features.</p>
+        <p class="small">If you have any questions or if you don't hear from us in the next 24hrs do not hesitate to <a href="mailto:support@planzheroes.org">contact us</a>.
+        </p>
+
+
+    </section>
+    <section ng-hide="confirmationStatus" ng-if="errorReason != 'User not found'">
+        <h1>Error occurred while confirming your account</h1>
+        <p>Something went wrong while trying to confirm your account. Please try again or contact us at <a href="mailto:support@planzheroes.org"><strong>support@planzheroes.org</strong></a> making reference to the following error description: <div class="error--clarification" ng-if="errorReason"><small>{{ errorReason }}</small>
+        </p>
+        </div>
+    </section>
+    <section ng-hide="confirmationStatus" ng-if="errorReason == 'User not found'">
+        <h1>Email account already confirmed</h1>
+        <p>Thanks! Your email account was already verified. <a ui-sref="login"><strong>Sign in</strong></a> and start to explore this great community.</p>
+        <p>If you are having some issues to enter your account, please send us an email to <a href="mailto:support@planzheroes.org"><strong>support@planzheroes.org</strong></a></p>
+        </div>
+    </section>
+</article>

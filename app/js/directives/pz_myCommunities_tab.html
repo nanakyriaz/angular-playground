@@ -1,0 +1,24 @@
+<div class="tab-pane fade in"
+     ng-class="tabName"
+     id="{{tabName}}"
+     ng-class="activeSection == tabName ? 'active' :''"
+     ng-show="activeSection == tabName">
+    <h4 class="visible-xs">{{tabName | capitalizeFirstLetter}}</h4>
+
+    <ul class="profile-list clearfix" ng-if="!isEmptyList">
+        <li class="profile"
+            ng-repeat="item in filteredCommunityList = (communityItems | profileItemsForType:profileType | filter:updatedSearchTerm.term)">
+            <a ui-sref="profile_detail({id:item.id})">
+                <p>{{ item.fullName }}</p>
+                <img ng-src="{{ item.avatarImages.thumb ? item.avatarImages.thumb : '/images/profile-placeholder.png'}}"
+                     alt="{{ item.fullName }}">
+            </a>
+        </li>
+    </ul>
+
+    <div class="empty" ng-if="isEmptyList">
+        <h2>You don't have at the moment any {{ tabName }} in your community.</h2>
+
+        <p>Use the <a ui-sref="map">Map</a> to find new connections.</p>
+    </div>
+</div>

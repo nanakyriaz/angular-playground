@@ -1,0 +1,25 @@
+.story--item {
+
+  margin-bottom: 20px;
+
+  h1 {
+    font-size: $font-size-h3;
+    margin-top: $content-padding;
+    color: $primary-purple;
+
+    a {
+      color: $primary-purple;
+    }
+
+  }
+
+  @media (max-width: $screen-xs-max) {
+
+    .intro,
+    .links {
+      display: none;
+    }
+
+  }
+
+}

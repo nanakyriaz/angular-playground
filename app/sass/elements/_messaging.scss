@@ -1,0 +1,201 @@
+.messaging {
+
+}
+
+.messaging--toolbar {
+  margin-bottom: 10px
+}
+
+.messages-container {
+  background: $gray-lighter;
+  margin: 0 16px 16px 0;
+  padding: 16px;
+
+  .message-item {
+    margin-bottom: 16px;
+
+    .profile-name {
+
+      a {
+        font-size: 18px;
+        text-decoration: underline;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .message-content {
+    background: #717271;
+    border-radius: 4px 4px 0 0;
+    color: #fff;
+    padding: 16px 16px 16px 48px;
+    position: relative;
+
+    &:before {
+      border-color: transparent;
+      border-style: solid;
+      border-top-width: 14px;
+      border-right-width: 15px;
+      border-bottom-width: 14px;
+      content: " ";
+      position: absolute;
+      top: 16px;
+      left: -18px;
+    }
+
+    &.charity {
+      background: $secondary-light-red url("/images/icons/icon-charity-sm-white.png") 10px 16px no-repeat;
+
+      &:before {
+        border-right-color: $secondary-light-red;
+      }
+    }
+
+    &.business {
+      background: $secondary-green url("/images/icons/icon-business-sm-white.png") 10px 16px no-repeat;
+
+      &:before {
+        border-right-color: $secondary-green;
+      }
+    }
+
+    &.volunteer {
+      background: $secondary-purple url("/images/icons/icon-volunteer-sm-white.png") 10px 16px no-repeat;
+
+      &:before {
+        border-right-color: $secondary-purple;
+      }
+    }
+
+    &.transporter {
+      background: $secondary-pink url("/images/icons/icon-transporter-sm-white.png") 10px 16px no-repeat;
+
+      &:before {
+        border-right-color: $secondary-pink;
+      }
+    }
+
+    .profile-name {
+
+      a {
+        color: #fff;
+      }
+    }
+
+    .message-text {
+      border-bottom: 1px solid rgba(255,255,255,0.5);
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+
+      a:link {
+        color: $gray-lighter;
+      }
+    }
+  }
+
+  .replies-container {
+    background: #fff;
+    padding: 16px;
+
+    .show-more {
+      border-top: 1px solid #e6e6e6;
+      padding-top: 16px;
+    }
+  }
+
+  .reply-container {
+    border-bottom: 1px solid #e6e6e6;
+    margin-bottom: 16px;
+    padding-bottom: 7px;
+
+    &:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  .reply-item {
+
+    &.charity {
+
+      .profile-name {
+        background: url("/images/icons/icon-charity-sm.png") 0 0 no-repeat;
+      }
+    }
+
+    &.business {
+
+      .profile-name {
+        background: url("/images/icons/icon-business-sm.png") 0 0 no-repeat;
+      }
+    }
+
+    &.volunteer {
+
+      .profile-name {
+        background: url("/images/icons/icon-volunteer-sm.png") 0 0 no-repeat;
+      }
+    }
+
+    &.transporter {
+
+      .profile-name {
+        background: url("/images/icons/icon-transporter-sm.png") 0 0 no-repeat;
+      }
+    }
+
+    .profile-name {
+      min-height: 25px;
+      padding-left: 32px;
+    }
+
+      .reply-text {
+      border-bottom: 1px solid #f4f4f4;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+    }
+
+    .reply-date {
+      color: #000;
+    }
+  }
+
+  .reply-form {
+    background: $brand-gray;
+    border-radius: 0 0 4px 4px;
+    padding: 16px;
+
+    textarea {
+      height: 40px;
+      resize: none;
+      @include transition(height 400ms ease-in-out);
+
+      &:focus {
+        height: 73px; // calculated height of auto
+        @include transition(height 400ms ease-in-out);
+      }
+    }
+
+    .reply-image {
+      background: #fff;
+      margin-bottom: 16px;
+      min-height: 48px;
+      position: relative;
+
+      .remove {
+        background: url("/images/icons/icon-close.png") 0 0 no-repeat;
+        display: block;
+        height: 16px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        text-indent: -9999px;
+        width: 16px;
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+@import "bootstrap-variables";
+
+// Floats - extended
+// -------------------------
+
+@media (min-width: $screen-md-min) {
+  .md-pull-right {
+    float: right !important;
+  }
+  .md-pull-left {
+    float: left !important;
+  }
+}
+
+@media (min-width: $screen-lg-min) {
+  .lg-pull-right {
+    float: right !important;
+  }
+  .md-pull-left {
+    float: left !important;
+  }
+}
+
+// Helper classes
+// -------------------------
+
+.table--row {
+  cursor: pointer;
+  cursor: hand;
+}
+
+.relative {
+  position: relative;
+}

@@ -1,0 +1,234 @@
+@import "../planz-branding";
+
+// to get these to play nicely I've tweaked the grid:
+
+@media screen and (min-width: $screen-xs-min) {
+  .profile--detail {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: $screen-sm-min)  and (max-width: $screen-md-max){
+  .profile--detail {
+    width: 49%;
+  }
+}
+
+@media screen and (min-width: $screen-lg-min) {
+  .profile--detail {
+    width: 33%;
+  }
+}
+
+.addImage{
+  border: 1px solid $brand-gray-light;
+
+  img{
+    display: block;
+    margin: 40px auto;
+  }
+}
+
+.changeImage{
+
+  img{
+    display: block;
+    //margin: 40px auto;
+  }
+}
+
+.profile--image {
+
+  border: 1px solid $brand-gray-light;
+
+  button{
+    bottom: 30px;
+    left: 50%;
+    margin-left: -75px;
+    position: absolute;
+  }
+}
+
+.profile--detail {
+  .icon {
+    padding-left: 45px;
+
+    h3, div, p, li, .help-block {
+      font-family: $font-family-base;
+    }
+
+    &.location {
+      background: url("../images/icons/icon-location.png") no-repeat 0 5px;
+    }
+
+    &.contact {
+      background: url("../images/icons/icon-contact-details.png") no-repeat 0 5px;
+    }
+
+    &.food {
+      background: url("../images/icons/icon-food-details.png") no-repeat 0 5px;
+    }
+
+    &.donation {
+      background: url("../images/icons/icon-donation.png") no-repeat 0 5px;
+    }
+
+    &.otherInfo {
+      background: url("../images/icons/icon-other-info.png") no-repeat 0 5px;
+    }
+  }
+}
+
+
+.profile {
+
+  h3 {
+    margin: 0;
+    padding: 10px 0 5px 30px;
+  }
+
+  [class^=col-] {
+    margin-bottom: 10px;
+  }
+}
+
+.profile--image {
+  margin-bottom: 10px;
+  position: relative;
+  margin-top: 18px;
+
+  img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .add-photo {
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
+  }
+}
+
+.profile--detail {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+
+  ul{
+    -webkit-padding-start: 18px;
+  }
+}
+
+.profile--summary,
+.profile--detail > div,
+.profile--status,
+.profile--missing {
+  padding: 0 $container-padding 5px;
+}
+
+.profile.editing {
+
+  .profile--editable {
+    background: $brand-gray-light;
+  }
+
+  .profile--editable.changed {
+    background: $secondary-blue;
+    transition:0.5s linear all;
+    color: #fff;
+  }
+}
+
+.profile--status {
+  background: $brand-gray-light;
+
+  h3 {
+    border-bottom: 1px solid #9a9a9a;
+  }
+
+  .progress {
+    background: $secondary-purple-light;
+    border-radius: 60px;
+    height: 120px;
+    margin: 10px auto 15px;
+    overflow: hidden;
+    position: relative;
+    width: 120px;
+  }
+
+  .progress-bar {
+    background: $primary-purple;
+    float: none;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    @include transition-property(height);
+
+    span {
+      font-size: 36px;
+      position: absolute;
+      bottom: 51px;
+      left: 0;
+      text-align: center;
+      width: 100%;
+    }
+  }
+
+}
+
+.profile--missing {
+  background: $brand-gray-dark;
+  color: #fff;
+}
+
+.profile-profile-type{
+  i{
+    width: 25px;
+    height: 25px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-size: 100%;
+    margin-right: 10px;
+    &.business {
+      background-image: url(../images/icons/icon-business.png);
+    }
+    &.charity {
+      background-image: url(../images/icons/icon-charity.png);
+    }
+    &.transporter {
+      background-image: url(../images/icons/icon-transporter.png);
+    }
+    &.volunteer {
+      background-image: url(../images/icons/icon-volunteer.png);
+    }
+  }
+  span{
+    font-size: 18px;
+    height: 35px;
+    display: inline-block;
+    vertical-align: middle;
+    &.business {
+      color: $primary-green;
+    }
+    &.charity {
+      color: $primary-orange;
+    }
+    &.transporter {
+      color: $secondary-pink;
+    }
+    &.volunteer {
+      color: $primary-purple;
+    }
+  }
+}
+
+@media screen and (min-width: $screen-md-min) {
+
+  .profile--status,
+  .profile--missing {
+    margin-left: 20px;
+  }
+}
+
+

@@ -1,0 +1,141 @@
+/**************************************************/
+/* GENERAL
+/**************************************************/
+
+.about-us p {
+    line-height: 1.5em;
+}
+.about-us ul {
+    line-height: 1.7em;
+}
+.about-us h2 {
+    color: $brand-gray-darker;
+}
+.about-us .row {
+    margin-top: 40px;
+}
+.about-us .row:first-child {
+    margin-top: 0;
+}
+.about-us .row .col-md-6, .about-us .row .col-md-4 {
+    padding-left: $grid-gutter-width;
+    padding-right: $grid-gutter-width;
+}
+.top-padding {
+    margin-top: 20px;
+}
+@media (max-width: $screen-md) {
+    .row.history h2 {
+        margin-top: 20px;
+    }
+    .funder {
+        margin-top: 40px;
+    }
+    .row .col-md-4:first-child .funder {
+        margin-top: 0;
+    }
+}
+/**************************************************/
+/* QUOTE
+/**************************************************/
+
+.aside.quote {
+    background-color: $secondary-purple-lighter;    
+    color: $primary-purple;
+    font-family: "bree_serifregular", Georgia, "Times New Roman", Times, serif;
+    font-size: 24px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+/**************************************************/
+/* FUNDERS AND TRUSTEES
+/**************************************************/
+
+.trustee {
+    margin-top: 20px;    
+}
+
+.funder h3, .trustee h3 {
+    margin-top: 10px;
+    text-align: center;
+}
+.funder .role, .trustee .role {
+    color: $brand-gray-dark;
+    font-family: "bree_serifregular", Georgia, "Times New Roman", Times, serif;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.funder:after, .trustee:after {
+    clear: both;
+}
+.funder .description a.glyphicon-envelope:hover, .trustee .description a.glyphicon-envelope:hover {
+    text-decoration: none; 
+}
+.funder .description a.glyphicon-envelope, .trustee .description a.glyphicon-envelope {
+    margin-left: 10px;
+}
+.funder .description p, .trustee .description p {
+    margin: 10px 0 0 0;
+    font-size: 12px;
+}
+.div-circle {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 100%;
+    margin: 0 auto;
+}
+
+/**************************************************/
+/* VOLUNTEERS
+/**************************************************/
+
+.volunteer-profile {
+    width: 100%;
+    height: 90px;
+    background-color: $brand-gray-light;
+    margin: 5px 0;
+}
+.volunteer-profile.you {
+    background-color: $brand-gray-lighter;
+}
+.volunteer-profile.you:hover {
+    background-color: $brand-gray-light;
+}
+.volunteer-profile .div-circle {
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    border-radius: 100%;
+    margin: 10px;
+}
+.volunteer-profile a.glyphicon-envelope {
+    margin-left: 10px;
+}
+.volunteer-profile a.glyphicon-envelope:hover {
+    text-decoration: none;
+}
+.volunteer-profile .img {
+    width: 80px;
+    max-width: none;
+    margin-left: -10px;
+    margin-top: 3px;
+}
+.volunteer-profile .description {
+    color: $brand-gray-darker;
+    width: calc(100% - 120px);
+    left: 0;
+    position: absolute;
+    margin-left: 120px;
+    margin: 5px 0 10px 100px;
+}
+.volunteer-profile .description h4 {
+    margin-top: 4px;
+}
+.volunteer-profile .description p {
+    font-size: 12px;
+    font-style: italic;
+    margin-top: 5px;
+}

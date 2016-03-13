@@ -1,0 +1,17 @@
+<div class="host" tabindex="-1" ti-transclude-append>
+  <div class="profiles" ng-class="{focused: hasFocus}">
+    <ul class="profile-list">
+      <li class="profile-item" ng-repeat="profile in profileList.items" ng-class="{ selected: profile == profileList.selected }" ng-click="profileList.profileClick($index)">
+        <span ng-bind="getDisplayText(profile)"></span>
+        <a class="remove-button" ng-click="profileList.remove($index, event)">×</a>
+      </li>
+    </ul>
+    <input class="input"
+           ng-model="newProfile.text"
+           ng-change="newProfileChange()"
+           ng-trim="false"
+           ng-class="{'invalid-profile': newProfile.invalid}"
+           placeholder="+ Add profile"
+           ti-autosize>
+  </div>
+</div>

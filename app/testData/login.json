@@ -1,0 +1,12 @@
+{
+    "userSession":{
+        "userEmail":"user@user.com",
+        "sessionId":"[ users serssion id]",
+        "sesionValidTo":"2014-12-01 12:00:00",
+        "LastLogin":"2014-12-01 12:00:00",
+        "User":{
+            "userEmail":"user@user.com",
+            "displayName":"user@user.com"
+        }
+    }
+}

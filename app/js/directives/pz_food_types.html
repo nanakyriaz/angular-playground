@@ -1,0 +1,12 @@
+<div class="food-types-widget">
+  <div class="row" ng-repeat="foodType in foodTypesInfo track by $index">
+    <div ng-repeat="foodItem in foodType.items track by $index"> 
+  
+      <div class="food-cell" ng-class="{active: foodTypes[$parent.$index][$index]}" ng-click="toggleFoodType($parent.$index, $index);">
+        <div class="food-section">{{foodType.section}}</div>
+        <div class="food-description">{{foodItem.type}}</div>
+      </div>
+  
+    </div>
+  </div>
+</div>

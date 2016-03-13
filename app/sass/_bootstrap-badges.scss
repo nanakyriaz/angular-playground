@@ -1,0 +1,32 @@
+.badge {
+    border-radius: 8px;
+    color: #fff;
+    line-height: 16px;
+    min-width: 14px;
+    padding: 0 5px;
+    position: absolute;
+    left: 14px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    top: -9px;
+    z-index: 990;
+    background-color: $secondary-wine-red;
+    font-size: 11px;
+    font-weight: bold;
+    border: 1px solid #F1F1F1;
+}
+.navbar-default .navbar-nav li > a:hover span.badge {
+    border: 1px solid #F1F1F1;
+}
+@media (max-width: $screen-sm-max) {
+    .badge {
+        top: 4px;
+        left: 33px;
+    }
+    .navbar-default .navbar-nav li.my_messages a, .navbar-default .navbar-nav li.my_deliveries a { 
+        padding-left: 55px !important;
+    }
+    .navbar-default .navbar-nav li.my_messages a i, .navbar-default .navbar-nav li.my_deliveries a i {
+        left: 20px;
+    }
+}

@@ -1,0 +1,38 @@
+{
+  "name": "angular-playgrnd-frontend",
+  "version": "0.0.1",
+  "description": "Angular.js based front-end project",
+  "devDependencies": {
+    "appium": "latest",
+    "grunt": "^0.4.5",
+    "grunt-cli": "latest",
+    "grunt-contrib-clean": "latest",
+    "grunt-contrib-compass": "latest",
+    "grunt-contrib-connect": "latest",
+    "grunt-contrib-copy": "latest",
+    "grunt-contrib-jshint": "latest",
+    "grunt-contrib-uglify": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-karma": "~0.6.2",
+    "grunt-protractor-runner": "latest",
+    "grunt-rev": "~0.1.0",
+    "grunt-shell-spawn": "latest",
+    "grunt-text-replace": "~0.3.11",
+    "grunt-usemin": "~2.1.1",
+    "grunt-wait": "^0.1.0",
+    "karma": "~0.10",
+    "karma-chrome-launcher": "latest",
+    "karma-coverage": "latest",
+    "karma-firefox-launcher": "latest",
+    "karma-jasmine": "~0.1",
+    "karma-junit-reporter": "~0.1",
+    "karma-osx-reporter": "*",
+    "karma-safari-launcher": "latest",
+    "matchdep": "~0.3.0",
+    "phantomjs": "latest",
+    "time-grunt": "~0.3.1"
+  },
+  "scripts": {
+    "install": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update"
+  }
+}

@@ -1,0 +1,46 @@
+<article>
+    <section class="login clearfix">
+
+        <form class="form-horizontal login-form" role="form" novalidate>
+            <fieldset>
+                <legend ng-show="!scenario">Please sign in</legend>
+                <h1 ng-show="scenario=='already'">Your email is already registered.<br/>Do you want to log in?</h1>
+                <h1 ng-show="scenario=='active'">Please sign in</h1>
+                <p ng-show="scenario=='active'">Your account is activated, but login was unsuccessful.</p>
+                <p class="formError" ng-show="wrongCredentials">The username or password you have entered is invalid.</p>
+                <p class="formError" ng-show="accountNotConfirmed">Your account is not confirmed yet.<a ng-click="reconfirmEmail()" >Resend Confirmation Email</a></p>
+                <input type="hidden" name="csrf_token" value="[[ request.csrfToken() ]]">
+
+                <div class="form-group">
+                    <label for="username" class="control-label">Email</label>
+                    <input type="text" class="form-control" id="username" name="username"
+                           autocomplete="on"  VCARD_NAME="vCard.Email"
+                           ng-model="email" type="email"
+                           ng-blur="validateEmail = true"
+                           ng-change="wrongCredentials = false"
+                           placeholder="Enter email address">
+
+                    <span class="icon-incorrect form-control-feedback" ng-show="validateEmail && !isEmailValid()"></span>
+                    <div class="formError" id="inputEmailFormError" ng-show="validateEmail && !isEmailValid()" style="position:absolute">The email address is not valid</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="control-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password"
+                             autocomplete="on"
+                           ng-model="password"
+                           ng-change="wrongCredentials = false"
+                           placeholder="Enter your password">
+
+                </div>
+
+                <div class="form-group submit-group">
+                    <input type="submit" value="Sign in" class="btn btn-success" ng-click="login()" ng-disabled="!validate()">
+                    <span id="or">Or</span>  <a ui-sref="registration" class="joinus">Join us!</a>
+                    <a ng-click="forgottenPasswordClick()" class="forgot-password">Forgotten your password?</a>
+                </div>
+            </fieldset>
+        </form>
+
+    </section>
+</article>

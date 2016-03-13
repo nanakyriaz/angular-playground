@@ -1,0 +1,20 @@
+<article>
+    <h1>News</h1>
+
+    <section>
+        <div class="items-list" ng-hide="!recordItems.length">
+            <div class="items-list--item" ng-repeat="item in recordItems">
+                <h2>{{ item.title }}</h2>
+                <p class="description">{{ item.description }}</p>
+                <a ui-sref="news_detail({id: item.id })" title="Read the news article">Read more</a>
+            </div>
+        </div>
+
+
+        <!-- if no recordItems -->
+        <div class="empty" ng-hide="recordItems">
+            <h2>No news items available.</h2>
+        </div>
+        <!-- end if -->
+    </section>
+</article>

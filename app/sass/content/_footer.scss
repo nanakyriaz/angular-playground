@@ -1,0 +1,343 @@
+#site-footer-wrapper {
+  background-color: $primary-purple;
+  clear: both;
+  color: white;
+  padding: 30px 20px;
+
+//  push it to the bottom of the page
+//  position: absolute;
+//  bottom: 0;
+//  left: 0;
+//  right: 0;
+}
+
+#site-footer {
+  position: relative;
+  font-size: $font-size-base;
+
+  //== Navigation
+  //
+  .nav {
+    display: block;
+    list-style: none;
+    margin: 0;
+    margin-top: 15px;
+    padding: 0;
+
+    width: 100%;
+    clear: both;
+  }
+
+  .nav > li {
+    display: block;
+    list-style: none;
+  }
+
+  .nav > li > a {
+    color: white;
+    padding: 0;
+    margin: 0px 0px $content-padding 0;
+    border-right: none;
+
+    &:focus {
+      background-color: transparent;
+      text-decoration: underline;
+    }
+
+    &:hover {
+      background-color: transparent;
+      text-decoration: underline;
+    }
+  }
+
+  //== News Feedbag items
+  //
+  .newsfeedbag {
+    display: none;
+  }
+
+  //== Colophon
+  //
+  .colophon {
+    border-top: 1px solid opacify(rgba(255, 255, 255, 0.3), 0.1);
+    padding-top: $container-padding;
+  }
+
+  //== Social Buttons
+  //
+  .social {
+    width: 100%;
+    text-align: left;
+    margin: 0 0 $container-padding 0;
+    padding: 0;
+  }
+
+  .social > li {
+    display: inline-block;
+    padding-right: $container-padding;
+    text-align: center;
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  .social > li > a {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    text-indent: -9000px;
+
+    &.twitter {
+      background: transparent url('../images/social/twitter.png') no-repeat center center;
+    }
+
+    &.linkedin {
+      background: transparent url('../images/social/linkedin.png') no-repeat center center;
+    }
+
+    &.facebook {
+      background: transparent url('../images/social/facebook.png') no-repeat center center;
+    }
+
+    &.youtube {
+      background: transparent url('../images/social/youtube.png') no-repeat center center;
+    }
+  }
+}
+
+#news-footer {
+  display: none;
+}
+
+// Desktop-overrides
+@media (min-width: $screen-md-min) {
+  #news-footer {
+    display: block;
+    margin: 0;
+    padding: 0;
+    font-size: $font-size-h6;
+
+    h1 {
+      margin-top: 0;
+      font-size: $font-size-h3;
+    }
+
+    a {
+      font-weight: bold;
+      color: white;
+    }
+
+    .wrapper {
+      display: table;
+      color: white;
+      padding-bottom: 50px;
+      margin-bottom: 25px;
+      border-bottom: 1px solid opacify(rgba(255, 255, 255, 0.3), 0.1);
+    }
+
+    .column-wrapper {
+      display: table;
+      width: 100%;
+
+      article {
+        display: table-cell;
+        padding-right: 25px;
+
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+    }
+
+    .column {
+
+      h3 {
+        margin: 0 0 $content-padding 0;
+        padding: 0;
+        font-size: $font-size-h4;
+      }
+
+      h4 {
+        margin: 0;
+        padding: 0;
+        font-family: $font-family-base;
+        font-size: $font-size-h6;
+      }
+
+      p {
+        margin-top: $content-padding;
+        line-height: 1.4;
+      }
+    }
+
+    .column.news h2 {
+      display: none;
+    }
+
+    .twitter-item {
+      position: relative;
+
+      .pagination {
+        margin: 0;
+      }
+    }
+
+    .column.twitter-feed {
+
+      h1 {
+        font-family: $font-family-base;
+      }
+
+      .pagination {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+
+      .twitter-toolbar {
+        width: 100%;
+        text-align: left;
+        margin: 0;
+        margin-top: 2em;
+        padding: 0;
+      }
+
+      .twitter-toolbar > li {
+        display: inline-block;
+        padding-left: $content-padding;
+        padding-right: $content-padding;
+        border-right: 1px solid opacify(rgba(255, 255, 255, 0.3), 0.1);
+        text-align: center;
+
+        &:first-child {
+          padding-left: 0;
+        }
+
+        &:last-child {
+          padding-right: 0;
+          border-right: none;
+        }
+      }
+
+      .twitter-toolbar > li > a {
+        font-weight: normal;
+        line-height: 1.2em;
+        font-size: $font-size-h6;
+        padding-left: 25px;
+
+        &.reply {
+          background: transparent url('../images/buttons/reply.png') no-repeat left center;
+        }
+
+        &.retweet {
+          background: transparent url('../images/buttons/refresh.png') no-repeat left center;
+        }
+
+        &.favourite {
+          background: transparent url('../images/buttons/favourite.png') no-repeat left center;
+        }
+      }
+    }
+
+    // Two-column footer container
+    .column {
+      display: table-cell;
+      width: 50%;
+      padding-left: $container-padding;
+      padding-right: $container-padding;
+
+      &:first-child {
+        padding-left: 0px;
+        border-right: 1px solid opacify(rgba(255, 255, 255, 0.3), 0.1);
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+
+  #site-footer {
+
+    .nav {
+      padding-bottom: 15px;
+      width: 75%;
+
+      li {
+        display: inline-block;
+        margin: 0 5px 10px 0;
+
+        a {
+          border-right: 1px solid rgba(255, 255, 255, 0.4);
+          display: inline;
+          padding-right: 10px;
+        }
+
+        &:last-child a {
+          border-right: none;
+        }
+      }
+    }
+  }
+
+}
+
+// Footer fixes when not mobile-devices
+@media (min-width: $screen-md-min) {
+  #site-footer {
+    display: table;
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: $font-size-smaller;
+
+    // Move the social buttons to the top right corner of the footer
+    .social {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: auto !important;
+    }
+
+    // Move the navigation items from left to right
+    .nav-inner {
+      float: left;
+
+      .nav {
+        margin-top: 0;
+        padding-bottom: 0;
+        width: 100%
+      }
+
+      .nav > li {
+        display: inline-block;
+
+        &:first-child > a {
+          padding-left: 0;
+        }
+
+        &:last-child > a {
+          border-right: none;
+          padding-right: 0;
+        }
+      }
+
+      .nav > li > a {
+        padding-right: $content-padding;
+        padding-left: $content-padding;
+        margin-bottom: 0;
+        border-right: 1px solid opacify(rgba(255, 255, 255, 0.3), 0.1);
+      }
+    }
+
+    // Simplify the styling of the colophon
+    .colophon {
+      margin: 0;
+      margin-top: 15px;
+      padding: 0;
+      border: none !important;
+    }
+  }
+}

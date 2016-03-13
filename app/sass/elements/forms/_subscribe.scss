@@ -1,0 +1,25 @@
+.form-subscribe {
+
+  h2 {
+    margin: 0;
+    font-size: 28px;
+  }
+
+  p {
+    font-size: $font-size-h3;
+  }
+
+  .form-inline {
+    margin-top: 10px;
+  }
+
+  .form-group label,
+  .form-group input {
+    margin-right: 20px;
+  }
+  @media screen and (min-width: $screen-sm-min) {
+    .form-group input {
+      width: 260px;
+    }    
+  }
+}

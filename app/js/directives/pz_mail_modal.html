@@ -1,0 +1,33 @@
+<form class="form-horizontal" role="form" name="$parent.shareMailForm" ng-show="!subscribed">
+    <div class="modal-body">
+        <fieldset>
+            <!-- Text input-->
+            <div class="form-group">
+                <label for="email">To: <br>
+                    <small>(type one or more email addresses, separating multiple addresses with a comma)</small>
+                </label>
+                <input type="text" id="email" name="email"
+                       ng-model="$parent.email" class="form-control"
+                       ng-click="isEmailValid()"
+                       required>
+
+                <label for="email">Comment: </label>
+                <textarea id="comment" name="comment"
+                          ng-model="$parent.comment"
+                          class="form-control" rows="3"></textarea>
+            </div>
+        </fieldset>
+        <h2> {{title}} </h2>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" id="subscribe" name="subscribe" class="btn btn-success"
+                ng-click="send()" ng-disabled="!validate()">
+            Send
+        </button>
+        <div class="row" ng-show="subscribed">
+            <div class="col-md-8"><h2>Thank you! You are now signed up to our newsletter!</h2></div>
+            <div class="col-md-1 col-md-offset-3 text-center"><img src="/images/icons/icon-mail-ok.png" alt="OK"></div>
+        </div>
+
+    </div>
+</form>

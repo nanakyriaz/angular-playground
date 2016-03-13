@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en" id="ng-app" ng-app="planz">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <style>
+        [ng-cloak] {
+            display: none;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name=”fragment” content=”!” />
+
+    <meta property="og:title" content="Plan Zheroes"/>
+    <meta property="og:image" content="./images/brand/logo.png"/>
+    <meta property="og:site_name" content="Plan Zheroes"/>
+    <meta property="og:description" content="In the UK, 13 million people are living in poverty, while 650,000 tonnes of perfectly good food is thrown away by food businesses. This is a crazy situation — but it doesn’t have to be this way. We seek to inspire food businesses to give their surplus food to those who need it, so it will never ever go to waste."/>
+    <meta property="description" content="In the UK, 13 million people are living in poverty, while 650,000 tonnes of perfectly good food is thrown away by food businesses. This is a crazy situation — but it doesn’t have to be this way. We seek to inspire food businesses to give their surplus food to those who need it, so it will never ever go to waste."/>
+    <meta name="google-site-verification" content="BtZk2Gt-nBWxyI-hDD15POH5hyA0Ndlx0dnrfF2ioeE" />
+
+    <title ng-bind="'Plan Zheroes' + title">Plan Zheroes</title>
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon" />
+    <link rel="icon" href="images/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/planz-bootstrap.css"/>
+    <link rel="stylesheet" href="css/redactor/redactor.css"/>
+    <link rel="stylesheet" href="css/select2.css" />
+    <!-- build:css css/main.css -->
+    <link rel="stylesheet" href="css/main.css"/>
+    <!-- endbuild -->
+
+    <!-- build:css css/ie8.css -->
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="css/ie8.css"/>
+    <![endif]-->
+    <!-- endbuild -->
+
+    <script>
+        FileAPI = {
+            //only one of jsPath or jsUrl.
+            jsUrl: '/js/FileAPI.min.js',
+
+            //only one of staticPath or flashUrl.
+            flashUrl: '/js/FileAPI.flash.swf',
+
+            forceLoad: true,
+            html5: false //to debug flash in HTML5 browsers
+        }
+    </script>
+
+    <script>
+        // Fallback for existing bookmarks which are missing #!/!
+        var loc = window.location.href;
+        if (loc.indexOf("#") != -1 &&  loc.indexOf("#!") == -1 ){
+            window.location.href = loc.replace("#", "#!");
+        }
+
+        // Load the Google Analytics code
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-55668966-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <!--[if lte IE 8]>
+        <!-- build:js ie_shims.js -->
+        <script src="ie_shims.js"></script>
+        <!-- endbuild -->
+    <![endif]-->
+    <!-- build:js vendor.js -->
+    <script src="vendor.js"></script>
+    <!-- endbuild -->
+    <!--js-->
+    <!-- build:js app.js -->
+    <script src="app.js"></script>
+    <!-- endbuild -->
+</head>
+
+<!--[if IE 8]><body class="no-js ie8 ie"><![endif]-->
+<!--[if gt IE 8]><body class="no-js ie8 ie" ng-cloak><![endif]-->
+<!--[if !IE]><!--> <body class="no-js" ng-cloak><!--<![endif]-->
+
+<div id="container" data-ng-controller="MainController" ng-class="{operator: isLoggedIn }" ng-click="hideLoginOverlay()">
+    <!-- Loading indicator -->
+    <div class="loading" ng-show="loading">
+        <div class="inner">
+            <img src="/images/brand/logo.png" alt="Plan Zheroes">
+            <h1>Loading...</h1>
+            <h4>Achieving zero waste and hunger in many ways</h4>
+        </div>
+    </div>
+
+    <h1 class="sr-only">Plan Zheroes</h1>
+
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <header role="navigation">
+                <div class="notifications"  ng-show="$root.isLoggedIn">
+                    <div role-granted="PROFILE_UNAPPROVED" class="alert alert-info">
+                        This profile has not been approved yet. You won't be able to experience the site in full glory.
+                    </div>
+                </div>
+
+                <nav class="navbar navbar-default" role="navigation" ng-controller="MenuController as vm">
+
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" ng-click="$root.navigateToHome()">Plan Zheroes</a>
+                        </div>
+                        <div class="navbar-collapse collapse" id="navbar-main-menu" collapse="!isCollapsed">
+                            <ul class="nav navbar-nav registered" ng-show="$root.isLoggedIn">
+                                <li class="map" active-nav-item="map">
+                                    <a ui-sref="map" title="Map">
+                                        <i></i>
+                                        <span>Map</span>
+                                    </a>
+                                </li>
+                                <li class="my_community" active-nav-item="my_community">
+                                  <a ui-sref="my_community" title="My community">
+                                    <i></i>
+                                    <span>My community</span>
+                                  </a>
+                                </li>
+                                <li active-nav-item="howwework">
+                                    <a ui-sref="howwework" title="How we work">
+                                        <span>How we work</span>
+                                    </a>
+                                </li>
+                                <li class="my_messages" active-nav-item="my_messages" role-granted="PROFILE_APPROVED">
+                                    <a ui-sref="my_messages" title="Message centre" ng-click="vm.clearMessages()">
+                                        <i></i>
+                                        <span>Message centre</span>
+                                        <span class="badge" ng-class="{unread:vm.notifications.messages > 0}">{{ vm.notifications.messages || '' }}</span>
+                                    </a>
+                                </li>
+                                <li class="my_deliveries" active-nav-item="my_deliveries" role-granted="PROFILE_APPROVED">
+                                    <a ui-sref="my_donations" title="My food donations" ng-click="vm.clearDonations()">
+                                        <i></i>
+                                        <span>My food donations</span>
+                                        <span class="badge" ng-class="{unread:vm.notifications.donations > 0}">{{ vm.notifications.donations || '' }}</span>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <ul class="nav navbar-nav anonymus" ng-show="!$root.isLoggedIn">
+                                <li active-nav-item="howwework">
+                                    <a ui-sref="howwework" title="How we work">
+                                        <span>How we work</span>
+                                    </a>
+                                </li>
+                                <li class="" active-nav-item="howyoucanhelp">
+                                    <a ui-sref="howyoucanhelp" title="How you can help">
+                                        <span>How you can help</span>
+                                    </a>
+                                </li>
+                                <li class="" active-nav-item="faqs">
+                                    <a ui-sref="faqs" title="FAQs">
+                                        <span>FAQs</span>
+                                    </a>
+                                </li>
+                                <li class="" active-nav-item="donate">
+                                    <a ui-sref="donate" title="Donate">
+                                        <span>Donate</span>
+                                    </a>
+                                </li>
+                                <li class="" active-nav-item="news">
+                                    <a ui-sref="news" title="News">
+                                        <span>News</span>
+                                    </a>
+                                </li>
+                                <li class="" active-nav-item="sponsors">
+                                    <a ui-sref="sponsors" title="Sponsors & friends">
+                                        <span>Sponsors & friends</span>
+                                    </a>
+                                </li>
+                                <li class="" active-nav-item="ourstory">
+                                  <a ui-sref="ourstory" title="Our story">
+                                    <span>Our story</span>
+                                  </a>
+                                </li>
+                                <li class="" active-nav-item="ourteam">
+                                  <a ui-sref="ourteam" title="Our team">
+                                    <span>Our team</span>
+                                  </a>
+                                </li>
+                                <li class="contact" active-nav-item="contact">
+                                    <a ui-sref="contact" title="Contact us">
+                                        <span>Contact us</span>
+                                    </a>
+                                </li>
+                                <li class="signin">
+                                    <button ng-click="goLogin()" class="btn btn-callout" title="Sign in">
+                                      <span>Sign in</span>
+                                    </button>
+                                </li>
+                                <li class="joinus">
+                                    <button class="btn btn-callout" ng-click="goSignUp()" title="Join us">
+                                        <span>Join us</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div ng-controller="UserController as vm">
+                        <div class="navbar-account" ng-show="vm.isLoggedIn" ng-click="vm.toggleUserButton($event)">
+                            <button class="navbar-login my-account"><span>My Profile</span></button>
+                        </div>
+                        <div class="navbar-user-menu" id="user-menu" ng-show="vm.userMenuDisplaying" ng-class="{loggedIn: vm.isLoggedIn}" stop-propagation>
+                            <div class="authenticated_user-menu" id="my-account-menu">
+                                <p class="user-name">
+                                    <span ng-if="vm.user.profileType=='business' || vm.user.profileType =='charity'">{{ vm.user.contactName }}</span>
+                                    <span ng-if="vm.user.profileType=='volunteer' || vm.user.profileType =='transporter'">{{ vm.user.fullName }}</span>
+                                </p>
+                                <p class="business-name"><i class="profile-type ng-class:vm.user.profileType;"></i>
+                                    <span ng-if="vm.user.profileType=='business' || vm.user.profileType =='charity'">{{ vm.user.fullName }}</span>
+                                    <span ng-if="vm.user.profileType=='volunteer' || vm.user.profileType =='transporter'">{{ vm.user.profileType | capitalizeFirstLetter }}</span>
+                                </p>
+                                <hr>
+                                <ul>
+                                    <li><a ui-sref="my_profile" active-nav-item="my_profile">My Profile</a></li>
+                                    <li><a ui-sref="my_settings" active-nav-item="my_settings">Settings</a></li>
+                                    <li ng-show="vm.isAdministrator"><a ui-sref="admin" active-nav-item="admin">Admin area</a></li>
+                                    <hr>
+                                    <li><a ng-click="vm.logout()">Sign out</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+
+            <div id="body-container" role="main">
+                <div ui-view class="contentView"></div>
+            </div>
+
+            <div class="feedback" ng-controller="FeedbackController">
+                <h3 ng-click="content = !content">Feedback</h3>
+                <div ng-show="content" class="feedbackContent">
+                    <form name="feedbackForm" role="form" novalidate>
+                        <fieldset>
+                            <p><label for="name">Name</label><br />
+                                <input id="name" type="text" ng-model="feedback.name" required/></p>
+
+                            <p><label for="email">Email address</label><br />
+                                <input id="email" type="email" name="email" ng-model="feedback.email" required>
+                                <div role="alert">
+                                  <span class="error" ng-show="feedbackForm.email.$error.email">
+                                    Not valid email!</span>
+                                </div>
+                            </p>
+
+                            <p><label for="subject">Subject</label><br />
+                                <input id="subject" type="text" ng-model="feedback.subject" required/></p>
+
+                            <p><label for="message">Message</label><br />
+                                <textarea id="message" ng-model="feedback.body" required></textarea></p>
+                        </fieldset>
+
+                        <p class="text-right">
+                            <button ng-click="submitFeedback(feedback)" class="btn btn-success" name="submitFeedback" id="submitFeedback" type="submit" ng-disabled="!validate()">Submit</button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Cookies warning message -->
+            <div class="cookies" ng-if="!ckns_policy">
+                <h1>This website uses cookies.</h1>
+                <p>We use cookies to make our website work better and improve your online experience. <br/>
+                    By continuing to browse this website you accept the use of cookies.
+                    <a ui-sref="cookie_policy"><b>Learn more about cookies.</b></a>
+                </p>
+                <button class="btn btn-success" ng-click="cookiePolicy()">Continue</button>
+            </div>
+
+            <footer id="site-footer-wrapper">
+                <div id="site-footer">
+                    <ul class="social">
+                        <li><a class="facebook" href="http://www.facebook.com/planzheroes/" target="_social">Facebook</a></li>
+                        <li><a class="twitter" href="https://twitter.com/planzheroes" target="_social">Twitter</a></li>
+                        <li><a class="youtube" href="http://www.youtube.com/user/planzheroes" target="_social">YouTube</a></li>
+                    </ul>
+
+                    <div class="nav-inner">
+                        <ul class="nav">
+                            <li active-nav-item="howwework"><a ui-sref="howwework">How we work</a></li>
+                            <li active-nav-item="howyoucanhelp"><a ui-sref="howyoucanhelp">How you can help</a></li>
+                            <li active-nav-item="faqs"><a ui-sref="faqs">FAQs</a></li>
+                            <li active-nav-item="donate"><a ui-sref="donate" target="_blank">Donate</a></li>
+                            <li active-nav-item="sponsors"><a ui-sref="sponsors">Sponsors & friends</a></li>
+                            <li active-nav-item="success_stories"><a ui-sref="success_stories">Zheroes Stories</a></li>
+                            <li active-nav-item="news"><a ui-sref="news/">News</a></li>
+                            <li active-nav-item="cookie_policy"><a ui-sref="cookie_policy/">Cookie policy</a></li>
+                            <li active-nav-item="terms_and_conditions"><a ui-sref="terms_and_conditions">Terms and conditions</a></li>
+                            <li active-nav-item="ourstory"><a ui-sref="ourstory">Our story</a></li>
+                            <li active-nav-item="our team"><a ui-sref="ourteam">Our team</a></li>
+                            <li active-nav-item="contact"><a ui-sref="contact">Contact us</a></li>
+                        </ul>
+
+                        <div class="colophon">
+                            <span>Plan Zheroes — The Zero Food Waste Heroes is a C.I.O — Registered Charity Number 1154291 (21 October 2013)</span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyBjZCp3PQzUk-m9_XBut0ZBMxHpHE0k7_Q&amp;sensor=false&libraries=places"></script>
+</div>
+</body>
+</body>

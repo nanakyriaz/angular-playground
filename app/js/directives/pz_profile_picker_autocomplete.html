@@ -1,0 +1,16 @@
+<div class="autocomplete" ng-show="suggestionList.visible">
+  <ul class="suggestion-list">
+    <li class="suggestion-item"
+        ng-repeat="item in suggestionList.items"
+        ng-class="{selected: item == suggestionList.selected, 'favourites--item':$index <= (suggestionList.getTotalFavourites() - 1), 'favourites--item-ended':$index == (suggestionList.getTotalFavourites() - 1)}"
+        ng-click="addSuggestionByIndex($index)"
+        ng-mouseenter="selectItemByIndex($index)"
+        ng-mousemove="resetState()"
+        >
+      <div>
+        <img ng-src="{{ getItemImage(item) }}">
+        <span ng-bind-html="highlight(item)"></span><span></span>
+      </div>
+    </li>
+  </ul>
+</div>

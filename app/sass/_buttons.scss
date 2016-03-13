@@ -1,0 +1,42 @@
+// Define generic UI button elements here
+@import "bootstrap-variables";
+
+button:focus {
+  outline:0 !important;
+}
+
+.btn-reset {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.btn-medium {
+  min-width: 115px;
+}
+
+
+.btn {
+  font-family: $font-family-serif;
+  outline:0 !important;
+}
+button.btn input[type=file]{
+  opacity:0 !important;
+  width:0px !important;
+  height:0px !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+// ensure that all clickable elements have a pointer cursor
+a,
+.button {
+  cursor: pointer;
+}
+
+
+// improve the positioning of buttons in the navigation bars
+.navbar-nav .btn {
+  position: relative;
+  left: 10px;
+  top: -10px;
+}

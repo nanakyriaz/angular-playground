@@ -1,0 +1,128 @@
+<section id="reviewDelivery" class="review-delivery clearfix">
+    <div class="row">
+        <h2>Food Donation</h2>
+
+        <div class="alert alert-danger" role="alert" ng-show="delivery.deliveryAccepted">
+          <p><strong>Sorry, you've missed this one.</strong> The donation has been given already. Don't worry there will be more... keep an eye on your emails!</p>
+        </div>
+
+        <div class="alert alert-danger" role="alert" ng-show="">
+          <p><strong>Sorry, you've missed this one.</strong> Don't worry there will be more... keep an eye on your emails!</p>
+        </div>
+
+        <div class="alert alert-success" role="alert" ng-show="processCompleted">
+          <p ng-show="recipientCanCollect"><strong>Well done Zhero Food Waste Hero, your food donation is now confirmed! Please make sure you are there in time.</strong> Any questions? Please contact the business through the <a ui-sref="my_messages">Message Centre</a> or find the contact details in <a ui-sref="profile_detail({id:delivery.creator.id})">{{ delivery.creator.fullName }}</a>. Don't forget to validate the donation once its collected - Bon app&eacute;tit!</p>
+          <p ng-show="!recipientCanCollect && donorCanDeliver">Thank you! The donor will be in contact when they can deliver the donation.</p>
+          <p ng-show="!recipientCanCollect && !donorCanDeliver">Thank you! A volunteer or transporter will contact you if they can help with transportation.</p>
+        </div>
+
+        <div class="delivery-header">
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <h3>Donor</h3>
+                    <p><a ui-sref="profile_detail({id:delivery.creator.id})">{{ delivery.creator.fullName }}</a></p>
+
+                    <h3>Transportation</h3>
+                    <p ng-show="delivery.collectionOnly">The food needs to be collected.</p>
+                    <p ng-hide="delivery.collectionOnly">The donor can deliver</p>
+                </div>
+                <div class="col-xs-12 col-md-6" ng-class="{'delivery--accepted':delivery.recipient}">
+                    <div ng-if="delivery.recipient">
+                      <h3>Receiver</h3>
+                      <p><a ui-sref="profile_detail({id:delivery.recipient.id})">{{ delivery.recipient.fullName }}</a></p>
+                    </div>
+
+                    <h3>Date & Time</h3>
+                    <p>
+                      {{ delivery.deliveryDate | date:shortDate }} 
+                      <span ng-if="delivery.startTime && !delivery.endTime">after {{ delivery.startTime | time }}</span>
+                      <span ng-if="!delivery.startTime && delivery.endTime">before {{ delivery.endTime | time }}</span>
+                      <span ng-if="delivery.startTime && delivery.endTime">{{ delivery.startTime | time }} - {{ delivery.endTime | time }}</span>
+                      <span ng-if="!delivery.startTime && !delivery.endTime">(time not specified)</span>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="delivery-items-list deliveries-list">
+                  <h3>Food</h3>
+                  <table cellspacing="0" ng-show="deliveryItems">
+                    <colgroup>
+                      <col class="col-1">
+                    </colgroup>
+                    <tbody>
+                    <tr ng-repeat="listItem in deliveryItems">
+                      <td>
+                        <div>
+                          {{ listItem.quantity }} {{ listItem.unitOfMeasure.uomDescription || '' }} {{ listItem.productName }}
+                        </div>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                  <div class="empty" ng-hide="deliveryItems">
+                    <h2>No delivery items for this delivery.</h2>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="user-response" ng-if="!deliveryAccepted" ng-show="delivery.todaysDate > delivery.deliveryDate">
+          <h3>Ready to receive this donation?</h3>
+          <fieldset ng-show="!processDeliveryAccepted && !processCompleted">
+            <button class="btn btn-success btn-medium" ng-click="checkDonation()">Yes</button>
+            <div class="step-window" ng-show="transportationWindowIsVisible">
+              <div class="step-window-container pull-arrow-left">
+                <a ng-click="cancelRequest()" class="remove">Remove</a>
+                <div class="step-window-content">
+                  <p>Thank you very much for your interest – you are one step closer to receiving this donation! :)</p>
+                  <p><strong>Are you able to collect?</strong></p>
+                  <div class="step-window-toolbar">
+                    <button class="btn btn-success btn-medium" ng-click="canCollectDonation()">Yes</button>
+                    <button class="btn btn-danger btn-medium" ng-click="requestTransportation()">No, I need help!</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="step-window request-window" ng-if="requestWindowIsVisible">
+                <div class="step-window-container pull-arrow-request">
+                    <a ng-click="cancelTransportation()" class="remove">Remove</a>
+                    <div class="step-window-content">
+                      <p>You’re nearly there! Since neither you nor the business can transport the food, let’s contact a volunteer or transporter to do that for you.</p>
+
+                      <form id="collectionRequestForm" name="collectionRequestForm">
+                        <div class="form-group">
+                          <h3>Message</h3>
+                          <p class="help-block">A personal message from you to the transporter/volunteer to ask if they can help delivering the food donation to you.</p>
+                          <textarea class="form-control" id="message" name="message" rows="3"
+                                    placeholder="Write a message to ask for help with the transportation"
+                                    ng-model="transport.message"
+                                    ng-minlength="1"
+                                    ng-maxlength="400"></textarea>
+                          <div class="formError" ng-show="collectionRequestForm.message.$error.minlength">Sorry, you can have an empty message. Please amend.</div>
+                          <div class="formError" ng-show="collectionRequestForm.message.$error.maxlength">Sorry, you can only use maximum 400 characters. Please amend.</div>
+                        </div>
+
+                          <h3>Transporter/volunteers</h3>
+                          <p class="help-block">Select one or more transporters/volunteers you would like to send your request for delivery of this food donation.</p>
+                          <div pz-profile-picker name="participants" ng-model="transport.participants" class="pz-profile-picker">
+                          <div pz-profile-pickers source="loadProfiles($query)" favourites="favourites" class="pz-profile-pickers"></div>
+                        </div>
+                        <div class="formError" ng-show="noParticipants">Sorry, there are no transporters or volunteers in your My Community. Try adding them through the Map or select specific ones from the picker.</span></span></div>
+
+                        <div class="step-window-toolbar">
+                          <button class="btn btn-primary" ng-click="requestDelivery(transport)">Send</button>
+                          <button class="btn btn-secondary" ng-click="cancelTransportation()">Cancel</button>
+                        </div>
+                      </form>
+
+                      <div class="alert alert-note" role="alert">
+                        <p>NOTE: This donation will remain open to others until you have secured transportation.</p>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+    </div>
+</section>

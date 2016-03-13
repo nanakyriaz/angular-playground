@@ -1,0 +1,228 @@
+.contact-us {
+  position: relative;
+  color: white;
+  padding-top: 10px;
+  margin-bottom: 14px;
+
+  a ,a:visited , h2{
+    text-decoration: none;
+    color: white;
+
+  }
+
+}
+
+.contact-us {
+
+  .map {
+
+
+    .contact-location{
+      background: url("/images/icons/icon-contact-location.png") 0 0 no-repeat;
+      width: 59px;
+      height: 88px;
+      position: absolute;
+
+
+    }
+
+    .background{
+      background: url("/images/placeholder-contact-us.png") 0 0 no-repeat;
+      width: 100%;
+      height: 100%;
+
+    }
+  }
+
+
+  .contact-content {
+    position: absolute;
+    top: 40px;
+    left: 0px;
+    width: 570px;
+    height: 428px;
+    border: 1px solid black;
+    background-color: $secondary-darker;
+    padding:20px;
+    font-size: 12px;
+
+
+    h1 {
+      display: inline;
+      padding: 10px;
+      white-space: nowrap;
+    }
+
+    h2{
+      margin: 20px 0;
+    }
+
+    .padder{
+      position: relative;
+    }
+
+    section{
+      font-weight: 14px;
+    }
+
+  }
+
+
+  .direct-contact {
+    padding: 15px 0px;
+    display: table-cell;
+
+    li {
+      display: block;
+      height: 50px;
+      width: 230px;
+      float: left;
+      padding: 15px 0 0 60px;
+      list-style-type: none;
+
+
+    }
+
+    .net-info{
+      background: url("/images/icons/icon-contact-mail.png") 0 0 no-repeat; ;
+    }
+    .phone-info{
+      background: url("/images/icons/icon-contact-phone.png") 0 0 no-repeat; ;
+    }
+  }
+
+  //== Social Buttons
+  //
+  .contact-content {
+    .social {
+      width: 100%;
+      text-align: left;
+      margin: 0 0 $container-padding 0;
+      padding: 0;
+    }
+
+    .social > li {
+      display: inline-block;
+      padding-right: $container-padding;
+      margin: 10px;
+
+    }
+
+    .social > li > a {
+      width: 200px;
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      height: 40px;
+      padding-left: 50px;
+      text-align: left;
+
+
+      line-height: 40px;
+      &.twitter {
+        background: transparent url('../images/social/twitter.png') no-repeat ;
+      }
+      
+      &.instagram {
+        background: transparent url('../images/social/insta.png') no-repeat ;
+      }
+
+      &.linkedin {
+        background: transparent url('../images/social/linkedin.png') no-repeat ;
+      }
+
+      &.facebook {
+        background: transparent url('../images/social/facebook.png') no-repeat ;
+      }
+
+      &.youtube {
+        background: transparent url('../images/social/youtube.png') no-repeat ;
+      }
+    }
+  }
+  @media (max-width: $screen-xs-max) {
+
+    .map .background{
+      background-size: cover;
+      height: 255px;
+    }
+    .contact-content {
+      width: 100%;
+      height: auto;
+      top: 275px;
+    }
+    h1 {
+      font-size: 18px;
+    }
+
+    .contact-content .social li, .direct-contact li{
+        width: 100%;
+
+    }
+
+
+  }
+
+  @media (min-width: $screen-xs-min) {
+
+    .map{
+      height: 900px;
+    }
+
+    h1 {
+      font-size: 18px;
+    }
+
+  }
+
+  @media (min-width: $screen-sm-min) {
+
+    h1 {
+      font-size: 28px;
+    }
+    .map{
+      height: 485px;
+    }
+
+    .map .background {
+      background-size: auto;
+      background-position: right -260px top -100px;
+    }
+
+  }
+  @media (min-width: $screen-md-min) {
+
+    .map{
+      height: 680px;
+    }
+    .map .background {
+      background-size: auto 100%;
+      background-position: left;
+    }
+    .contact-location{
+      top: 290px;
+      left: 665px;
+    }
+
+  }
+
+  @media (min-width: $screen-lg-min) {
+
+
+  }
+
+
+  @media (min-width: $body-breakpoint-max-width) {
+
+    .map .background {
+      background-size: cover;
+    }
+
+    .contact-location{
+      top: 325px;
+      left: 725px;
+    }
+
+  }
+
+}

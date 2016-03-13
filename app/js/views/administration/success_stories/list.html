@@ -1,0 +1,72 @@
+<article>
+    <h1>Manage Zheroes stories <small>(<a ui-sref="admin">Back to Administration dashboard</a>)</small></h1>
+
+    <div class="toolbar clearfix">
+        <a ui-sref="admin_success_story_create" class="btn btn-primary">Create Zheroes story</a>
+    </div>
+
+
+    <section class="clearfix profiles-list">
+        <table cellspacing="0" ng-hide="!recordItems.length">
+            <colgroup>
+                <col class="col-1">
+                <col class="col-2">
+                <col class="col-3">
+                <col class="col-4">
+            </colgroup>
+            <thead>
+            <tr>
+                <th class="col-title">
+                    <div>Title</div>
+                </th>
+                <th class="col-creator">
+                    <div>Creator</div>
+                </th>
+                <th class="col-createdAt">
+                    <div>Created At</div>
+                </th>
+                <th class="col-actions">
+                    <div>Actions</div>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in recordItems">
+                <td class="col-title">
+                    <div>{{item.title}}</div>
+                </td>
+                <td class="col-creator">
+                    <div>
+                        {{ item.creator.fullName || 'Unavailable' }}
+                    </div>
+                </td>
+                <td class="col-createdAt">
+                    <div>{{item.createdAt | date:short }}</div>
+                </td>
+                <td class="col-actions">
+                    <div>
+                        <a ng-click="viewItem(item)">
+                            <span>View</span>
+                        </a>
+                        <a ng-click="updateItem(item)">
+                            <span>Edit</span>
+                        </a>
+                        <a ng-click="deleteItem(item)">
+                            <span>Delete</span>
+                        </a>
+
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+
+        <!-- if no profiles -->
+        <div class="empty" ng-hide="recordItems">
+            <h2>No Zheroes stories available.</h2>
+            <p>Why not create a Zheroes story?</p>
+        </div>
+        <!-- end if -->
+    </section>
+</article>

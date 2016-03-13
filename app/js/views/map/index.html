@@ -1,0 +1,20 @@
+<section>
+    <div class="row">
+        <h1 class="col-xs-12 col-sm-6">Map</h1>
+        <form class="col-xs-12 col-sm-6 form-inline community-search" name="mapSearchForm">
+            <div class="searchGroup">
+                <div class="form-group">
+                    <label class="sr-only" for="places_search">Search by place, city or postcode</label>
+                    <input class="form-control input-sm places-searchbox" placeholder="Place, city or postcode..." id="places_search" name="search" pz-places-autocomplete place="selectedPlace" ng-model="searchTerm" on-enter="processSelection()">
+                </div>
+                <button type="submit" class="btn btn-sm btn-success" ng-click="processSelection()">Search</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="container">
+        <div pz-map latitude="userLatitude" longitude="userLongitude" initial-zoom="14" min-zoom="10" max-zoom="20" navigation-bar="true" updated-search-term="updatedSearchTerm">
+
+        </div>
+    </div>
+</section>

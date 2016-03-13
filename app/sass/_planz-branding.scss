@@ -1,0 +1,53 @@
+//
+// Variables
+// --------------------------------------------------
+
+//== Greyscale Colors
+//
+$brand-black:            #000000;
+$brand-gray-darker:      #424242;
+$brand-gray-dark:        #707070;
+$brand-gray:             #CCCCCC;
+$brand-gray-light:       #E5E5E5;
+$brand-gray-lighter:     #F2F2F2;
+
+//== Branding Colors
+//
+$brand-primary:          #98CA3D !default;
+$brand-success:          #98CA3D !default;
+$brand-info:             #FF8B7B !default;
+$brand-warning:          #ffb643 !default;
+$brand-danger:           #d9534f !default;
+$brand-inverse:          #424242 !default;
+
+// primary brand colours
+$primary-green:          #98CA3D !default;
+$primary-red:            #FF8B7B !default;
+$primary-orange:         #FFB743 !default;
+$primary-purple:         #5A2E75 !default;
+
+// secondary brand colours
+$secondary-darker:        transparentize($brand-gray-darker, 0.1);
+$secondary-dark:          transparentize($brand-gray-dark, 0.7);
+$secondary-gray:          $brand-gray;
+$secondary-gray-light:    transparentize($brand-gray-dark, 0.9);
+$secondary-gray-lighter:  $brand-gray-lighter;
+$secondary-purple-light:        transparentize($primary-purple, 0.7);
+$secondary-purple-lighter: transparentize($primary-purple, 0.9);
+
+$secondary-orange:       #FBA102 !default;
+$secondary-light-red:    #FF6955 !default;
+$secondary-red:          #E14840 !default;
+$secondary-pink:         #E25AA5 !default;
+$secondary-wine-red:     #D12060 !default;
+$secondary-purple:       #9F5DAF !default;
+$secondary-light-green:  #92CB74 !default;
+$secondary-green:        #489B3A !default;
+$secondary-blue:         #4C9FC7 !default;
+$secondary-turquoise:    #4F738C !default;
+
+//== Interface colours
+//
+$navigation-color:       #F1F1F1 !default;
+$navigator-stroke-color: $secondary-gray;
+$navigation-padding:     15px !default;

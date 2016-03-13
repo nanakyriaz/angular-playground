@@ -1,0 +1,12 @@
+<article>
+    <h1>News</h1>
+    <pz-share></pz-share>
+
+    <section>
+        <h1>{{ selectedItem.title }}</h1>
+        <div ng-bind-html="explicitlyTrustedHtml"></div>
+        <div class="metadata">
+            <date>Last updated at: {{ selectedItem.updatedAt | date:shortdate }}</date>
+        </div>
+    </section>
+</article>

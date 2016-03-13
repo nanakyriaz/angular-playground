@@ -1,0 +1,23 @@
+.recommended-matches {
+
+  h2 {
+    background: #717271;
+    color: #fff;
+    margin: 0 0 16px;
+    padding: 16px;
+  }
+
+  .match {
+    background: $gray-lighter;
+    margin-bottom: 16px;
+    padding: 16px;
+
+    p {
+      color: $primary-purple;
+    }
+
+    .btn {
+      margin-right: 12px;
+    }
+  }
+}

@@ -1,0 +1,37 @@
+<div class="step-title" ng-class="{business: registration.type==='business', charity: registration.type==='charity', transporter: registration.type==='transporter', volunteer: registration.type==='volunteer'}">
+  <div class="desktop">
+    <span>Step {{step}} - Nearly finished your registration :)</span>
+  </div>
+  <div class="mobile">
+    <div class="step-title-mobile">4. Finish</div>
+    <div class="step-subtitle-mobile">
+      <span>Step {{step}} - Nearly finished :)</span>
+    </div>
+  </div> 
+</div>
+<div class="steps-header-mobile row mobile">
+  <div class="col-xs-3 step-container">
+      <div class="step-box" ng-class="{done: step>1, current: step===1}"> 
+        <div class="step-number first" ng-click="go('newregistration.newaccount')">1</div>
+      </div>
+  </div>
+  <div class="col-xs-3 step-container">
+      <div class="step-box" ng-class="{done: step>2, current: step===2, ahead: step<2}"> 
+        <div class="step-number" ng-click="go('newregistration.address')">2</div>
+      </div>
+  </div>
+  <div class="col-xs-3 step-container">
+      <div class="step-box" ng-class="{done: step>3, current: step===3, ahead: step<3}"> 
+        <div class="step-number" ng-click="go('newregistration.donation')">3</div>
+      </div>
+  </div>
+  <div class="col-xs-3 step-container">
+      <div class="step-box" ng-class="{current: step===4, ahead: step<4}"> 
+        <div class="step-number" ng-click="go('newregistration.finish')">4</div>
+      </div>
+  </div>
+</div> 
+
+<div class="row inner-container">
+  <div pz-agreement type="registration.type" accepted-terms="registration.acceptedTerms" accepted-agreement="registration.acceptedAgreement" registration="registration"></div>
+</div>

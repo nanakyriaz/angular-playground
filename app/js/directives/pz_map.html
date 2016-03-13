@@ -1,0 +1,304 @@
+<div class="map-widget-container">
+<div class="map-container">
+    <div class="map map-element" id="google-maps-map-element"></div>
+</div>
+
+<div class="map-menu" ng-show="navigationBar" ng-class="{'open':filterBarExpanded}">
+
+    <div class="map-toggle" ng-click="toggleFilterBar()">
+        <span class="toggle-state"></span>
+        <span class="dots"></span>
+        <span class="filter-state" ng-show="isFiltered">*</span>
+    </div>
+
+    <!-- Nav tabs -->
+    <ul class="map-tabs">
+        <li class="businesses" ng-class="activeSection =='businesses' ? 'active' :''">
+            <a href data-toggle="tab" class="icon-business-tab" ng-click="activeSection = 'businesses'">Businesses</a>
+        </li>
+        <li class="charities" ng-class="activeSection =='charities' ? 'active' :''">
+            <a href data-toggle="tab" class="icon-charity-tab" ng-click="activeSection = 'charities'">Charities</a>
+        </li>
+        <li class="volunteers" ng-class="activeSection =='volunteers' ? 'active' :''">
+            <a href data-toggle="tab" class="icon-volunteer-tab" ng-click="activeSection = 'volunteers'">Volunteers</a>
+        </li>
+        <li class="transporters" ng-class="activeSection =='transporters' ? 'active' :''">
+            <a href data-toggle="tab" class="icon-transporter-tab" ng-click="activeSection = 'transporters'">Transporters</a>
+        </li>
+        <li class="filter" ng-class="activeSection =='filter' ? 'active' :''">
+            <a href data-toggle="tab" class="icon-filter" ng-click="activeSection = 'filter'">Filter</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane fade in businesses" ng-class="activeSection == 'businesses' ? 'active' :''">
+            <h4>Businesses nearby</h4>
+
+            <div class="empty-list" ng-hide="(profileItems| filter: {profileType:'business'}).length">No items found
+            </div>
+            <ul>
+                <li ng-repeat="item in profileItems | filter: {profileType:'business'} | orderBy: 'fullName'">
+                    <img ng-show="item.avatar" ng-src="{{ item.avatarImages.thumb }}" class="map-profile-picture" alt="{{ item.fullName }}">
+                    <img ng-show="!item.avatar" src="images/my_profile_placeholder_thumb.png" class="map-profile-picture" alt="{{ item.fullName }}">
+
+                    <p class="profile-name">{{ item.fullName }}</p>
+
+                    <p class="profile-address">{{ item.address.postcode }}</p>
+                    <p class="profile-friends">{{ item.friends.length || '0' }} Zheroes connections</p>
+
+                    <div class="profile-links">
+                        <span ng-if="approvedUser && !item.isCurrentUser">
+                            <a ng-click="addProfileAsFriend(item)" ng-if="!item.isCurrentUser && !item.isFriend">Add</a>
+                            <a ng-click="removeProfileAsFriend(item)" class="remove" ng-if="!item.isCurrentUser && item.isFriend">Remove</a>
+                        </span>
+                        <span>
+                            <a ng-click="displayProfile(item.id)" ng-if="!item.isCurrentUser" stop-propagation>Profile</a>
+                            <a ng-click="displayMyProfile()" ng-if="item.isCurrentUser" stop-propagation>Me</a>
+                            <a ng-click="locateProfileOnMap(item)">View on map</a>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-pane fade in charities" ng-class="activeSection == 'charities' ? 'active' :''">
+            <h4>Charities nearby</h4>
+
+            <div class="empty-list" ng-hide="(profileItems| filter: {profileType:'charity'}).length">No items found
+            </div>
+            <ul>
+                <li ng-repeat="item in profileItems | filter: {profileType:'charity'} | orderBy: 'fullName'">
+                    <img ng-show="item.avatar" ng-src="{{ item.avatarImages.thumb }}" class="map-profile-picture" alt="{{ item.fullName }}">
+                    <img ng-show="!item.avatar" src="images/my_profile_placeholder_thumb.png" class="map-profile-picture" alt="{{ item.fullName }}">
+                    <p class="profile-name">{{ item.fullName }}</p>
+
+                    <p class="profile-address">{{ item.address.postcode }}</p>
+                    <p class="profile-friends">{{ item.friends.length || '0' }} Zheroes connections</p>
+
+                    <div class="profile-links">
+                        <span ng-if="approvedUser && !item.isCurrentUser">
+                            <a ng-click="addProfileAsFriend(item)" ng-if="!item.isCurrentUser && !item.isFriend">Add</a>
+                            <a ng-click="removeProfileAsFriend(item)" class="remove" ng-if="!item.isCurrentUser && item.isFriend">Remove</a>
+                        </span>
+                        <span>
+                            <a ng-click="displayProfile(item.id)" ng-if="!item.isCurrentUser" stop-propagation>Profile</a>
+                            <a ng-click="displayMyProfile()" ng-if="item.isCurrentUser" stop-propagation>Me</a>
+                            <a ng-click="locateProfileOnMap(item)">View on map</a>
+                        </span>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-pane fade in volunteers" ng-class="activeSection == 'volunteers' ? 'active' :''">
+            <h4>Volunteers nearby</h4>
+
+            <div class="empty-list" ng-hide="(profileItems| filter: {profileType:'volunteer'}).length">No items found
+            </div>
+            <ul>
+                <li ng-repeat="item in profileItems | filter: {profileType:'volunteer'} | orderBy: 'fullName'">
+                    <img ng-show="item.avatar" ng-src="{{ item.avatarImages.thumb }}" class="map-profile-picture" alt="{{ item.fullName }}">
+                    <img ng-show="!item.avatar" src="images/my_profile_placeholder_thumb.png" class="map-profile-picture" alt="{{ item.fullName }}">
+                    <p class="profile-name">{{ item.fullName }}</p>
+
+                    <p class="profile-address">{{ item.address.postcode }}</p>
+                    <p class="profile-friends">{{ item.friends.length || '0' }} Zheroes connections</p>
+
+                    <div class="profile-links">
+                        <span ng-if="approvedUser && !item.isCurrentUser">
+                            <a ng-click="addProfileAsFriend(item)" ng-if="!item.isCurrentUser && !item.isFriend">Add</a>
+                            <a ng-click="removeProfileAsFriend(item)" class="remove" ng-if="!item.isCurrentUser && item.isFriend">Remove</a>
+                        </span>
+                        <span>
+                            <a ng-click="displayProfile(item.id)" ng-if="!item.isCurrentUser" stop-propagation>Profile</a>
+                            <a ng-click="displayMyProfile()" ng-if="item.isCurrentUser" stop-propagation>Me</a>
+                            <a ng-click="locateProfileOnMap(item)">View on map</a>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-pane fade in transporters" ng-class="activeSection == 'transporters' ? 'active' :''">
+            <h4>Transporters nearby</h4>
+
+            <div class="empty-list" ng-hide="(profileItems| filter: {profileType:'transporter'}).length">No items
+                found
+            </div>
+            <ul>
+                <li ng-repeat="item in profileItems | filter: {profileType:'transporter'} | orderBy: 'fullName'">
+                    <img ng-show="item.avatar" ng-src="{{ item.avatarImages.thumb }}" class="map-profile-picture" alt="{{ item.fullName }}">
+                    <img ng-show="!item.avatar" src="images/my_profile_placeholder_thumb.png" class="map-profile-picture" alt="{{ item.fullName }}">
+                    <p class="profile-name">{{ item.fullName }}</p>
+
+                    <p class="profile-address">{{ item.address.postcode }}</p>
+                    <p class="profile-friends">{{ item.friends.length || '0' }} Zheroes connections</p>
+
+                    <div class="profile-links">
+                        <span ng-if="approvedUser && !item.isCurrentUser">
+                            <a ng-click="addProfileAsFriend(item)" ng-if="!item.isCurrentUser && !item.isFriend">Add</a>
+                            <a ng-click="removeProfileAsFriend(item)" class="remove" ng-if="!item.isCurrentUser && item.isFriend">Remove</a>
+                        </span>
+                        <span>
+                            <a ng-click="displayProfile(item.id)" ng-if="!item.isCurrentUser" stop-propagation>Profile</a>
+                            <a ng-click="displayMyProfile()" ng-if="item.isCurrentUser" stop-propagation>Me</a>
+                            <a ng-click="locateProfileOnMap(item)">View on map</a>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-pane fade in filter" ng-class="activeSection == 'filter' ? 'active' :''">
+            <h4>Filter by</h4>
+
+            <form action="">
+                <div class="form-group">
+                    <label for="zheroesCategories" class="control-label">Zheroes categories</label>
+                    <select id="zheroesCategories" name="zheroesCategories" class="form-control"
+                            ng-change="refreshFilter()"
+                            ng-model="search.profileType">
+                        <option value="">Zheroes categories (All)</option>
+                        <option value="business">Business</option>
+                        <option value="charity">Charity</option>
+                        <option value="transporter">Transporter</option>
+                        <option value="volunteer">Volunteer</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="typeOfFood" class="control-label">Type of food</label>
+                    <select id="typeOfFood" name="typeOfFood"
+                            ng-model="search.foodType"
+                            ng-options="c.id as c.description for c in foodTypeList"
+                            ng-change="refreshFilter()"
+                            class="form-control">
+                        <option value="">Type of food (Any)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="donationSize" class="control-label">Donation size</label>
+                    <select id="donationSize" name="donationSize"
+                            ng-model="search.donationSize"
+                            ng-options="c.id as c.description for c in donationSizeList"
+                            ng-change="refreshFilter()"
+                            class="form-control">
+                        <option value="">Donation size (Any)</option>
+                    </select>
+                </div>
+                <p class="results"><strong>{{ profileItems.length }} Zheroes</strong> on the map</p>
+                <input class="btn btn-link pull-right" type="button" ng-click="clearFilter()" value="Reset all">
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/ng-template" id="/profilePopup.html">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" ng-click="cancel()" aria-hidden="true">&times;</button>
+        <div class="row clearfix">
+            <div class="col-sm-4">
+                <div class="profile--image">
+                    <img ng-show="!selectedProfile.avatar" ng-src="images/my_profile_placeholder.png">
+                    <img ng-show="selectedProfile.avatar" ng-src="{{ selectedProfile.avatarImages.mid ? selectedProfile.avatarImages.mid : '/images/profile-placeholder.png' }}" alt="Image of {{ selectedProfile.fullName }}">
+                </div>
+            </div>
+
+            <div class="col-sm-8">
+                <h3>{{ selectedProfile.fullName }}</h3>
+                <p class="profile-profile-type "><i class="profile-type  ng-class:selectedProfile.profileType;"></i><span class=" ng-class:selectedProfile.profileType;">{{selectedProfile.profileType || capitalizeFirstLetter}}</span></p>
+                <div class="">
+                    <p>{{ selectedProfile.description }}</p>
+
+                    <span role-granted="PROFILE_APPROVED">
+                        <span ng-if="!selectedProfile.isFriend"><a title="Add to My Community" ng-click="addProfileAsFriend()"
+                                                                   class="btn btn-primary">Add to My Community</a></span>
+
+                        <span ng-if="selectedProfile.isFriend"><a title="Remove from my Community" ng-click="removeProfileAsFriend()"
+                                                                  class="btn btn-primary">Remove from my Community</a></span>
+                    </span>
+                    <a ng-click="openProfile(selectedProfile.id)" class="btn btn-success">Go to full profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body">
+        <hr>
+        <div class="row clearfix">
+
+            <fieldset class="col-sm-6 col-md-6 profile--detail">
+                <div class="location icon">
+                    <h3>Location</h3>
+
+                    <div class="address-block" ng-if="selectedProfile.address">
+                        <p>{{ selectedProfile.address.address1 }}</p>
+                        <p>{{ selectedProfile.address.address2 }}</p>
+                        <p ng-show="selectedProfile.address.address3">{{ selectedProfile.address.address3 }}</p>
+                        <p ng-show="selectedProfile.address.address4">{{ selectedProfile.address.address4 }}</p>
+                        <p ng-show="selectedProfile.address.city">{{ selectedProfile.address.city }},</p>
+                        <p>
+                            <span class="postcode">{{ selectedProfile.address.postcode }}</span>
+                        </p>
+                        <p>{{ selectedProfile.address.country }}</p>
+                    </div>
+                    <div class="warning-block" ng-if="!selectedProfile.address">No location details available for this
+                        profile.
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="col-sm-6 col-md-6 profile--detail">
+
+                <div class="contact icon">
+                    <h3>Contact Details</h3>
+                    <p ng-show="selectedProfile.contactPhoneNumber"><span>Phone number: </span> <a
+                            href="phone:{{ selectedProfile.contactPhoneNumber }}"
+                            title="Call {{ selectedProfile.contactPhoneNumber }}">{{ selectedProfile.contactPhoneNumber
+                        }}</a></p>
+                    <p ng-show="selectedProfile.user.email"><span>Email address: </span> <a
+                            href="mailto:{{ selectedProfile.user.email }}"
+                            title="Mail to {{ selectedProfile.user.email }}">{{
+                        selectedProfile.user.email }}</a></p>
+                    <div class="warning-block"
+                         ng-if="!selectedProfile.contactPhoneNumber && !selectedProfile.user.email">No contact
+                        details available for this profile.
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <fieldset class="col-sm-6 col-md-6 profile--detail" ng-show="selectedProfile.foodTypes">
+            <div class="food icon">
+                <h3>Food type</h3>
+
+                <ul>
+                    <li ng-repeat="item in selectedProfile.foodTypes">{{ item.description }}</li>
+                </ul>
+                <p class="missing-content" ng-hide="selectedProfile.foodTypes.length">N/A</p>
+            </div>
+        </fieldset>
+
+        <fieldset class="col-sm-6 col-md-6 profile--detail" ng-show="selectedProfile.donationSizes">
+            <div class="donation icon">
+                <h3>Donation size</h3>
+
+                <ul>
+                    <li ng-repeat="item in selectedProfile.donationSizes">{{ item.description }}</li>
+                </ul>
+                <p class="missing-content" ng-hide="selectedProfile.donationSizes.length">N/A</p>
+            </div>
+        </fieldset>
+
+
+        <fieldset class="col-sm-6 col-md-6 profile--detail" ng-show="selectedProfile.other">
+            <div class="otherInfo icon">
+                <h3>Other information</h3>
+
+                <div class="collection-time" ng-if="selectedProfile.collectionTime">
+                    <h4>Collection Time</h4>
+
+                    <p>{{ selectedProfile.collectionTime.description }}</p>
+                </div>
+                <p>{{ selectedProfile.other || 'No other information available' }}</p>
+            </div>
+        </fieldset>
+    </div>
+</script>
+</div>
